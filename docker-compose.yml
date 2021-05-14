@@ -1,0 +1,41 @@
+version: "3.8"
+
+networks:
+  app_maltalovers:
+
+services:
+  django:
+    build: .
+    container_name: app_maltalovers
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+    - .:/usr/src/app
+    ports:
+    - "8000:8000"
+    depends_on:
+    - pgdb
+    - redis
+    networks:
+    - app_maltalovers
+
+  pgdb:
+    image: postgres
+    container_name: mt_db
+    restart: always
+    ports:
+    - 5432:5432
+    environment:
+      POSTGRES_DB: app_maltalovers
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1234
+    networks:
+    - app_maltalovers
+
+  redis:
+    image: redis:alpine
+    container_name: mt_redis
+    restart: unless-stopped
+    ports:
+    - 6379:6379
+    networks:
+    - app_maltalovers
