@@ -49,10 +49,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'wagtail.contrib.modeladmin',
     'rest_framework',
     'rest_framework.authtoken',
     'corsheaders',
-    'authentication.apps.AuthenticationConfig'
+    'authentication.apps.AuthenticationConfig',
+    'places.apps.PlacesConfig',
+    'places_api.apps.PlacesApiConfig'
 ]
 
 MIDDLEWARE = [

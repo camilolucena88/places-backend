@@ -10,10 +10,10 @@ from search import views as search_views
 
 urlpatterns = [
     path('config/', admin.site.urls),
-
     path('admin/', include(wagtailadmin_urls)),
     path('documents/', include(wagtaildocs_urls)),
-    path('api/', include('authentication.urls')),
+    path('api/auth/', include('authentication.urls')),
+    path('api/places/', include('places_api.urls')),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('search/', search_views.search, name='search'),
 
