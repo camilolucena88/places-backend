@@ -1,4 +1,7 @@
+import os
+
 from django.db import models
+from django.db.models import Avg
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import User
 
@@ -31,14 +34,24 @@ class Genres(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return self.slug
+
 
 class Images(models.Model):
     name = models.CharField('Name', max_length=50)
     description = models.TextField('Description', max_length=150)
-    img = models.FileField("Imag", upload_to="files/notifications")
+    img = models.FileField("Image", upload_to="files/notifications")
     created_by = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    @property
+    def filename(self):
+        return os.path.basename(self.img.name)
+
+    def __str__(self):
+        return self.filename
 
 
 class Places(models.Model):
@@ -46,11 +59,30 @@ class Places(models.Model):
     description = models.TextField('Description', max_length=150)
     slug = models.SlugField('Slug')
     address = models.OneToOneField(Address, on_delete=models.CASCADE, blank=True, null=True)
-    genres = models.ForeignKey(Genres, on_delete=models.CASCADE, blank=True, null=True)
+    genres = models.ManyToManyField(Genres, blank=True, null=True, related_name='places_genres')
     img = models.ForeignKey(Images, on_delete=models.CASCADE, blank=True, null=True)
     created_by = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.name
+
+    @property
+    def likes(self):
+        return self.places_like.count()
+
+    @property
+    def comments(self):
+        return self.places_comment.all()
+
+    @property
+    def rate(self):
+        return self.places_rate.all().aggregate(Avg('rate'))['rate__avg']
+
+    @property
+    def cover_img(self):
+        return self.img
 
 
 class RateList(models.IntegerChoices):
@@ -78,9 +110,18 @@ class Likes(models.Model):
     place = models.ForeignKey(Places, on_delete=models.CASCADE, related_name='places_like')
     type = models.PositiveSmallIntegerField('Type', choices=LikesType.choices)
     comment = models.ForeignKey(Places, on_delete=models.CASCADE, blank=True, null=True, related_name='comment_like')
-    created_by = models.ForeignKey(User, on_delete=models.CASCADE)
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_likes')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name_plural = "Likes"
+        verbose_name = "Like"
+        ordering = ('created_at',)
+        unique_together = ['place', 'created_by']
+
+    def __str__(self):
+        return self.place.name
 
 
 class CommentType(models.IntegerChoices):
@@ -91,15 +132,26 @@ class CommentType(models.IntegerChoices):
 class Comments(models.Model):
     description = models.TextField('Description', max_length=150)
     type = models.PositiveSmallIntegerField('Type', choices=CommentType.choices)
-    place = models.ForeignKey(Places, on_delete=models.CASCADE, related_name='related_place')
+    place = models.ForeignKey(Places, on_delete=models.CASCADE, related_name='places_comment')
     parent = models.ForeignKey(Places, on_delete=models.CASCADE, blank=True, null=True, related_name='parent_comment')
-    created_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='created_by')
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_comments')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name_plural = "Comments"
+        verbose_name = "Comment"
+        ordering = ('created_at',)
 
 
 class Bookmark(models.Model):
     place = models.ForeignKey(Places, on_delete=models.CASCADE)
-    created_by = models.ForeignKey(User, on_delete=models.CASCADE)
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='bookmark_user')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name_plural = "Bookmarks"
+        verbose_name = "Bookmark"
+        ordering = ('created_at',)
+        unique_together = ['place', 'created_by']

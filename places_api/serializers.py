@@ -1,13 +1,29 @@
 from rest_framework import serializers
-from rest_framework.authtoken.admin import User
-
-from authentication.serializers import UserSerializer
-from places.models import Places
+from places.models import Places, Genres, Comments
 
 
-class PlacesSerializer(serializers.HyperlinkedModelSerializer):
-    created_by = UserSerializer(many=True, read_only=True)
+class GenresSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Genres
+        fields = ['slug']
+
+
+class CommentsSerializer(serializers.ModelSerializer):
+    id = serializers.IntegerField(source='pk')
+    timestamp = serializers.CharField(source='created_at')
+    comment = serializers.CharField(source='description')
+
+    class Meta:
+        model = Comments
+        fields = ['id', 'comment', 'timestamp', 'created_by']
+
+
+class PlacesSerializer(serializers.ModelSerializer):
+    img = serializers.CharField(read_only=True)
+    comments = CommentsSerializer(read_only=True, many=True)
+    key = serializers.CharField(source='slug')
+    genres = GenresSerializer(read_only=True, many=True)
 
     class Meta:
         model = Places
-        fields = ['name', 'description', 'slug', 'address', 'genres', 'img', 'created_by']
+        fields = ['id', 'name', 'description', 'key', 'address', 'genres', 'likes', 'comments', 'img', 'rate']

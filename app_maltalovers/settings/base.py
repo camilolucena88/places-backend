@@ -55,7 +55,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'authentication.apps.AuthenticationConfig',
     'places.apps.PlacesConfig',
-    'places_api.apps.PlacesApiConfig'
+    'places_api.apps.PlacesApiConfig',
+    'users_api.apps.UsersApiConfig'
 ]
 
 MIDDLEWARE = [

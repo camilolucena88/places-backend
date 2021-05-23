@@ -14,6 +14,7 @@ urlpatterns = [
     path('documents/', include(wagtaildocs_urls)),
     path('api/auth/', include('authentication.urls')),
     path('api/places/', include('places_api.urls')),
+    path('api/users/', include('users_api.urls')),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('search/', search_views.search, name='search'),
 

@@ -1,1 +1,12 @@
 venv/*
+
+authentication/__pycache__/
+places/__pycache__/
+places_api/__pycache__/
+users_api/__pycache__/
+users_api/__pycache__/__init__.cpython-39.pyc
+users_api/migrations/__pycache__/__init__.cpython-39.pyc
+places_api/migrations/__pycache__/__init__.cpython-39.pyc
+places_api/migrations/__pycache__/
+.idea/
+authentication/__pycache__/*
