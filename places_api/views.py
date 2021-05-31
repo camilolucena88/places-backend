@@ -4,8 +4,8 @@ from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from places.models import Places, Likes
-from places_api.serializers import PlacesSerializer
+from places.models import Places, Likes, Bookmark
+from places_api.serializers import PlacesSerializer, BookmarkSerializer
 from users_api.serializers import LikedSerializer, LikeSerializer
 
 
@@ -25,14 +25,27 @@ class LikesView(APIView):
         except Likes.DoesNotExist:
             raise Http404
 
-    def post(self, request):
-        serializer = LikeSerializer(data=request.data)
+    def post(self, request, pk):
+        serializer = LikeSerializer(data={'place':pk, 'type':1, 'created_by': request.user.id})
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, pk):
-        like = self.get_object(request, pk)
+        like = Likes.objects.get(place_id=pk, created_by=request.user.id)
+        like.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+class BookmarkView(APIView):
+    def post(self, request, pk):
+        serializer = BookmarkSerializer(data={'place': pk, 'created_by': request.user.id})
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, pk):
+        like = Bookmark.objects.get(place_id=pk, created_by=request.user.id)
         like.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)

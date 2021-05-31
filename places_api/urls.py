@@ -1,6 +1,6 @@
 from django.urls import path, include
 from rest_framework import routers
-from places_api.views import PlacesViewSet, LikesView
+from places_api.views import PlacesViewSet, LikesView, BookmarkView
 from users_api.views import UserProfileDetail
 
 router = routers.DefaultRouter()
@@ -10,4 +10,7 @@ urlpatterns = [
     path("", include(router.urls)),
     path("like", LikesView.as_view()),
     path("like/<int:pk>", LikesView.as_view()),
+    path("", include(router.urls)),
+    path("bookmark", BookmarkView.as_view()),
+    path("bookmark/<int:pk>", BookmarkView.as_view()),
 ]

@@ -8,7 +8,7 @@ from users_api.models import UserProfile
 class LikeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Likes
-        fields = ['place', 'type', 'created_by', 'created_at']
+        fields = ['place', 'type', 'created_by']
 
     def create(self, validated_data):
         """

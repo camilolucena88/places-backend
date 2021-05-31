@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from places.models import Places, Genres, Comments
+from places.models import Places, Genres, Comments, Bookmark
 
 
 class GenresSerializer(serializers.ModelSerializer):
@@ -27,3 +27,8 @@ class PlacesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Places
         fields = ['id', 'name', 'description', 'key', 'address', 'genres', 'likes', 'comments', 'img', 'rate']
+
+class BookmarkSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Bookmark
+        fields = ['place', 'created_by']
