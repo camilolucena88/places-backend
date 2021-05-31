@@ -28,7 +28,14 @@ class PlacesSerializer(serializers.ModelSerializer):
         model = Places
         fields = ['id', 'name', 'description', 'key', 'address', 'genres', 'likes', 'comments', 'img', 'rate']
 
+
 class BookmarkSerializer(serializers.ModelSerializer):
     class Meta:
         model = Bookmark
         fields = ['place', 'created_by']
+
+
+class CommentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Comments
+        fields = ['description', 'type', 'place', 'parent', 'created_by']
