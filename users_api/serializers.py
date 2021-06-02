@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from places.models import Likes, Bookmark
+from places.models import Likes, Bookmark, CommentLikes
 from places_api.serializers import CommentsSerializer
 from users_api.models import UserProfile
 
@@ -8,7 +8,7 @@ from users_api.models import UserProfile
 class LikeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Likes
-        fields = ['place', 'type', 'created_by']
+        fields = ['place', 'created_by']
 
     def create(self, validated_data):
         """
@@ -29,7 +29,7 @@ class LikedSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Likes
-        fields = ['id', 'place', 'type', 'created_by', 'timestamp']
+        fields = ['id', 'place', 'created_by', 'timestamp']
         depth = 1
 
     def create(self, validated_data):
@@ -49,11 +49,22 @@ class BookmarkSerializer(serializers.ModelSerializer):
         depth = 1
 
 
+class LikedCommentsSerializer(serializers.ModelSerializer):
+    id = serializers.IntegerField(source='pk')
+    timestamp = serializers.CharField(source='created_at')
+
+    class Meta:
+        model = CommentLikes
+        fields = ['id', 'comment', 'place', 'created_by', 'timestamp']
+        depth = 1
+
+
 class UserProfileSerializer(serializers.HyperlinkedModelSerializer):
+    comment_likes = LikedCommentsSerializer(read_only=True, many=True, allow_null=True)
     commented = CommentsSerializer(read_only=True, many=True, allow_null=True)
     liked = LikedSerializer(read_only=True, many=True)
     bookmarks = BookmarkSerializer(read_only=True, many=True, allow_null=True)
 
     class Meta:
         model = UserProfile
-        fields = ['username', 'first_name', 'last_name', 'email', 'commented', 'liked', 'bookmarks']
+        fields = ['username', 'first_name', 'last_name', 'email', 'commented', 'liked', 'bookmarks', 'comment_likes']

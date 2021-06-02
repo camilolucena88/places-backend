@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from places.models import Places, Genres, Comments, Bookmark
+from places.models import Places, Genres, Comments, Bookmark, Likes, CommentLikes
 
 
 class GenresSerializer(serializers.ModelSerializer):
@@ -15,7 +15,7 @@ class CommentsSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Comments
-        fields = ['id', 'comment', 'timestamp', 'created_by']
+        fields = ['id', 'comment', 'likes', 'timestamp', 'created_by']
 
 
 class PlacesSerializer(serializers.ModelSerializer):
@@ -39,3 +39,21 @@ class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comments
         fields = ['description', 'type', 'place', 'parent', 'created_by']
+
+
+class CommentLikeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CommentLikes
+        fields = ['place', 'comment', 'created_by']
+
+    def create(self, validated_data):
+        """
+        Create and return a new `Snippet` instance, given the validated data.
+        """
+        return CommentLikes.objects.create(**validated_data)
+
+    def delete(self, validated_data):
+        """
+        Create and return a new `Snippet` instance, given the validated data.
+        """
+        return CommentLikes.objects.create(**validated_data)

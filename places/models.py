@@ -101,15 +101,35 @@ class Rate(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
 
-class LikesType(models.IntegerChoices):
+class CommentType(models.IntegerChoices):
     PLACES_LIKE = 0, _('Places')
-    COMMENTS_LIKE = 1, _('Comment')
+    COMMENTS_LIKE = 1, _('Reply')
+
+
+class Comments(models.Model):
+    description = models.TextField('Description', max_length=150)
+    type = models.PositiveSmallIntegerField('Type', choices=CommentType.choices)
+    place = models.ForeignKey(Places, on_delete=models.CASCADE, related_name='places_comment')
+    parent = models.ForeignKey("self", on_delete=models.CASCADE, blank=True, null=True, related_name='parent_comment')
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_comments')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name_plural = "Comments"
+        verbose_name = "Comment"
+        ordering = ('created_at',)
+
+    def __str__(self):
+        return self.description
+
+    @property
+    def likes(self):
+        return self.comment_like.count()
 
 
 class Likes(models.Model):
     place = models.ForeignKey(Places, on_delete=models.CASCADE, related_name='places_like')
-    type = models.PositiveSmallIntegerField('Type', choices=LikesType.choices)
-    comment = models.ForeignKey(Places, on_delete=models.CASCADE, blank=True, null=True, related_name='comment_like')
     created_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_likes')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -124,24 +144,21 @@ class Likes(models.Model):
         return self.place.name
 
 
-class CommentType(models.IntegerChoices):
-    PLACES_LIKE = 0, _('Places')
-    COMMENTS_LIKE = 1, _('Reply')
-
-
-class Comments(models.Model):
-    description = models.TextField('Description', max_length=150)
-    type = models.PositiveSmallIntegerField('Type', choices=CommentType.choices)
-    place = models.ForeignKey(Places, on_delete=models.CASCADE, related_name='places_comment')
-    parent = models.ForeignKey(Places, on_delete=models.CASCADE, blank=True, null=True, related_name='parent_comment')
-    created_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_comments')
+class CommentLikes(models.Model):
+    place = models.ForeignKey(Places, on_delete=models.CASCADE, related_name='places_comment_likes')
+    comment = models.ForeignKey(Comments, on_delete=models.CASCADE, blank=True, null=True, related_name='comment_like')
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_comment_likes')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
-        verbose_name_plural = "Comments"
-        verbose_name = "Comment"
+        verbose_name_plural = "Comment Likes"
+        verbose_name = "Comment Like"
         ordering = ('created_at',)
+        unique_together = ['created_by', 'comment']
+
+    def __str__(self):
+        return self.place.name
 
 
 class Bookmark(models.Model):

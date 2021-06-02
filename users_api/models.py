@@ -24,3 +24,7 @@ class UserProfile(User):
     @property
     def bookmarks(self):
         return self.bookmark_user.all()
+
+    @property
+    def comment_likes(self):
+        return self.user_comment_likes.all()

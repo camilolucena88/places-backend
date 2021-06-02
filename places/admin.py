@@ -2,7 +2,7 @@ from wagtail.contrib.modeladmin.options import ModelAdmin
 from wagtail.contrib.modeladmin.options import modeladmin_register
 from django.contrib import admin
 
-from places.models import Places, Images, Genres, Address, Coordinates, Likes, Comments, Rate, Bookmark
+from places.models import Places, Images, Genres, Address, Coordinates, Likes, Comments, Rate, Bookmark, CommentLikes
 
 
 class CoordinatesAdmin(admin.ModelAdmin):
@@ -56,8 +56,17 @@ class LikesAdmin(ModelAdmin):
     menu_label = "Likes"
     menu_icon = "user"
     menu_order = 290
-    list_display = ("place", "type", "created_by")
+    list_display = ("place", "created_by")
     search_fields = ["place__name"]
+
+
+class CommentLikesAdmin(ModelAdmin):
+    model = CommentLikes
+    menu_label = "CommentLikes"
+    menu_icon = "user"
+    menu_order = 290
+    list_display = ("place", "comment", "created_by")
+    search_fields = ["place__name", "comment__description"]
 
 
 class ImagesAdmin(ModelAdmin):
@@ -85,7 +94,7 @@ class CommentsAdmin(ModelAdmin):
     menu_label = "Comments"
     menu_icon = "user"
     menu_order = 290
-    list_display = ("pk", "description", "place", "type", "created_by")
+    list_display = ("pk", "description", "place", "created_by")
     search_fields = ["place__name"]
 
 
@@ -114,3 +123,4 @@ modeladmin_register(LikesAdmin)
 modeladmin_register(CommentsAdmin)
 modeladmin_register(RateAdmin)
 modeladmin_register(BookmarkAdmin)
+modeladmin_register(CommentLikesAdmin)
