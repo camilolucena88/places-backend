@@ -1,0 +1,439 @@
+[
+  {
+    "model": "places.genres",
+    "pk": 1,
+    "fields": {
+      "name": "Beaches",
+      "description": "Beaches around Malta",
+      "slug": "beach",
+      "created_by": 1,
+      "created_at": "2021-05-16T09:54:45.239Z",
+      "updated_at": "2021-05-16T09:54:45.239Z"
+    }
+  },
+  {
+    "model": "places.genres",
+    "pk": 2,
+    "fields": {
+      "name": "Restaurant",
+      "description": "Restaurant",
+      "slug": "restaurant",
+      "created_by": 1,
+      "created_at": "2021-05-18T05:54:06.671Z",
+      "updated_at": "2021-05-18T05:54:06.671Z"
+    }
+  },
+  {
+    "model": "places.genres",
+    "pk": 3,
+    "fields": {
+      "name": "Historical Places",
+      "description": "historical",
+      "slug": "historical-places",
+      "created_by": 1,
+      "created_at": "2021-05-18T05:59:03.657Z",
+      "updated_at": "2021-05-18T05:59:03.657Z"
+    }
+  },
+  {
+    "model": "places.genres",
+    "pk": 4,
+    "fields": {
+      "name": "Night Clubs",
+      "description": "Night Clubs",
+      "slug": "night-clubs",
+      "created_by": 1,
+      "created_at": "2021-05-18T06:38:08.949Z",
+      "updated_at": "2021-05-18T06:38:08.949Z"
+    }
+  },
+  {
+    "model": "places.images",
+    "pk": 1,
+    "fields": {
+      "name": "Primera Imagen",
+      "description": "Aqui",
+      "img": "files/notifications/WhatsApp_Image_2021-05-15_at_16.35.08.jpeg",
+      "created_by": 1,
+      "created_at": "2021-05-16T04:42:56.034Z",
+      "updated_at": "2021-05-16T04:42:56.035Z"
+    }
+  },
+  {
+    "model": "places.images",
+    "pk": 2,
+    "fields": {
+      "name": "Mdina",
+      "description": "Mdina",
+      "img": "files/notifications/Mdina.JPG",
+      "created_by": 1,
+      "created_at": "2021-05-18T05:55:40.700Z",
+      "updated_at": "2021-05-18T05:55:40.700Z"
+    }
+  },
+  {
+    "model": "places.images",
+    "pk": 3,
+    "fields": {
+      "name": "Spinola",
+      "description": "Spinola",
+      "img": "files/notifications/Love_Monument.JPG",
+      "created_by": 1,
+      "created_at": "2021-05-18T05:56:09.967Z",
+      "updated_at": "2021-05-18T05:57:46.936Z"
+    }
+  },
+  {
+    "model": "places.images",
+    "pk": 4,
+    "fields": {
+      "name": "Sliema Pools",
+      "description": "Sliema Pools",
+      "img": "files/notifications/Sliema-Pools.jpg",
+      "created_by": 1,
+      "created_at": "2021-05-18T06:03:19.652Z",
+      "updated_at": "2021-05-18T06:03:19.652Z"
+    }
+  },
+  {
+    "model": "places.images",
+    "pk": 5,
+    "fields": {
+      "name": "Marrobio",
+      "description": "Marrobio",
+      "img": "files/notifications/image_57.png",
+      "created_by": 1,
+      "created_at": "2021-05-18T06:09:03.476Z",
+      "updated_at": "2021-05-18T06:09:03.476Z"
+    }
+  },
+  {
+    "model": "places.images",
+    "pk": 6,
+    "fields": {
+      "name": "Comino",
+      "description": "Comino",
+      "img": "files/notifications/Blue-Lagoon-Cominotto.jpg",
+      "created_by": 1,
+      "created_at": "2021-05-18T06:12:36.706Z",
+      "updated_at": "2021-05-18T06:12:36.706Z"
+    }
+  },
+  {
+    "model": "places.images",
+    "pk": 7,
+    "fields": {
+      "name": "St Peters Pool",
+      "description": "St Peters",
+      "img": "files/notifications/0I6A8630.jpg",
+      "created_by": 1,
+      "created_at": "2021-05-18T06:13:57.827Z",
+      "updated_at": "2021-05-18T06:13:57.827Z"
+    }
+  },
+  {
+    "model": "places.images",
+    "pk": 8,
+    "fields": {
+      "name": "Mellieha",
+      "description": "Mellieha",
+      "img": "files/notifications/DJI_0241_1.jpg",
+      "created_by": 1,
+      "created_at": "2021-05-18T06:16:47.625Z",
+      "updated_at": "2021-05-18T06:16:47.625Z"
+    }
+  },
+  {
+    "model": "places.images",
+    "pk": 9,
+    "fields": {
+      "name": "Coral Cave",
+      "description": "Coral Cave",
+      "img": "files/notifications/DJI_0319.jpg",
+      "created_by": 1,
+      "created_at": "2021-05-18T06:22:31.460Z",
+      "updated_at": "2021-05-18T06:22:31.460Z"
+    }
+  },
+  {
+    "model": "places.images",
+    "pk": 10,
+    "fields": {
+      "name": "Valletta",
+      "description": "Valletta",
+      "img": "files/notifications/0I6A8851.jpg",
+      "created_by": 1,
+      "created_at": "2021-05-18T06:23:27.112Z",
+      "updated_at": "2021-05-18T06:23:27.112Z"
+    }
+  },
+  {
+    "model": "places.images",
+    "pk": 11,
+    "fields": {
+      "name": "Qarraba Bay",
+      "description": "Qarraba Bay",
+      "img": "files/notifications/DJI_0302.jpg",
+      "created_by": 1,
+      "created_at": "2021-05-18T06:25:54.629Z",
+      "updated_at": "2021-05-18T06:25:54.629Z"
+    }
+  },
+  {
+    "model": "places.images",
+    "pk": 12,
+    "fields": {
+      "name": "Paceville",
+      "description": "Paceville",
+      "img": "files/notifications/0I6A9006.jpg",
+      "created_by": 1,
+      "created_at": "2021-05-18T06:37:27.935Z",
+      "updated_at": "2021-05-18T06:37:27.935Z"
+    }
+  },
+  {
+    "model": "places.images",
+    "pk": 13,
+    "fields": {
+      "name": "Dingli Cliff",
+      "description": "Dingli",
+      "img": "files/notifications/8a6b63b8-44a5-4f37-877a-fcdf7fe07719.jpg",
+      "created_by": 1,
+      "created_at": "2021-05-18T06:53:41.017Z",
+      "updated_at": "2021-05-18T06:54:32.545Z"
+    }
+  },
+  {
+    "model": "places.images",
+    "pk": 14,
+    "fields": {
+      "name": "The Red Tower",
+      "description": "The Red Tower",
+      "img": "files/notifications/068971d2-5137-43d4-8444-e6b45ec7f910.jpeg",
+      "created_by": 1,
+      "created_at": "2021-05-18T07:09:47.182Z",
+      "updated_at": "2021-05-18T07:09:47.183Z"
+    }
+  },
+  {
+    "model": "places.places",
+    "pk": 1,
+    "fields": {
+      "name": "Comino",
+      "description": "Este es Comino",
+      "slug": "comino",
+      "address": null,
+      "img": 6,
+      "created_by": 1,
+      "created_at": "2021-05-16T05:00:49.411Z",
+      "updated_at": "2021-05-18T06:12:44.446Z",
+      "genres": [
+        1
+      ]
+    }
+  },
+  {
+    "model": "places.places",
+    "pk": 2,
+    "fields": {
+      "name": "St Peters Pool",
+      "description": "St Peters Pool",
+      "slug": "st-peters-pool",
+      "address": null,
+      "img": 7,
+      "created_by": 1,
+      "created_at": "2021-05-18T05:53:38.871Z",
+      "updated_at": "2021-05-18T06:14:14.594Z",
+      "genres": [
+        1
+      ]
+    }
+  },
+  {
+    "model": "places.places",
+    "pk": 3,
+    "fields": {
+      "name": "Marrobio",
+      "description": "Marrobio",
+      "slug": "marrobio",
+      "address": null,
+      "img": 5,
+      "created_by": 1,
+      "created_at": "2021-05-18T05:54:27.402Z",
+      "updated_at": "2021-05-18T06:09:21.874Z",
+      "genres": [
+        2
+      ]
+    }
+  },
+  {
+    "model": "places.places",
+    "pk": 4,
+    "fields": {
+      "name": "Balluta",
+      "description": "Amazing places",
+      "slug": "balluta",
+      "address": null,
+      "img": 3,
+      "created_by": 1,
+      "created_at": "2021-05-18T05:56:41.947Z",
+      "updated_at": "2021-05-18T05:56:41.947Z",
+      "genres": [
+        1
+      ]
+    }
+  },
+  {
+    "model": "places.places",
+    "pk": 5,
+    "fields": {
+      "name": "Mdina",
+      "description": "Mdina",
+      "slug": "mdina",
+      "address": null,
+      "img": 2,
+      "created_by": 1,
+      "created_at": "2021-05-18T05:58:45.461Z",
+      "updated_at": "2021-05-18T05:59:11.617Z",
+      "genres": [
+        3
+      ]
+    }
+  },
+  {
+    "model": "places.places",
+    "pk": 6,
+    "fields": {
+      "name": "Sliema Pools",
+      "description": "Sliema",
+      "slug": "sliema-pools",
+      "address": null,
+      "img": 4,
+      "created_by": 1,
+      "created_at": "2021-05-18T06:03:03.861Z",
+      "updated_at": "2021-05-18T06:03:27.056Z",
+      "genres": [
+        1
+      ]
+    }
+  },
+  {
+    "model": "places.places",
+    "pk": 7,
+    "fields": {
+      "name": "Mellieha",
+      "description": "Mellieha is an amazing beach located in the north of Malta",
+      "slug": "mellieha",
+      "address": null,
+      "img": 8,
+      "created_by": 1,
+      "created_at": "2021-05-18T06:16:24.944Z",
+      "updated_at": "2021-05-18T06:16:55.236Z",
+      "genres": [
+        1
+      ]
+    }
+  },
+  {
+    "model": "places.places",
+    "pk": 8,
+    "fields": {
+      "name": "Coral Cave",
+      "description": "Coral Cave",
+      "slug": "coral-cave",
+      "address": null,
+      "img": 9,
+      "created_by": 1,
+      "created_at": "2021-05-18T06:22:13.569Z",
+      "updated_at": "2021-05-18T06:22:38.270Z",
+      "genres": [
+        1
+      ]
+    }
+  },
+  {
+    "model": "places.places",
+    "pk": 9,
+    "fields": {
+      "name": "Valletta",
+      "description": "The capital of the country and the most visited places",
+      "slug": "valletta",
+      "address": null,
+      "img": 10,
+      "created_by": 1,
+      "created_at": "2021-05-18T06:23:55.438Z",
+      "updated_at": "2021-05-18T06:23:55.438Z",
+      "genres": [
+        3
+      ]
+    }
+  },
+  {
+    "model": "places.places",
+    "pk": 10,
+    "fields": {
+      "name": "Qarraba Bay",
+      "description": "Qarraba Bay",
+      "slug": "qarraba-bay",
+      "address": null,
+      "img": 11,
+      "created_by": 1,
+      "created_at": "2021-05-18T06:26:14.289Z",
+      "updated_at": "2021-05-18T06:26:14.289Z",
+      "genres": [
+        1
+      ]
+    }
+  },
+  {
+    "model": "places.places",
+    "pk": 11,
+    "fields": {
+      "name": "Paceville",
+      "description": "Paceville",
+      "slug": "paceville",
+      "address": null,
+      "img": 12,
+      "created_by": 1,
+      "created_at": "2021-05-18T06:37:46.370Z",
+      "updated_at": "2021-05-18T06:38:16.348Z",
+      "genres": [
+        4
+      ]
+    }
+  },
+  {
+    "model": "places.places",
+    "pk": 12,
+    "fields": {
+      "name": "Dingli Cliff",
+      "description": "Dingli is a small village located about fifteen minutes away from Valletta. This village offers us a splendid view thanks to its surrounding cliffs. W",
+      "slug": "dingli-cliff",
+      "address": null,
+      "img": 13,
+      "created_by": 1,
+      "created_at": "2021-05-18T06:52:49.549Z",
+      "updated_at": "2021-05-18T06:54:40.352Z",
+      "genres": [
+        1
+      ]
+    }
+  },
+  {
+    "model": "places.places",
+    "pk": 13,
+    "fields": {
+      "name": "The Red Tower",
+      "description": "The Red Tower",
+      "slug": "red-tower",
+      "address": null,
+      "img": 14,
+      "created_by": 1,
+      "created_at": "2021-05-18T07:10:04.336Z",
+      "updated_at": "2021-05-18T07:10:04.336Z",
+      "genres": [
+        3
+      ]
+    }
+  }
+]

@@ -59,7 +59,7 @@ class Places(models.Model):
     description = models.TextField('Description', max_length=150)
     slug = models.SlugField('Slug')
     address = models.OneToOneField(Address, on_delete=models.CASCADE, blank=True, null=True)
-    genres = models.ManyToManyField(Genres, blank=True, null=True, related_name='places_genres')
+    genres = models.ManyToManyField(Genres, blank=True, related_name='places_genres')
     img = models.ForeignKey(Images, on_delete=models.CASCADE, blank=True, null=True)
     created_by = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)

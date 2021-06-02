@@ -14,7 +14,6 @@ services:
     - "8000:8000"
     depends_on:
     - pgdb
-    - redis
     networks:
     - app_maltalovers
 
@@ -28,14 +27,5 @@ services:
       POSTGRES_DB: app_maltalovers
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: 1234
-    networks:
-    - app_maltalovers
-
-  redis:
-    image: redis:alpine
-    container_name: mt_redis
-    restart: unless-stopped
-    ports:
-    - 6379:6379
     networks:
     - app_maltalovers

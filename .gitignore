@@ -10,3 +10,4 @@ places_api/migrations/__pycache__/__init__.cpython-39.pyc
 places_api/migrations/__pycache__/
 .idea/
 authentication/__pycache__/*
+.env
