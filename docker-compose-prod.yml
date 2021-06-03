@@ -34,7 +34,7 @@ services:
     depends_on:
       - app
     ports:
-      - 3001:8000
+      - 80:8000
     volumes:
       - ./static:/usr/src/app/static
       - ./media:/usr/src/app/media
