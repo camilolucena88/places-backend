@@ -1,6 +1,6 @@
 server {
     listen *:8443 ssl;
-    server_name         app.maltalovers.lcl;
+    server_name         ${APP_DOMAIN};
     ssl_certificate     certs/app_maltalovers.pem;
     ssl_certificate_key certs/app_maltalovers.key;
     ssl_protocols       TLSv1 TLSv1.1 TLSv1.2;

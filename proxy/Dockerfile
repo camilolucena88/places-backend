@@ -10,6 +10,7 @@ ENV LISTEN_PORT=8000
 ENV LISTEN_PORT_SSL=443
 ENV APP_HOST=app
 ENV APP_PORT=9000
+ENV APP_DOMAIN='admin-staging.maltalovers.com'
 
 USER root
 
