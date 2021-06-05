@@ -35,9 +35,11 @@ services:
       - app
     ports:
       - 80:8000
+      - 443:8443
     volumes:
       - ./static:/usr/src/app/static
       - ./media:/usr/src/app/media
+      - ./certs:/etc/nginx/certs
 
 volumes:
   postgres-data:

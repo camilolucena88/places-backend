@@ -11,3 +11,5 @@ server {
         client_max_body_size    10M;
     }
 }
+
+include /etc/nginx/conf.d/ssl.conf;

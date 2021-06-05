@@ -16,3 +16,4 @@ places_api/migrations/__pycache__/
 .idea/
 authentication/__pycache__/*
 .env
+certs
