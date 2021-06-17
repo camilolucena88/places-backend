@@ -5,10 +5,29 @@ from django.contrib import admin
 from wagtail.admin import urls as wagtailadmin_urls
 from wagtail.core import urls as wagtail_urls
 from wagtail.documents import urls as wagtaildocs_urls
+from django.contrib.auth import views as auth_views
 
+from authentication.views import register
 from search import views as search_views
 
 urlpatterns = [
+    path("", include(wagtail_urls)),
+    path(r"register", register),
+    path(r'password/reset', auth_views.PasswordResetView.as_view(
+        template_name='users/password_reset.html',
+        email_template_name='users/password_reset_email.html',
+        success_url='/'
+    ), name='password_reset'),
+    path(r'password/reset/confirm/<uidb64>/<token>/',
+         auth_views.PasswordResetConfirmView.as_view(
+             template_name='users/password_reset_confirm.html'
+         ),
+         name='password_reset_confirm'),
+    path(r'password/reset/complete/',
+         auth_views.PasswordResetCompleteView.as_view(
+             template_name='users/password_reset_complete.html'
+         ),
+         name='password_reset_complete'),
     path('config/', admin.site.urls),
     path('admin/', include(wagtailadmin_urls)),
     path('documents/', include(wagtaildocs_urls)),

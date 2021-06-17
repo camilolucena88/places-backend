@@ -4,6 +4,8 @@ from django.db import models
 from django.db.models import Avg
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import User
+from wagtail.images.models import Image
+from wagtail.images.models import Rendition
 
 
 class Coordinates(models.Model):
@@ -42,6 +44,7 @@ class Images(models.Model):
     name = models.CharField('Name', max_length=50)
     description = models.TextField('Description', max_length=150)
     img = models.FileField("Image", upload_to="files/notifications")
+    img_render = models.ForeignKey(Image, on_delete=models.CASCADE, null=True)
     created_by = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -53,6 +56,19 @@ class Images(models.Model):
     def __str__(self):
         return self.filename
 
+    @property
+    def custom_thumbnail(self):
+        if self.img_render.renditions.filter(width=275, height=185).count() > 0:
+            return self.img_render.renditions.filter(width=275, height=185)[0]
+        else:
+            return self.img_render.get_rendition('fill-275x185|jpegquality-80').url
+
+    @property
+    def thumbnail(self):
+        if self.img_render.renditions.filter(width=165).count() > 0:
+            return self.img_render.renditions.get(width=165)
+        else:
+            return self.img_render.get_rendition('fill-300x150|jpegquality-60').url
 
 class Places(models.Model):
     name = models.CharField('Name', max_length=50)
@@ -82,7 +98,14 @@ class Places(models.Model):
 
     @property
     def cover_img(self):
-        return self.img
+        return self.img.url
+
+    @property
+    def thumbnail(self):
+        if self.img.img_render:
+            return self.img.custom_thumbnail.url
+        else:
+            return self.img.img.url
 
 
 class RateList(models.IntegerChoices):

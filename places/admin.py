@@ -74,7 +74,7 @@ class ImagesAdmin(ModelAdmin):
     menu_label = "Images"
     menu_icon = "user"
     menu_order = 290
-    list_display = ("name", "description", "img", "created_by")
+    list_display = ("name", "description", "img", 'img_render', "created_by")
     list_filter = ["name", "created_by"]
     search_fields = ["name", "description", "img"]
 

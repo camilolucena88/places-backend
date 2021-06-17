@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block body_class %}container{% endblock %}
+
+{% block extra_css %}
+
+{% comment %}
+Delete the line below if you're just getting started and want to remove the welcome screen!
+{% endcomment %}
+<link rel="stylesheet" href="{% static 'css/welcome_page.css' %}">
+<link rel="stylesheet" href="{% static '/plugins/custom/fullcalendar/fullcalendar.bundle.css' %}">
+<link rel="stylesheet" href="{% static '/plugins/global/plugins.bundle.css' %}">
+<link rel="stylesheet" href="{% static '/plugins/custom/prismjs/prismjs.bundle.css' %}">
+<link rel="stylesheet" href="{% static '/css/style.bundle.css' %}">
+<script type="text/javascript" src="{% static 'plugins/custom/fullcalendar/fullcalendar.bundle.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/pages/features/calendar/basic.js' %}"></script>
+<!--end::Global Theme Styles-->
+<!--begin::Layout Themes(used by all pages)-->
+<!--end::Layout Themes-->
+
+{% endblock extra_css %}
+
+{% block content %}
+
+{% comment %}
+Delete the line below if you're just getting started and want to remove the welcome screen!
+{% endcomment %}
+{% load i18n wagtailcore_tags wagtailimages_tags %}
+
+<div class="card card-custom">
+ <div class="card-header">
+  <div class="card-title">
+   <h3 class="card-label">
+    {% if type == 'schedule' %}
+        Calendario de {{ course.name }}
+    {% else %}
+         Calendario de la Escuela Uno
+    {% endif %}
+   </h3>
+  </div>
+  <div class="card-toolbar">
+   {% if request.user.is_staff %}<a href="/admin/school_calendar/events/" class="btn btn-light-primary font-weight-bold">
+   <i class="ki ki-plus "></i> Agregar un Evento
+   </a>
+  {% endif %}
+  </div>
+ </div>
+ <div class="card-body">
+     {% if type == 'schedule' %}
+        {% include 'calendar/school/courses/schedule.html' %}
+    {% else %}
+         <div id="kt_calendar"></div>
+    {% endif %}
+
+ </div>
+</div>
+{% endblock content %}
+{% block extra_js %}
+    {% include 'extra_js/calendar.html' %}
+{% endblock %}

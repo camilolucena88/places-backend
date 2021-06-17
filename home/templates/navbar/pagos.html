@@ -1,0 +1,76 @@
+<div class="flex-shrink-0 dropdown dropdown-inline py-1" data-placement="top">
+    {% if request.user.is_authenticated %}
+    <div
+       class="btn btn-fixed-height btn-bg-white btn-text-dark-50 btn-hover-text-primary btn-icon-primary font-weight-bolder font-size-sm px-5 mr-3"
+       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pagos</div>
+    {% endif %}
+    <div class="dropdown-menu dropdown-menu-md dropdown-menu-right p-0 m-0">
+        {% if request.user.is_staff %}
+
+        <!--begin::Navigation-->
+        <ul class="navi navi-hover">
+            <li class="navi-header font-weight-bold py-4">
+                <span class="font-size-lg">Resumen de Pagos:</span>
+                <i class="flaticon2-information icon-md text-muted" data-toggle="tooltip"
+                   data-placement="right" title="" data-original-title="Maneja todos los pagos realizados anteriormente o nuevos"></i>
+            </li>
+            <li class="navi-separator mb-3 opacity-70"></li>
+            <li class="navi-item">
+                <a href="/payments/view/new" class="navi-link">
+														<span class="navi-text">
+															Pagos nuevos {% if new_payments %}<span class="ml-2 label label-sm label-inline label-light-primary"></span>{% endif %}
+														</span>
+                </a>
+            </li>
+            <li class="navi-item">
+                <a href="/payments/view" class="navi-link">
+														<span class="navi-text">
+															Pagos realizados
+														</span>
+                </a>
+            </li>
+            <li class="navi-item">
+                <a href="/payments/view/request" class="navi-link">
+														<span class="navi-text">
+															Historial de Solicitudes
+														</span>
+                </a>
+            </li>
+            <li class="navi-separator mt-3 opacity-70"></li>
+            <li class="navi-footer py-4">
+                <a class="btn btn-primary font-weight-bold btn-sm px-5" href="/payments/create">
+                    <i class="ki ki-plus icon-sm"></i>Solicitar un Pago</a>
+            </li>
+        </ul>
+        <!--end::Navigation-->
+        {% elif user.groups.all.0.name == 'Representantes' %}
+            <ul class="navi navi-hover">
+            <li class="navi-header font-weight-bold py-4">
+                <span class="font-size-lg">Resumen de Pagos:</span>
+                <i class="flaticon2-information icon-md text-muted" data-toggle="tooltip"
+                   data-placement="right" title="" data-original-title="Maneja todos los pagos realizados anteriormente o nuevos"></i>
+            </li>
+            <li class="navi-separator mb-3 opacity-70"></li>
+            <li class="navi-item">
+                <a href="/student/payments/pending" class="navi-link">
+														<span class="navi-text">
+															Solicitudes de pago {% if new_payments %}<span class="ml-2 label label-sm label-inline label-light-primary"></span>{% endif %}
+														</span>
+                </a>
+            </li>
+            <li class="navi-item">
+                <a href="/student/payments/index" class="navi-link">
+														<span class="navi-text">
+															Historial de Pagos
+														</span>
+                </a>
+            </li>
+            <li class="navi-separator mt-3 opacity-70"></li>
+            <li class="navi-footer py-4">
+                <a class="btn btn-primary font-weight-bold btn-sm px-5" href="/student/payments/create">
+                    <i class="ki ki-plus icon-sm"></i>Create un nuevo Pago</a>
+            </li>
+        </ul>
+        {% endif %}
+    </div>
+</div>

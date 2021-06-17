@@ -1,40 +1,84 @@
-{% load static wagtailuserbar %}
+{% load static wagtailuserbar i18n wagtailcore_tags wagtailimages_tags%}
 
 <!DOCTYPE html>
-<html class="no-js" lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <title>
-            {% block title %}
-                {% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %}
-            {% endblock %}
-            {% block title_suffix %}
-                {% with self.get_site.site_name as site_name %}
-                    {% if site_name %}- {{ site_name }}{% endif %}
-                {% endwith %}
-            {% endblock %}
-        </title>
-        <meta name="description" content="" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-        {# Global stylesheets #}
-        <link rel="stylesheet" type="text/css" href="{% static 'css/app_maltalovers.css' %}">
-
-        {% block extra_css %}
-            {# Override this in templates to add extra stylesheets #}
+<html class="no-js" lang="es">
+<head>
+    <meta charset="utf-8"/>
+    <title>
+        {% block title %}
+        {% if self.seo_title %}{{ self.seo_title }}{% else %}Escuela Uno - Aula Virtual{% endif %}
         {% endblock %}
-    </head>
-
-    <body class="{% block body_class %}{% endblock %}">
-        {% wagtailuserbar %}
-
-        {% block content %}{% endblock %}
-
-        {# Global javascript #}
-        <script type="text/javascript" src="{% static 'js/app_maltalovers.js' %}"></script>
-
-        {% block extra_js %}
-            {# Override this in templates to add extra javascript #}
+        {% block title_suffix %}
+        {% with self.get_site.site_name as site_name %}
+        {% if site_name %}- {{ site_name }}{% endif %}
+        {% endwith %}
         {% endblock %}
-    </body>
+    </title>
+    <meta name="description" content=""/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    {# Global stylesheets #}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/app_maltalovers.css' %}">
+    <link rel="shortcut icon" href="https://escuelauno.com/wp-content/uploads/2020/09/cropped-untitled-1-32x32.png">
+    <!--end::Fonts-->
+    <!--begin::Page Vendors Styles(used by this page)-->
+    {% block extra_css %}
+    {# Override this in templates to add extra stylesheets #}
+    {% endblock %}
+</head>
+
+<body class="{% block body_class %}{% endblock %}">
+{% wagtailuserbar %}
+<div id="kt_header_mobile" class="header-mobile header-mobile-fixed">
+			<!--begin::Logo-->
+			<a href="/">
+				<img alt="Logo" src="https://escuelauno.com/wp-content/uploads/2020/09/cropped-untitled-1-32x32.png" class="max-h-30px">
+			</a>
+			<!--end::Logo-->
+			<!--begin::Toolbar-->
+			<div class="d-flex align-items-center">
+				<button class="btn btn-hover-icon-primary p-0" id="kt_aside_offcanvas_toggle_mobile">
+					<span class="svg-icon svg-icon-xl">
+						<!--begin::Svg Icon | path:/keen/theme/demo2/dist/assets/media/svg/icons/Text/Toggle-Left.svg-->
+						<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+							<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+								<rect x="0" y="0" width="24" height="24"></rect>
+								<path d="M2 11.5C2 12.3284 2.67157 13 3.5 13H20.5C21.3284 13 22 12.3284 22 11.5V11.5C22 10.6716 21.3284 10 20.5 10H3.5C2.67157 10 2 10.6716 2 11.5V11.5Z" fill="black"></path>
+								<path opacity="0.5" fill-rule="evenodd" clip-rule="evenodd" d="M9.5 20C8.67157 20 8 19.3284 8 18.5C8 17.6716 8.67157 17 9.5 17H20.5C21.3284 17 22 17.6716 22 18.5C22 19.3284 21.3284 20 20.5 20H9.5ZM15.5 6C14.6716 6 14 5.32843 14 4.5C14 3.67157 14.6716 3 15.5 3H20.5C21.3284 3 22 3.67157 22 4.5C22 5.32843 21.3284 6 20.5 6H15.5Z" fill="black"></path>
+							</g>
+						</svg>
+						<!--end::Svg Icon-->
+					</span>
+				</button>
+			</div>
+			<!--end::Toolbar-->
+		</div>
+<header class="header">
+    <div class="subheader py-4 pt-lg-0 pb-lg-10" id="kt_subheader">
+        <div class="container d-flex align-items-center justify-content-between flex-wrap">
+            <!--begin::Info-->
+            {% include 'logo.html' %}
+            <!--end::Info-->
+            <!--begin::Toolbar-->
+            {% include 'navbar.html' %}
+            <!--end::Toolbar-->
+        </div>
+    </div>
+</header>
+<div class="aside-offcanvas aside-offcanvas-left d-flex flex-column flex-row-auto" id="kt_aside_offcanvas">
+    {% include 'base/aside-menu.html' %}
+</div>
+{% block content %}
+
+{% endblock %}
+{% include 'base/footer.html' %}
+{# Global javascript #}
+<script type="text/javascript" src="{% static 'plugins/global/plugins.bundle.781bfceccadf31d97c2d.js' %}"></script>
+<script type="text/javascript" src="{% static 'plugins/custom/prismjs/prismjs.bundle.b1e8e592c283e681a465.js' %}"></script>
+<script>var KTAppSettings = { "breakpoints": { "sm": 576, "md": 768, "lg": 992, "xl": 1200, "xxl": 1400 }, "colors": { "theme": { "base": { "white": "#ffffff", "primary": "#3E97FF", "secondary": "#E5EAEE", "success": "#08D1AD", "info": "#844AFF", "warning": "#F5CE01", "danger": "#FF3D60", "light": "#E4E6EF", "dark": "#181C32" }, "light": { "white": "#ffffff", "primary": "#DEEDFF", "secondary": "#EBEDF3", "success": "#D6FBF4", "info": "#6125E1", "warning": "#FFF4DE", "danger": "#FFE2E5", "light": "#F3F6F9", "dark": "#D6D6E0" }, "inverse": { "white": "#ffffff", "primary": "#ffffff", "secondary": "#3F4254", "success": "#ffffff", "info": "#ffffff", "warning": "#ffffff", "danger": "#ffffff", "light": "#464E5F", "dark": "#ffffff" } }, "gray": { "gray-100": "#F3F6F9", "gray-200": "#EBEDF3", "gray-300": "#E4E6EF", "gray-400": "#D1D3E0", "gray-500": "#B5B5C3", "gray-600": "#7E8299", "gray-700": "#5E6278", "gray-800": "#3F4254", "gray-900": "#181C32" } }, "font-family": "Poppins" };</script>
+<script type="text/javascript" src="{% static 'js/scripts.bundle.ece40378b8a8d89edcc9.js' %}"></script>
+{% block extra_js %}
+{# Override this in templates to add extra javascript #}
+{% endblock %}
+</body>
 </html>

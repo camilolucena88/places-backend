@@ -1,4 +1,10 @@
 venv/*
+app_maltalovers/__pycache__/
+app_maltalovers/__pycache__/*
+authentication/migrations/__pycache__/
+authentication/migrations/__pycache__/*
+app_maltalovers/settings/__pycache__/
+app_maltalovers/settings/__pycache__/*
 
 home/__pycache__/
 home/migrations/__pycache__/
@@ -8,6 +14,7 @@ places_api/__pycache__/
 places/migrations/__pycache__/
 places/migrations/__pycache__/*
 search/__pycache__/
+search/__pycache__/*
 users_api/__pycache__/
 users_api/__pycache__/__init__.cpython-39.pyc
 users_api/migrations/__pycache__/__init__.cpython-39.pyc
@@ -17,3 +24,22 @@ places_api/migrations/__pycache__/
 authentication/__pycache__/*
 .env
 certs
+db.sqlite3
+/node_modules/
+/menus/__pycache__/
+/menus/__pycache__/*
+/menus/migrations/__pycache__/*
+/menus/migrations/__pycache__/
+forms/__pycache__/
+forms/__pycache__/*
+forms/migrations/__pycache__/
+forms/migrations/__pycache__/*
+places/migrations/
+places/migrations/*
+menus/templatetags/__pycache__/
+menus/templatetags/__pycache__/*
+search/__pycache__/views.cpython-39.pyc
+search/__pycache__/__init__.cpython-39.pyc
+places/migrations/__pycache__/__init__.cpython-39.pyc
+places/migrations/__pycache__/0005_alter_likes_place.cpython-39.pyc
+app_maltalovers/__pycache__/__init__.cpython-39.pyc

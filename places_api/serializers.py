@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from places.models import Places, Genres, Comments, Bookmark, Likes, CommentLikes
+from places.models import Places, Genres, Comments, Bookmark, CommentLikes, Images
 
 
 class GenresSerializer(serializers.ModelSerializer):
@@ -18,15 +18,23 @@ class CommentsSerializer(serializers.ModelSerializer):
         fields = ['id', 'comment', 'likes', 'timestamp', 'created_by']
 
 
+class ImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Images
+        fields = ['img', 'created_by']
+
+
 class PlacesSerializer(serializers.ModelSerializer):
     img = serializers.CharField(read_only=True)
+    thumbnail = serializers.CharField(read_only=True, allow_null=True)
     comments = CommentsSerializer(read_only=True, many=True)
     key = serializers.CharField(source='slug')
     genres = GenresSerializer(read_only=True, many=True)
 
     class Meta:
         model = Places
-        fields = ['id', 'name', 'description', 'key', 'address', 'genres', 'likes', 'comments', 'img', 'rate']
+        fields = ['id', 'name', 'description', 'key', 'address', 'genres', 'likes', 'comments', 'img', 'thumbnail',
+                  'rate']
 
 
 class BookmarkSerializer(serializers.ModelSerializer):

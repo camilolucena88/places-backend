@@ -1,0 +1,97 @@
+{% for payment in payments %}
+    <tr data-row="0" class="datatable-row" style="left: 0px;">
+        <td class="datatable-cell-sorted datatable-cell-left datatable-cell" data-field="RecordID"
+            aria-label="1"><span style="width: 40px;"><span class="font-weight-bolder">{{ payment.id }}</span></span></td>
+        <td data-field="OrderID" aria-label="64616-103" class="datatable-cell"><span style="width: 250px;"><div
+                class="d-flex align-items-center">								<div
+                class="symbol symbol-40 symbol-light-success flex-shrink-0">									<span
+                class="symbol-label font-size-h4 font-weight-bold">B</span>								</div>								<div
+                class="ml-4">									<div
+                class="text-dark-75 font-weight-bolder font-size-lg mb-0">{{ payment.created_by.first_name }} {{ payment.created_by.last_name }}</div>									<a
+                href="#" class="text-muted font-weight-bold text-hover-primary">{{ payment.created_by.email }}</a>								</div>							</div></span>
+        </td>
+        <td data-field="Country" aria-label="Brazil" class="datatable-cell"><span style="width: 154px;"><div
+                class="font-weight-bolder font-size-lg mb-0">{{ payment.description }}</div><div
+                class="font-weight-bold text-muted"><small>Estudiante: {{ payment.related_student }}</small></div></span>
+        </td>
+        <td data-field="ShipDate" aria-label="10/15/2017" class="datatable-cell"><span
+                style="width: 154px;"><div
+                class="font-weight-bolder text-primary mb-0">{{ payment.created_at | date:"d/m/Y" }}</div></span></td>
+        <td data-field="CompanyName" aria-label="Casper-Kerluke" class="datatable-cell"><span
+                style="width: 154px;"><div class="font-weight-bold text-muted">{{ payment.amount }}</div></span>
+        </td>
+        <td data-field="Status" aria-label="5" class="datatable-cell"><span style="width: 154px;">
+                            <span class="label label-lg font-weight-bold label-light-success label-inline">{{ payment.status }}</span>
+                        </span>
+            <div
+                class="font-weight-bold text-muted"><small>Por {{ payment.approved_by.first_name }} {{ payment.approved_by.last_name }}</small></div>
+        </td>
+        <td data-field="Actions" data-autohide-disabled="false" aria-label="null" class="datatable-cell">
+            <a class="btn btn-sm btn-default btn-text-primary btn-hover-primary btn-icon" href="/payments/invoice/{{ payment.id }}"
+                                title="Approve">
+                                <span class="svg-icon svg-icon-primary svg-icon-2x"><!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/keen/releases/2021-03-15-144509/theme/demo2/dist/../src/media/svg/icons/Navigation/Angle-right.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <polygon points="0 0 24 0 24 24 0 24"/>
+                                        <path d="M6.70710678,15.7071068 C6.31658249,16.0976311 5.68341751,16.0976311 5.29289322,15.7071068 C4.90236893,15.3165825 4.90236893,14.6834175 5.29289322,14.2928932 L11.2928932,8.29289322 C11.6714722,7.91431428 12.2810586,7.90106866 12.6757246,8.26284586 L18.6757246,13.7628459 C19.0828436,14.1360383 19.1103465,14.7686056 18.7371541,15.1757246 C18.3639617,15.5828436 17.7313944,15.6103465 17.3242754,15.2371541 L12.0300757,10.3841378 L6.70710678,15.7071068 Z" fill="#000000" fill-rule="nonzero" transform="translate(12.000003, 11.999999) rotate(-270.000000) translate(-12.000003, -11.999999) "/>
+                                    </g>
+                                </svg><!--end::Svg Icon--></span>
+
+            </a>
+            <button type="button" class="btn btn-sm btn-default btn-text-primary btn-hover-primary btn-icon" data-toggle="modal" data-target="#reject"
+                title="Reject">
+                <span class="svg-icon svg-icon-primary svg-icon-2x"><!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/keen/releases/2021-03-15-144509/theme/demo2/dist/../src/media/svg/icons/Code/Stop.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <rect x="0" y="0" width="24" height="24"/>
+                        <path d="M12,22 C6.4771525,22 2,17.5228475 2,12 C2,6.4771525 6.4771525,2 12,2 C17.5228475,2 22,6.4771525 22,12 C22,17.5228475 17.5228475,22 12,22 Z M12,20 C16.418278,20 20,16.418278 20,12 C20,7.581722 16.418278,4 12,4 C7.581722,4 4,7.581722 4,12 C4,16.418278 7.581722,20 12,20 Z M19.0710678,4.92893219 L19.0710678,4.92893219 C19.4615921,5.31945648 19.4615921,5.95262146 19.0710678,6.34314575 L6.34314575,19.0710678 C5.95262146,19.4615921 5.31945648,19.4615921 4.92893219,19.0710678 L4.92893219,19.0710678 C4.5384079,18.6805435 4.5384079,18.0473785 4.92893219,17.6568542 L17.6568542,4.92893219 C18.0473785,4.5384079 18.6805435,4.5384079 19.0710678,4.92893219 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"/>
+                    </g>
+                </svg><!--end::Svg Icon--></span>
+            </button>
+        </td>
+    </tr>
+    <!-- Modal-->
+    <div class="modal fade" id="approve" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">¿Estás seguro de aprobar este pago?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <i aria-hidden="true" class="ki ki-close"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div><span>Estudiante relacionado:</span> <span class="font-size-h4 font-size-lg-h2">{{ payment.related_student }}</span></div>
+                    <div>Relizado por: <span class="font-size-h4 font-size-lg-h2">{{ payment.created_by.first_name }} {{ payment.created_by.last_name }}</span></div>
+                    <div>Monto: <span class="font-size-h4 font-size-lg-h2">{{ payment.amount }}</span></div>
+                    <div>Descripcion: <span class="font-size-h4 font-size-lg-h2">{{ payment.description }}</span></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
+                    <form action="{% url 'approve_payment' payment.id %}" method="POST">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-primary font-weight-bold">Save changes</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal-->
+    <div class="modal fade" id="reject" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal Title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <i aria-hidden="true" class="ki ki-close"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary font-weight-bold">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}

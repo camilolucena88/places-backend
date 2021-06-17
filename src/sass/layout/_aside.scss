@@ -1,0 +1,37 @@
+//
+// Aside
+//
+
+// General Mode(all devices)
+.aside {
+	overflow: auto;
+	position: fixed;
+	top: get($content-config, spacing, desktop);
+	bottom: get($content-config, spacing, desktop);
+	left: get($content-config, spacing, desktop);
+	width: get($aside-config, base, width);
+	z-index: get($aside-config, base, zindex);
+	box-shadow: get($aside-config, base, shadow);
+	background-color: get($aside-config, base, bg-color);
+	@include border-radius($border-radius);
+}
+
+// Tablet & Mobile Modes
+@include media-breakpoint-down(md) {
+	.aside {
+		@include border-radius(0);
+
+		// Buttons
+		.btn.btn-icon.btn-lg {
+			width: 40px;
+			height: 40px;
+
+			.svg-icon {
+				@include svg-icon-size(26px);
+			}
+		}
+	}
+}
+
+// Build Aside Offcanvas Panel for mobile mode
+@include offcanvas-build(aside, tablet-and-mobile, get($aside-config, offcanvas-mobile));

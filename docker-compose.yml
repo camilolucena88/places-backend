@@ -12,20 +12,6 @@ services:
     - .:/usr/src/app
     ports:
     - "8000:8000"
-    depends_on:
-    - pgdb
     networks:
     - app_maltalovers
 
-  pgdb:
-    image: postgres
-    container_name: mt_db
-    restart: always
-    ports:
-    - 5432:5432
-    environment:
-      POSTGRES_DB: app_maltalovers
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: 1234
-    networks:
-    - app_maltalovers

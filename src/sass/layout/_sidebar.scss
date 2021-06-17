@@ -1,0 +1,39 @@
+//
+// Sidebar
+//
+
+// Base
+.sidebar {
+	// Aside Scroll
+	.aside-scroll {
+		@include perfect-scrollbar-ver-offset(4px);
+	}
+}
+
+// Desktop Mode
+@include media-breakpoint-up(lg) {
+	// Sidebar Overlay
+	.sidebar {
+		position: fixed;
+		top: 0;
+		bottom: 0;
+		right: -(get($sidebar-config, desktop, width));
+		width: get($sidebar-config, desktop, width);
+		z-index: get($sidebar-config, desktop, z-index);
+		transition: right 0.3s ease;
+
+		// Sidebar Shown
+		[data-sidebar="on"] & {
+			transition: right 0.3s ease;
+			right: 0;
+		}
+	}
+
+	// Scrolltop
+	.scrolltop {
+		right: get($sidebar-config, desktop, width) - (get($scrolltop-config, size, desktop) / 2);
+	}
+}
+
+// Build Aside Offcanvas Panel for mobile mode
+@include offcanvas-build(sidebar, tablet-and-mobile, get($sidebar-config, offcanvas-mobile));

@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load static %}
+{% block body_class %}container{% endblock %}
+
+{% block extra_css %}
+
+{% comment %}
+Delete the line below if you're just getting started and want to remove the welcome screen!
+{% endcomment %}
+<link rel="stylesheet" href="{% static 'css/welcome_page.css' %}">
+<link rel="stylesheet" href="{% static '/plugins/custom/fullcalendar/fullcalendar.bundle.css' %}">
+<link rel="stylesheet" href="{% static '/plugins/global/plugins.bundle.css' %}">
+<link rel="stylesheet" href="{% static '/plugins/custom/prismjs/prismjs.bundle.css' %}">
+<link rel="stylesheet" href="{% static '/css/style.bundle.css' %}">
+<link rel="stylesheet" href="{% static 'css/pages/wizard/wizard-1.css' %}">
+<!--end::Global Theme Styles-->
+<!--begin::Layout Themes(used by all pages)-->
+<!--end::Layout Themes-->
+
+{% endblock extra_css %}
+
+{% block content %}
+
+{% comment %}
+Delete the line below if you're just getting started and want to remove the welcome screen!
+{% endcomment %}
+{% load i18n wagtailcore_tags wagtailimages_tags %}
+
+<div class="card-header flex-wrap py-3">
+<div class="d-flex align-items-center my-2">
+    <a href="javascript:history.go(-1)" class="btn btn-clean btn-icon btn-sm mr-6" data-inbox="back">
+        <i class="flaticon2-left-arrow-1"></i>
+    </a>
+    <div class="card-title">
+    <h3 class="card-label">Crear nuevos pagos
+        <span class="d-block text-muted pt-2 font-size-sm">Elegir entre pagos a grupos o a individuos</span>
+    </h3>
+    </div>
+</div>
+{% include 'payments/create_form.html' %}
+</div>
+
+
+{% endblock content %}
+{% block extra_js %}
+    {% include 'extra_js/datepicker.html' %}
+{% endblock extra_js %}

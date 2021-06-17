@@ -1,0 +1,180 @@
+<!--begin::Content-->
+<div class="flex-row-fluid ml-lg-8">
+    <!--begin::Card-->
+    <div class="card card-custom card-stretch">
+        <!--begin::Header-->
+        <div class="card-header py-3">
+            <div class="card-title align-items-start flex-column">
+                <h3 class="card-label font-weight-bolder text-dark">Información Personal</h3>
+                <span class="text-muted font-weight-bold font-size-sm mt-1">Actualiza tu información personal</span>
+            </div>
+        </div>
+        <!--end::Header-->
+        <!--begin::Form-->
+        <form class="form" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <!--begin::Body-->
+            <div class="card-body">
+                <div class="row">
+                    <label class="col-xl-3"></label>
+                    <div class="col-lg-9 col-xl-6">
+                        <h5 class="font-weight-bold mb-6">Información Personal</h5>
+                    </div>
+                </div>
+                {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li
+                    {% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                <div class="form-group row">
+                    <label class="col-xl-3 col-lg-3 col-form-label text-right">Foto de Perfil</label>
+                    <div class="col-lg-9 col-xl-6">
+                        <div class="image-input image-input-outline" id="kt_profile_avatar">
+                            {% if request.user.wagtail_userprofile.avatar %}
+                            <div class="image-input-wrapper"
+                                 style="background-image: url('/media/{{request.user.wagtail_userprofile.avatar}}')">
+                            </div>
+                            {% else %}
+                            <div class="image-input-wrapper"
+                                 style="background-image: url('/media/avatar_images/001-boy.svg')">
+                            </div>
+                            {% endif %}
+                            <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
+                                   data-action="change" data-toggle="tooltip" title=""
+                                   data-original-title="Change avatar">
+                                <i class="fa fa-pen icon-sm text-muted"></i>
+                                <input id="id_avatar" type="file" name="avatar" accept=".png, .jpg, .jpeg">
+                                <input type="hidden" name="profile_avatar_remove">
+                            </label>
+                            <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
+                                  data-action="cancel" data-toggle="tooltip" title=""
+                                  data-original-title="Cancel avatar">
+                                                                <i class="ki ki-bold-close icon-xs text-muted"></i>
+                                                            </span>
+                            <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
+                                  data-action="remove" data-toggle="tooltip" title=""
+                                  data-original-title="Remove avatar">
+                                                                <i class="ki ki-bold-close icon-xs text-muted"></i>
+                                                            </span>
+                        </div>
+                        <span class="form-text text-muted">Formatos permitidos: png, jpg, jpeg.</span>
+                    </div>
+                </div>
+                {% if personal_form.first_name.errors %}
+                <div class="alert alert-custom alert-light-danger fade show">
+                    {{ personal_form.first_name.errors }}
+                </div>
+                {% endif %}
+                <div class="form-group row">
+                    <label class="col-xl-3 col-lg-3 col-form-label text-right">Nombre</label>
+                    <div class="col-lg-9 col-xl-6">
+                        <input name="first_name" class="form-control form-control-lg form-control-solid" type="text"
+                               value="{{ request.user.first_name }}">
+                    </div>
+                </div>
+                {% if personal_form.last_name.errors %}
+                <div class="alert alert-custom alert-light-danger fade show">
+                    {{ personal_form.last_name.errors }}
+                </div>
+                {% endif %}
+                <div class="form-group row">
+                    <label class="col-xl-3 col-lg-3 col-form-label text-right">Apellido</label>
+                    <div class="col-lg-9 col-xl-6">
+                        <input name="last_name" class="form-control form-control-lg form-control-solid" type="text"
+                               value="{{ request.user.last_name }}">
+                    </div>
+                </div>
+<!--                <div class="row">-->
+<!--                    <label class="col-xl-3"></label>-->
+<!--                    <div class="col-lg-9 col-xl-6">-->
+<!--                        <h5 class="font-weight-bold mt-10 mb-6">Contact Info</h5>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                {% if student_form.address.errors %}-->
+<!--                <div class="alert alert-custom alert-light-danger fade show">-->
+<!--                    {{ student_form.address.errors }}-->
+<!--                </div>-->
+<!--                {% endif %}-->
+<!--                <div class="form-group row">-->
+<!--                    <label class="col-xl-3 col-lg-3 col-form-label text-right">Address</label>-->
+<!--                    <div class="col-lg-9 col-xl-6">-->
+<!--                        <div class="input-group input-group-lg input-group-solid">-->
+<!--                            {{ student_form.address }}-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                {% if student_form.city.errors %}-->
+<!--                <div class="alert alert-custom alert-light-danger fade show">-->
+<!--                    {{ student_form.city.errors }}-->
+<!--                </div>-->
+<!--                {% endif %}-->
+<!--                <div class="form-group row">-->
+<!--                    <label class="col-xl-3 col-lg-3 col-form-label text-right">City</label>-->
+<!--                    <div class="col-lg-9 col-xl-6">-->
+<!--                        <div class="input-group input-group-lg input-group-solid">-->
+<!--                            {{ student_form.city }}-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                {% if student_form.country.errors %}-->
+<!--                <div class="alert alert-custom alert-light-danger fade show">-->
+<!--                    {{ student_form.country.errors }}-->
+<!--                </div>-->
+<!--                {% endif %}-->
+<!--                <div class="form-group row">-->
+<!--                    <label class="col-xl-3 col-lg-3 col-form-label text-right">Country</label>-->
+<!--                    <div class="col-lg-9 col-xl-6">-->
+<!--                        <div class="input-group input-group-lg input-group-solid">-->
+<!--                            {{ student_form.country }}-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                {% if student_form.telephone.errors %}-->
+<!--                <div class="alert alert-custom alert-light-danger fade show">-->
+<!--                    {{ student_form.telephone.errors }}-->
+<!--                </div>-->
+<!--                {% endif %}-->
+<!--                <div class="form-group row">-->
+<!--                    <label class="col-xl-3 col-lg-3 col-form-label text-right">Contact Phone</label>-->
+<!--                    <div class="col-lg-9 col-xl-6">-->
+<!--                        <div class="input-group input-group-lg input-group-solid">-->
+<!--                            <div class="input-group-prepend">-->
+<!--                                                                <span class="input-group-text">-->
+<!--                                                                    <i class="la la-phone"></i>-->
+<!--                                                                </span>-->
+<!--                            </div>-->
+<!--                            {{ student_form.telephone }}-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+                {% if email_form.email.errors %}
+                <div class="alert alert-custom alert-light-danger fade show">
+                    {{ email_form.email.errors }}
+                </div>
+                {% endif %}
+                <div class="form-group row">
+                    <label class="col-xl-3 col-lg-3 col-form-label text-right">Correo Electrónico</label>
+                    <div class="col-lg-9 col-xl-6">
+                        <div class="input-group input-group-lg input-group-solid">
+                            <div class="input-group-prepend">
+                                                                <span class="input-group-text">
+                                                                    <i class="la la-at"></i>
+                                                                </span>
+                            </div>
+                            <input type="text" class="form-control form-control-lg form-control-solid"
+                                   value="{{ request.user.email | default_if_none:'' }}" placeholder="Email"
+                                   name="email">
+                        </div>
+                    </div>
+                </div>
+                {% include 'components/save_btn.html' %}
+            </div>
+            <!--end::Body-->
+        </form>
+        <!--end::Form-->
+    </div>
+</div>
+<!--end::Content-->

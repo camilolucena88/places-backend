@@ -1,9 +1,20 @@
 {% extends "base.html" %}
-
-{% block body_class %}template-404{% endblock %}
-
+{% load static %}
+{% block body_class %}container{% endblock %}
+{% block extra_css %}
+{% comment %}
+Delete the line below if you're just getting started and want to remove the welcome screen!
+{% endcomment %}
+<link rel="stylesheet" href="{% static 'css/welcome_page.css' %}">
+<link rel="stylesheet" href="{% static '/plugins/custom/fullcalendar/fullcalendar.bundle.css' %}">
+<link rel="stylesheet" href="{% static '/plugins/global/plugins.bundle.css' %}">
+<link rel="stylesheet" href="{% static '/plugins/custom/prismjs/prismjs.bundle.css' %}">
+<link rel="stylesheet" href="{% static '/css/style.bundle.css' %}">
+{% endblock extra_css %}
 {% block content %}
-    <h1>Page not found</h1>
+    <div class="container p-10 m-10">
+        <h1>Page not found</h1>
 
-    <h2>Sorry, this page could not be found.</h2>
+        <h2>Sorry, this page could not be found.</h2>
+    </div>
 {% endblock %}

@@ -1,0 +1,22 @@
+//
+// Aside Offcanvas
+//
+
+// Aside Offcanvas Menu
+.aside-offcanvas-menu {
+	@include perfect-scrollbar-ver-offset(4px);
+}
+
+// Tablet & Mobile Modes
+@include media-breakpoint-down(md) {
+	.aside-offcanvas {
+		overflow: auto;
+	}
+}
+
+// Build Aside Offcanvas Menu
+@include menu-ver-build-layout($aside-offcanvas-menu-config);
+@include menu-ver-build-theme($aside-offcanvas-menu-config, default);
+
+// Aside Offcanvas Panel For Mobile Mode
+@include offcanvas-build(aside-offcanvas, default, $aside-offcanvas-config);

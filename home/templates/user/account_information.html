@@ -1,0 +1,115 @@
+<!--begin::Content-->
+<div class="flex-row-fluid ml-lg-8">
+    <!--begin::Card-->
+    <div class="card card-custom card-stretch">
+        <!--begin::Header-->
+        <div class="card-header py-3">
+            <div class="card-title align-items-start flex-column">
+                <h3 class="card-label font-weight-bolder text-dark">Información Personal</h3>
+                <span class="text-muted font-weight-bold font-size-sm mt-1">Actualiza tu información personal</span>
+            </div>
+        </div>
+        <!--end::Header-->
+        <!--begin::Form-->
+        <form class="form" method="POST">
+            {% csrf_token %}
+            <!--begin::Body-->
+            <div class="card-body">
+                <div class="row">
+                    <label class="col-xl-3"></label>
+                    <div class="col-lg-9 col-xl-6">
+                        <h5 class="font-weight-bold mb-6">Información del usuario</h5>
+                    </div>
+                </div>
+                {% if form.dob.errors %}
+                <div class="alert alert-custom alert-light-danger fade show">
+                    {{ form.dob.errors }}
+                </div>
+                {% endif %}
+                <div class="form-group row">
+                    <label class="col-xl-3 col-lg-3 col-form-label text-right">Fecha de nacimiento</label>
+                    <div class="col-lg-9 col-xl-6">
+                        <div class="input-group input-group-lg input-group-solid">
+                            {{ form.dob }}
+                        </div>
+                    </div>
+                </div>
+                {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li
+                    {% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+               <div class="row">
+                    <label class="col-xl-3"></label>
+                    <div class="col-lg-9 col-xl-6">
+                        <h5 class="font-weight-bold mt-10 mb-6">Información de Contacto</h5>
+                    </div>
+                </div>
+                {% if form.address.errors %}
+                <div class="alert alert-custom alert-light-danger fade show">
+                    {{ form.address.errors }}
+                </div>
+                {% endif %}
+                <div class="form-group row">
+                    <label class="col-xl-3 col-lg-3 col-form-label text-right">Dirección</label>
+                    <div class="col-lg-9 col-xl-6">
+                        <div class="input-group input-group-lg input-group-solid">
+                            {{ form.address }}
+                        </div>
+                    </div>
+                </div>
+                {% if form.city.errors %}
+                <div class="alert alert-custom alert-light-danger fade show">
+                    {{ form.city.errors }}
+                </div>
+                {% endif %}
+                <div class="form-group row">
+                    <label class="col-xl-3 col-lg-3 col-form-label text-right">Ciudad</label>
+                    <div class="col-lg-9 col-xl-6">
+                        <div class="input-group input-group-lg input-group-solid">
+                            {{ form.city }}
+                        </div>
+                    </div>
+                </div>
+                {% if form.country.errors %}
+                <div class="alert alert-custom alert-light-danger fade show">
+                    {{ form.country.errors }}
+                </div>
+                {% endif %}
+                <div class="form-group row">
+                    <label class="col-xl-3 col-lg-3 col-form-label text-right">País</label>
+                    <div class="col-lg-9 col-xl-6">
+                        <div class="input-group input-group-lg input-group-solid">
+                            {{ form.country }}
+                        </div>
+                    </div>
+                </div>
+                {% if form.telephone.errors %}
+                <div class="alert alert-custom alert-light-danger fade show">
+                    {{ form.telephone.errors }}
+                </div>
+                {% endif %}
+                <div class="form-group row">
+                    <label class="col-xl-3 col-lg-3 col-form-label text-right">Teléfono de contacto</label>
+                    <div class="col-lg-9 col-xl-6">
+                        <div class="input-group input-group-lg input-group-solid">
+                            <div class="input-group-prepend">
+                                                                <span class="input-group-text">
+                                                                    <i class="la la-phone"></i>
+                                                                </span>
+                            </div>
+                            {{ form.telephone }}
+                        </div>
+                    </div>
+                </div>
+                {% include 'components/save_btn.html' %}
+            </div>
+            <!--end::Body-->
+        </form>
+        <!--end::Form-->
+    </div>
+</div>
+<!--end::Content-->

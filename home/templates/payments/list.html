@@ -1,0 +1,67 @@
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li
+            {% if message.tags %} class="alert alert-{{ message.tags }}" {% endif %}>{{ message }}
+    </li>
+    {% endfor %}
+</ul>
+{% endif %}
+<div class="card card-custom gutter-b">
+    <!--begin::Header-->
+    <div class="card-header flex-wrap border-0 pt-6 pb-0">
+        <div class="d-flex align-items-center my-2">
+            <a href="javascript:history.go(-1)" class="btn btn-clean btn-icon btn-sm mr-6" data-inbox="back">
+                <i class="flaticon2-left-arrow-1"></i>
+            </a>
+            <div class="card-title">
+                    {% if page == 'new' %}
+                    <h3 class="card-label">Nuevos de pagos
+                        <span class="d-block text-muted pt-2 font-size-sm">Historial de nuevos pagos</span>
+                    </h3>
+                    {% elif page == 'requested' %}
+                        <h3 class="card-label">Solicitudes de pagos
+                            <span class="d-block text-muted pt-2 font-size-sm">Historial de solicitudes de pagos a estudiantes o grupos</span>
+                        </h3>
+                    {% else %}
+                        <h3 class="card-label">Historial de pagos
+                            <span class="d-block text-muted pt-2 font-size-sm">Historial de pagos</span>
+                        </h3>
+                    {% endif %}
+            </div>
+        </div>
+    </div>
+    <!--end::Header-->
+    <div class="card-body">
+        <!--begin::Example-->
+        <div class="datatable datatable-bordered datatable-head-custom datatable-default datatable-primary datatable-loaded"
+             id="" style="">
+            {% if page_obj %}
+            <table class="table table-bordered table-checkable dataTable no-footer dtr-inline" id="kt_datatable_{{ page }}_payment" role="grid" aria-describedby="kt_datatable_info">
+                <thead class="datatable-head">
+                <tr>
+                    {% if page == 'new' %}
+                        {% include 'payments/headers/new.html' %}
+                    {% elif page == 'requested' %}
+                        {% include 'payments/headers/requested.html' %}
+                    {% else %}
+                        {% include 'payments/headers/new.html' %}
+                    {% endif %}
+                </tr>
+                </thead>
+                <tbody class="datatable-body" style="">
+                {% if page == 'new' %}
+                    {% include 'payments/new_payments.html' %}
+                {% elif page == 'requested' %}
+                    {% include 'payments/requested_payments.html' %}
+                {% else %}
+                    {% include 'payments/payments.html' %}
+                {% endif %}
+            </tbody>
+            </table>
+        {% else %}
+                No hay pagos pendientes
+        {% endif %}
+        </div>
+    </div>
+</div>

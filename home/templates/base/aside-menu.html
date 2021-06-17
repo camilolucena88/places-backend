@@ -1,0 +1,516 @@
+{% load static wagtailuserbar menus_tags %}
+
+<div class="aside-offcanvas-menu-wrapper flex-column-fluid" id="kt_aside_offcanvas_menu_wrapper">
+    <!--begin::Menu Container-->
+    <div id="kt_aside_offcanvas_menu" class="aside-offcanvas-menu my-4 scroll ps ps--active-y"
+         data-menu-vertical="1" style="overflow: hidden;">
+        <ul class="menu-nav">
+            {% for item in navigation.menu_items.all %}
+            <li class="menu-item {%if 'student/id/' in request.path %}menu-item-here{%endif%}" aria-haspopup="true">
+                {% if user.groups.all.0.name == 'Representantes' %}
+<!--                    <a href="/student/parent/id/{{ request.user.id }}" class="menu-link">-->
+                    <a href="/parents/profile" class="menu-link">
+                        <span class="menu-text">{{ item.title }}</span>
+                    </a>
+                {% elif user.groups.all.0.name == 'Estudiantes' %}
+                    <a href="/student/id/{{ request.user.id }}" class="menu-link">
+                        <span class="menu-text">{{ item.title }}</span>
+                    </a>
+                {% else %}
+                    <a href="/courses/dashboard" class="menu-link">
+                        <span class="menu-text">{{ item.title }}</span>
+                    </a>
+                {% endif %}
+            </li>
+            {% endfor %}
+            <li class="menu-section">
+                <h4 class="menu-text">Menu</h4>
+                <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
+            </li>
+                {% if 'students.view_students' in user.get_all_permissions %}
+                        <li class="menu-item menu-item-submenu {%if 'class' in request.path %}menu-item-open menu-item-here{%endif%}" aria-haspopup="true"
+                        data-menu-toggle="hover">
+                            <a href="/courses/all" class="menu-link menu-toggle">
+								<span class="svg-icon menu-icon">
+									<!--begin::Svg Icon | path:/keen/theme/demo1/dist/assets/media/svg/icons/Layout/Layout-4-blocks.svg-->
+									<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                         width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+										<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+											<rect x="0" y="0" width="24" height="24"></rect>
+											<rect fill="#000000" x="4" y="4" width="7" height="7" rx="1.5"></rect>
+											<path d="M5.5,13 L9.5,13 C10.3284271,13 11,13.6715729 11,14.5 L11,18.5 C11,19.3284271 10.3284271,20 9.5,20 L5.5,20 C4.67157288,20 4,19.3284271 4,18.5 L4,14.5 C4,13.6715729 4.67157288,13 5.5,13 Z M14.5,4 L18.5,4 C19.3284271,4 20,4.67157288 20,5.5 L20,9.5 C20,10.3284271 19.3284271,11 18.5,11 L14.5,11 C13.6715729,11 13,10.3284271 13,9.5 L13,5.5 C13,4.67157288 13.6715729,4 14.5,4 Z M14.5,13 L18.5,13 C19.3284271,13 20,13.6715729 20,14.5 L20,18.5 C20,19.3284271 19.3284271,20 18.5,20 L14.5,20 C13.6715729,20 13,19.3284271 13,18.5 L13,14.5 C13,13.6715729 13.6715729,13 14.5,13 Z"
+                                                  fill="#000000" opacity="0.3"></path>
+										</g>
+									</svg>
+                                    <!--end::Svg Icon-->
+								</span>
+                            <span class="menu-text">Clases</span>
+                        </a>
+                    </li>
+                        <li class="menu-item menu-item-submenu {%if 'class' in request.path %}menu-item-open menu-item-here{%endif%}" aria-haspopup="true"
+                        data-menu-toggle="hover">
+                            <a href="/courses/students" class="menu-link menu-toggle">
+								<span class="svg-icon menu-icon">
+									<!--begin::Svg Icon | path:/keen/theme/demo1/dist/assets/media/svg/icons/Layout/Layout-4-blocks.svg-->
+									<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                         width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+										<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+											<rect x="0" y="0" width="24" height="24"></rect>
+											<rect fill="#000000" x="4" y="4" width="7" height="7" rx="1.5"></rect>
+											<path d="M5.5,13 L9.5,13 C10.3284271,13 11,13.6715729 11,14.5 L11,18.5 C11,19.3284271 10.3284271,20 9.5,20 L5.5,20 C4.67157288,20 4,19.3284271 4,18.5 L4,14.5 C4,13.6715729 4.67157288,13 5.5,13 Z M14.5,4 L18.5,4 C19.3284271,4 20,4.67157288 20,5.5 L20,9.5 C20,10.3284271 19.3284271,11 18.5,11 L14.5,11 C13.6715729,11 13,10.3284271 13,9.5 L13,5.5 C13,4.67157288 13.6715729,4 14.5,4 Z M14.5,13 L18.5,13 C19.3284271,13 20,13.6715729 20,14.5 L20,18.5 C20,19.3284271 19.3284271,20 18.5,20 L14.5,20 C13.6715729,20 13,19.3284271 13,18.5 L13,14.5 C13,13.6715729 13.6715729,13 14.5,13 Z"
+                                                  fill="#000000" opacity="0.3"></path>
+										</g>
+									</svg>
+                                    <!--end::Svg Icon-->
+								</span>
+                            <span class="menu-text">Estudiantes</span>
+                        </a>
+                    </li>
+                        <li class="menu-item menu-item-submenu {%if 'class' in request.path %}menu-item-open menu-item-here{%endif%}" aria-haspopup="true"
+                        data-menu-toggle="hover">
+                            <a href="/parents/all" class="menu-link menu-toggle">
+								<span class="svg-icon menu-icon">
+									<!--begin::Svg Icon | path:/keen/theme/demo1/dist/assets/media/svg/icons/Layout/Layout-4-blocks.svg-->
+									<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                         width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+										<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+											<rect x="0" y="0" width="24" height="24"></rect>
+											<rect fill="#000000" x="4" y="4" width="7" height="7" rx="1.5"></rect>
+											<path d="M5.5,13 L9.5,13 C10.3284271,13 11,13.6715729 11,14.5 L11,18.5 C11,19.3284271 10.3284271,20 9.5,20 L5.5,20 C4.67157288,20 4,19.3284271 4,18.5 L4,14.5 C4,13.6715729 4.67157288,13 5.5,13 Z M14.5,4 L18.5,4 C19.3284271,4 20,4.67157288 20,5.5 L20,9.5 C20,10.3284271 19.3284271,11 18.5,11 L14.5,11 C13.6715729,11 13,10.3284271 13,9.5 L13,5.5 C13,4.67157288 13.6715729,4 14.5,4 Z M14.5,13 L18.5,13 C19.3284271,13 20,13.6715729 20,14.5 L20,18.5 C20,19.3284271 19.3284271,20 18.5,20 L14.5,20 C13.6715729,20 13,19.3284271 13,18.5 L13,14.5 C13,13.6715729 13.6715729,13 14.5,13 Z"
+                                                  fill="#000000" opacity="0.3"></path>
+										</g>
+									</svg>
+                                    <!--end::Svg Icon-->
+								</span>
+                            <span class="menu-text">Padres</span>
+                        </a>
+                    </li>
+                        <li class="menu-item menu-item-submenu {%if 'class' in request.path %}menu-item-open menu-item-here{%endif%}" aria-haspopup="true"
+                        data-menu-toggle="hover">
+                            <a href="/instructor/all" class="menu-link menu-toggle">
+								<span class="svg-icon menu-icon">
+									<!--begin::Svg Icon | path:/keen/theme/demo1/dist/assets/media/svg/icons/Layout/Layout-4-blocks.svg-->
+									<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                         width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+										<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+											<rect x="0" y="0" width="24" height="24"></rect>
+											<rect fill="#000000" x="4" y="4" width="7" height="7" rx="1.5"></rect>
+											<path d="M5.5,13 L9.5,13 C10.3284271,13 11,13.6715729 11,14.5 L11,18.5 C11,19.3284271 10.3284271,20 9.5,20 L5.5,20 C4.67157288,20 4,19.3284271 4,18.5 L4,14.5 C4,13.6715729 4.67157288,13 5.5,13 Z M14.5,4 L18.5,4 C19.3284271,4 20,4.67157288 20,5.5 L20,9.5 C20,10.3284271 19.3284271,11 18.5,11 L14.5,11 C13.6715729,11 13,10.3284271 13,9.5 L13,5.5 C13,4.67157288 13.6715729,4 14.5,4 Z M14.5,13 L18.5,13 C19.3284271,13 20,13.6715729 20,14.5 L20,18.5 C20,19.3284271 19.3284271,20 18.5,20 L14.5,20 C13.6715729,20 13,19.3284271 13,18.5 L13,14.5 C13,13.6715729 13.6715729,13 14.5,13 Z"
+                                                  fill="#000000" opacity="0.3"></path>
+										</g>
+									</svg>
+                                    <!--end::Svg Icon-->
+								</span>
+                            <span class="menu-text">Profesores</span>
+                        </a>
+                    </li>
+                {% elif user.groups.all.0.name == 'Profesores' %}
+                    <li class="menu-item menu-item-submenu {%if 'class' in request.path %}menu-item-open menu-item-here{%endif%}" aria-haspopup="true"
+                        data-menu-toggle="hover">
+                        <a href="/courses/notifications" class="menu-link menu-toggle">
+                                    <span class="svg-icon menu-icon">
+                                        <!--begin::Svg Icon | path:/keen/theme/demo1/dist/assets/media/svg/icons/Layout/Layout-4-blocks.svg-->
+                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                             width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                <rect x="0" y="0" width="24" height="24"></rect>
+                                                <rect fill="#000000" x="4" y="4" width="7" height="7" rx="1.5"></rect>
+                                                <path d="M5.5,13 L9.5,13 C10.3284271,13 11,13.6715729 11,14.5 L11,18.5 C11,19.3284271 10.3284271,20 9.5,20 L5.5,20 C4.67157288,20 4,19.3284271 4,18.5 L4,14.5 C4,13.6715729 4.67157288,13 5.5,13 Z M14.5,4 L18.5,4 C19.3284271,4 20,4.67157288 20,5.5 L20,9.5 C20,10.3284271 19.3284271,11 18.5,11 L14.5,11 C13.6715729,11 13,10.3284271 13,9.5 L13,5.5 C13,4.67157288 13.6715729,4 14.5,4 Z M14.5,13 L18.5,13 C19.3284271,13 20,13.6715729 20,14.5 L20,18.5 C20,19.3284271 19.3284271,20 18.5,20 L14.5,20 C13.6715729,20 13,19.3284271 13,18.5 L13,14.5 C13,13.6715729 13.6715729,13 14.5,13 Z"
+                                                      fill="#000000" opacity="0.3"></path>
+                                            </g>
+                                        </svg>
+                                        <!--end::Svg Icon-->
+                                    </span>
+                            <span class="menu-text">Inbox</span>
+                        </a>
+                    </li>
+                    <li class="menu-item menu-item-submenu {%if 'class' in request.path %}menu-item-open menu-item-here{%endif%}" aria-haspopup="true"
+                        data-menu-toggle="hover">
+                        <a href="/instructor/course/index" class="menu-link menu-toggle">
+                                    <span class="svg-icon menu-icon">
+                                        <!--begin::Svg Icon | path:/keen/theme/demo1/dist/assets/media/svg/icons/Layout/Layout-4-blocks.svg-->
+                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                             width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                <rect x="0" y="0" width="24" height="24"></rect>
+                                                <rect fill="#000000" x="4" y="4" width="7" height="7" rx="1.5"></rect>
+                                                <path d="M5.5,13 L9.5,13 C10.3284271,13 11,13.6715729 11,14.5 L11,18.5 C11,19.3284271 10.3284271,20 9.5,20 L5.5,20 C4.67157288,20 4,19.3284271 4,18.5 L4,14.5 C4,13.6715729 4.67157288,13 5.5,13 Z M14.5,4 L18.5,4 C19.3284271,4 20,4.67157288 20,5.5 L20,9.5 C20,10.3284271 19.3284271,11 18.5,11 L14.5,11 C13.6715729,11 13,10.3284271 13,9.5 L13,5.5 C13,4.67157288 13.6715729,4 14.5,4 Z M14.5,13 L18.5,13 C19.3284271,13 20,13.6715729 20,14.5 L20,18.5 C20,19.3284271 19.3284271,20 18.5,20 L14.5,20 C13.6715729,20 13,19.3284271 13,18.5 L13,14.5 C13,13.6715729 13.6715729,13 14.5,13 Z"
+                                                      fill="#000000" opacity="0.3"></path>
+                                            </g>
+                                        </svg>
+                                        <!--end::Svg Icon-->
+                                    </span>
+                            <span class="menu-text">Clases</span>
+                        </a>
+                    </li>
+                    <li class="menu-item menu-item-submenu {%if 'class' in request.path %}menu-item-open menu-item-here{%endif%}" aria-haspopup="true"
+                        data-menu-toggle="hover">
+                        <a href="/instructor/course/students" class="menu-link menu-toggle">
+                                    <span class="svg-icon menu-icon">
+                                        <!--begin::Svg Icon | path:/keen/theme/demo1/dist/assets/media/svg/icons/Layout/Layout-4-blocks.svg-->
+                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                             width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                <rect x="0" y="0" width="24" height="24"></rect>
+                                                <rect fill="#000000" x="4" y="4" width="7" height="7" rx="1.5"></rect>
+                                                <path d="M5.5,13 L9.5,13 C10.3284271,13 11,13.6715729 11,14.5 L11,18.5 C11,19.3284271 10.3284271,20 9.5,20 L5.5,20 C4.67157288,20 4,19.3284271 4,18.5 L4,14.5 C4,13.6715729 4.67157288,13 5.5,13 Z M14.5,4 L18.5,4 C19.3284271,4 20,4.67157288 20,5.5 L20,9.5 C20,10.3284271 19.3284271,11 18.5,11 L14.5,11 C13.6715729,11 13,10.3284271 13,9.5 L13,5.5 C13,4.67157288 13.6715729,4 14.5,4 Z M14.5,13 L18.5,13 C19.3284271,13 20,13.6715729 20,14.5 L20,18.5 C20,19.3284271 19.3284271,20 18.5,20 L14.5,20 C13.6715729,20 13,19.3284271 13,18.5 L13,14.5 C13,13.6715729 13.6715729,13 14.5,13 Z"
+                                                      fill="#000000" opacity="0.3"></path>
+                                            </g>
+                                        </svg>
+                                        <!--end::Svg Icon-->
+                                    </span>
+                            <span class="menu-text">Estudiantes</span>
+                        </a>
+                    </li>
+                {% elif user.groups.all.0.name == 'Representantes' %}
+                    <li class="menu-item menu-item-submenu {%if 'class' in request.path %}menu-item-open menu-item-here{%endif%}" aria-haspopup="true"
+                        data-menu-toggle="hover">
+                        <a href="/parents/students" class="menu-link menu-toggle">
+                                    <span class="svg-icon menu-icon">
+                                        <!--begin::Svg Icon | path:/keen/theme/demo1/dist/assets/media/svg/icons/Layout/Layout-4-blocks.svg-->
+                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                             width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                <rect x="0" y="0" width="24" height="24"></rect>
+                                                <rect fill="#000000" x="4" y="4" width="7" height="7" rx="1.5"></rect>
+                                                <path d="M5.5,13 L9.5,13 C10.3284271,13 11,13.6715729 11,14.5 L11,18.5 C11,19.3284271 10.3284271,20 9.5,20 L5.5,20 C4.67157288,20 4,19.3284271 4,18.5 L4,14.5 C4,13.6715729 4.67157288,13 5.5,13 Z M14.5,4 L18.5,4 C19.3284271,4 20,4.67157288 20,5.5 L20,9.5 C20,10.3284271 19.3284271,11 18.5,11 L14.5,11 C13.6715729,11 13,10.3284271 13,9.5 L13,5.5 C13,4.67157288 13.6715729,4 14.5,4 Z M14.5,13 L18.5,13 C19.3284271,13 20,13.6715729 20,14.5 L20,18.5 C20,19.3284271 19.3284271,20 18.5,20 L14.5,20 C13.6715729,20 13,19.3284271 13,18.5 L13,14.5 C13,13.6715729 13.6715729,13 14.5,13 Z"
+                                                      fill="#000000" opacity="0.3"></path>
+                                            </g>
+                                        </svg>
+                                        <!--end::Svg Icon-->
+                                    </span>
+                            <span class="menu-text">Estudiantes</span>
+                        </a>
+                    </li>
+                {% else %}
+                    <li class="menu-item menu-item-submenu {%if 'class' in request.path %}menu-item-open menu-item-here{%endif%}" aria-haspopup="true"
+                        data-menu-toggle="hover">
+                        <a href="/student/courses" class="menu-link menu-toggle">
+                                    <span class="svg-icon menu-icon">
+                                        <!--begin::Svg Icon | path:/keen/theme/demo1/dist/assets/media/svg/icons/Layout/Layout-4-blocks.svg-->
+                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                             width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                <rect x="0" y="0" width="24" height="24"></rect>
+                                                <rect fill="#000000" x="4" y="4" width="7" height="7" rx="1.5"></rect>
+                                                <path d="M5.5,13 L9.5,13 C10.3284271,13 11,13.6715729 11,14.5 L11,18.5 C11,19.3284271 10.3284271,20 9.5,20 L5.5,20 C4.67157288,20 4,19.3284271 4,18.5 L4,14.5 C4,13.6715729 4.67157288,13 5.5,13 Z M14.5,4 L18.5,4 C19.3284271,4 20,4.67157288 20,5.5 L20,9.5 C20,10.3284271 19.3284271,11 18.5,11 L14.5,11 C13.6715729,11 13,10.3284271 13,9.5 L13,5.5 C13,4.67157288 13.6715729,4 14.5,4 Z M14.5,13 L18.5,13 C19.3284271,13 20,13.6715729 20,14.5 L20,18.5 C20,19.3284271 19.3284271,20 18.5,20 L14.5,20 C13.6715729,20 13,19.3284271 13,18.5 L13,14.5 C13,13.6715729 13.6715729,13 14.5,13 Z"
+                                                      fill="#000000" opacity="0.3"></path>
+                                            </g>
+                                        </svg>
+                                        <!--end::Svg Icon-->
+                                    </span>
+                            <span class="menu-text">Clases</span>
+                        </a>
+                    </li>
+                    {% if request.user.is_authenticated %}
+                    <li class="menu-item menu-item-submenu {%if 'class' in request.path %}menu-item-open menu-item-here{%endif%}" aria-haspopup="true"
+                        data-menu-toggle="hover">
+                        <a href="/parents/register" class="menu-link menu-toggle">
+                                    <span class="svg-icon menu-icon">
+                                        <!--begin::Svg Icon | path:/keen/theme/demo1/dist/assets/media/svg/icons/Layout/Layout-4-blocks.svg-->
+                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                             width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                <rect x="0" y="0" width="24" height="24"></rect>
+                                                <rect fill="#000000" x="4" y="4" width="7" height="7" rx="1.5"></rect>
+                                                <path d="M5.5,13 L9.5,13 C10.3284271,13 11,13.6715729 11,14.5 L11,18.5 C11,19.3284271 10.3284271,20 9.5,20 L5.5,20 C4.67157288,20 4,19.3284271 4,18.5 L4,14.5 C4,13.6715729 4.67157288,13 5.5,13 Z M14.5,4 L18.5,4 C19.3284271,4 20,4.67157288 20,5.5 L20,9.5 C20,10.3284271 19.3284271,11 18.5,11 L14.5,11 C13.6715729,11 13,10.3284271 13,9.5 L13,5.5 C13,4.67157288 13.6715729,4 14.5,4 Z M14.5,13 L18.5,13 C19.3284271,13 20,13.6715729 20,14.5 L20,18.5 C20,19.3284271 19.3284271,20 18.5,20 L14.5,20 C13.6715729,20 13,19.3284271 13,18.5 L13,14.5 C13,13.6715729 13.6715729,13 14.5,13 Z"
+                                                      fill="#000000" opacity="0.3"></path>
+                                            </g>
+                                        </svg>
+                                        <!--end::Svg Icon-->
+                                    </span>
+                            <span class="menu-text">Crear cuenta de Representante</span>
+                        </a>
+                    </li>
+                    {% endif %}
+                {% endif %}
+            </li>
+            {% if request.user.authenticated %}
+            <li class="menu-item">
+                <a href="javascript:;" class="menu-link menu-toggle">
+								<span class="svg-icon menu-icon">
+									<!--begin::Svg Icon | path:/keen/theme/demo1/dist/assets/media/svg/icons/Layout/Layout-4-blocks.svg-->
+									<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                         width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+										<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+											<rect x="0" y="0" width="24" height="24"></rect>
+											<rect fill="#000000" x="4" y="4" width="7" height="7" rx="1.5"></rect>
+											<path d="M5.5,13 L9.5,13 C10.3284271,13 11,13.6715729 11,14.5 L11,18.5 C11,19.3284271 10.3284271,20 9.5,20 L5.5,20 C4.67157288,20 4,19.3284271 4,18.5 L4,14.5 C4,13.6715729 4.67157288,13 5.5,13 Z M14.5,4 L18.5,4 C19.3284271,4 20,4.67157288 20,5.5 L20,9.5 C20,10.3284271 19.3284271,11 18.5,11 L14.5,11 C13.6715729,11 13,10.3284271 13,9.5 L13,5.5 C13,4.67157288 13.6715729,4 14.5,4 Z M14.5,13 L18.5,13 C19.3284271,13 20,13.6715729 20,14.5 L20,18.5 C20,19.3284271 19.3284271,20 18.5,20 L14.5,20 C13.6715729,20 13,19.3284271 13,18.5 L13,14.5 C13,13.6715729 13.6715729,13 14.5,13 Z"
+                                                  fill="#000000" opacity="0.3"></path>
+										</g>
+									</svg>
+                                    <!--end::Svg Icon-->
+								</span>
+                    <span class="menu-text">Ir al salon de clases</span>
+                </a>
+            </li>
+            {% endif %}
+            {% if request.user.is_staff %}
+            <li class="menu-section">
+                <h4 class="menu-text">Pagos</h4>
+                <li class="menu-item">
+                <li class="menu-item">
+                <a href="/payments/view"
+                   class="menu-link">
+                        <span class="navi-icon mr-2">
+                            <span class="svg-icon">
+                                <!--begin::Svg Icon | path:/keen/theme/demo2/dist/assets/media/svg/icons/General/User.svg-->
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     xmlns:xlink="http://www.w3.org/1999/xlink"
+                                     width="24px" height="24px" viewBox="0 0 24 24"
+                                     version="1.1">
+                                    <g stroke="none" stroke-width="1" fill="none"
+                                       fill-rule="evenodd">
+                                        <polygon
+                                                points="0 0 24 0 24 24 0 24"></polygon>
+                                        <path d="M12,11 C9.790861,11 8,9.209139 8,7 C8,4.790861 9.790861,3 12,3 C14.209139,3 16,4.790861 16,7 C16,9.209139 14.209139,11 12,11 Z"
+                                              fill="#000000" fill-rule="nonzero"
+                                              opacity="0.3"></path>
+                                        <path d="M3.00065168,20.1992055 C3.38825852,15.4265159 7.26191235,13 11.9833413,13 C16.7712164,13 20.7048837,15.2931929 20.9979143,20.2 C21.0095879,20.3954741 20.9979143,21 20.2466999,21 C16.541124,21 11.0347247,21 3.72750223,21 C3.47671215,21 2.97953825,20.45918 3.00065168,20.1992055 Z"
+                                              fill="#000000"
+                                              fill-rule="nonzero"></path>
+                                    </g>
+                                </svg>
+                                <!--end::Svg Icon-->
+                            </span>
+                        </span>
+                    <span class="menu-text">Historial de Pagos</span>
+                </a>
+                </li>
+                <li class="menu-item">
+                <a href="/payments/create"
+                   class="menu-link">
+                        <span class="navi-icon mr-2">
+                            <span class="svg-icon">
+                                <!--begin::Svg Icon | path:/keen/theme/demo2/dist/assets/media/svg/icons/General/User.svg-->
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     xmlns:xlink="http://www.w3.org/1999/xlink"
+                                     width="24px" height="24px" viewBox="0 0 24 24"
+                                     version="1.1">
+                                    <g stroke="none" stroke-width="1" fill="none"
+                                       fill-rule="evenodd">
+                                        <polygon
+                                                points="0 0 24 0 24 24 0 24"></polygon>
+                                        <path d="M12,11 C9.790861,11 8,9.209139 8,7 C8,4.790861 9.790861,3 12,3 C14.209139,3 16,4.790861 16,7 C16,9.209139 14.209139,11 12,11 Z"
+                                              fill="#000000" fill-rule="nonzero"
+                                              opacity="0.3"></path>
+                                        <path d="M3.00065168,20.1992055 C3.38825852,15.4265159 7.26191235,13 11.9833413,13 C16.7712164,13 20.7048837,15.2931929 20.9979143,20.2 C21.0095879,20.3954741 20.9979143,21 20.2466999,21 C16.541124,21 11.0347247,21 3.72750223,21 C3.47671215,21 2.97953825,20.45918 3.00065168,20.1992055 Z"
+                                              fill="#000000"
+                                              fill-rule="nonzero"></path>
+                                    </g>
+                                </svg>
+                                <!--end::Svg Icon-->
+                            </span>
+                        </span>
+                    <span class="menu-text">Crear Solicitud Pagos</span>
+                </a>
+                </li>
+                <li class="menu-item">
+                <a href="/payments/view/new"
+                   class="menu-link">
+                        <span class="navi-icon mr-2">
+                            <span class="svg-icon">
+                                <!--begin::Svg Icon | path:/keen/theme/demo2/dist/assets/media/svg/icons/General/User.svg-->
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     xmlns:xlink="http://www.w3.org/1999/xlink"
+                                     width="24px" height="24px" viewBox="0 0 24 24"
+                                     version="1.1">
+                                    <g stroke="none" stroke-width="1" fill="none"
+                                       fill-rule="evenodd">
+                                        <polygon
+                                                points="0 0 24 0 24 24 0 24"></polygon>
+                                        <path d="M12,11 C9.790861,11 8,9.209139 8,7 C8,4.790861 9.790861,3 12,3 C14.209139,3 16,4.790861 16,7 C16,9.209139 14.209139,11 12,11 Z"
+                                              fill="#000000" fill-rule="nonzero"
+                                              opacity="0.3"></path>
+                                        <path d="M3.00065168,20.1992055 C3.38825852,15.4265159 7.26191235,13 11.9833413,13 C16.7712164,13 20.7048837,15.2931929 20.9979143,20.2 C21.0095879,20.3954741 20.9979143,21 20.2466999,21 C16.541124,21 11.0347247,21 3.72750223,21 C3.47671215,21 2.97953825,20.45918 3.00065168,20.1992055 Z"
+                                              fill="#000000"
+                                              fill-rule="nonzero"></path>
+                                    </g>
+                                </svg>
+                                <!--end::Svg Icon-->
+                            </span>
+                        </span>
+                    <span class="menu-text">Nuevos pagos</span>
+                </a>
+            </li>
+                <li class="menu-item">
+                <a href="/payments/view/request"
+                   class="menu-link">
+                        <span class="navi-icon mr-2">
+                            <span class="svg-icon">
+                                <!--begin::Svg Icon | path:/keen/theme/demo2/dist/assets/media/svg/icons/General/User.svg-->
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     xmlns:xlink="http://www.w3.org/1999/xlink"
+                                     width="24px" height="24px" viewBox="0 0 24 24"
+                                     version="1.1">
+                                    <g stroke="none" stroke-width="1" fill="none"
+                                       fill-rule="evenodd">
+                                        <polygon
+                                                points="0 0 24 0 24 24 0 24"></polygon>
+                                        <path d="M12,11 C9.790861,11 8,9.209139 8,7 C8,4.790861 9.790861,3 12,3 C14.209139,3 16,4.790861 16,7 C16,9.209139 14.209139,11 12,11 Z"
+                                              fill="#000000" fill-rule="nonzero"
+                                              opacity="0.3"></path>
+                                        <path d="M3.00065168,20.1992055 C3.38825852,15.4265159 7.26191235,13 11.9833413,13 C16.7712164,13 20.7048837,15.2931929 20.9979143,20.2 C21.0095879,20.3954741 20.9979143,21 20.2466999,21 C16.541124,21 11.0347247,21 3.72750223,21 C3.47671215,21 2.97953825,20.45918 3.00065168,20.1992055 Z"
+                                              fill="#000000"
+                                              fill-rule="nonzero"></path>
+                                    </g>
+                                </svg>
+                                <!--end::Svg Icon-->
+                            </span>
+                        </span>
+                    <span class="menu-text">Solicitudes de pago</span>
+                </a>
+            </li>
+            {% elif user.groups.all.0.name == 'Representantes' %}
+            <li class="menu-section">
+                <h4 class="menu-text">Pagos</h4>
+            <li class="menu-item">
+                <a href="/student/payments/index"
+                   class="menu-link">
+                        <span class="navi-icon mr-2">
+                            <span class="svg-icon">
+                                <!--begin::Svg Icon | path:/keen/theme/demo2/dist/assets/media/svg/icons/General/User.svg-->
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     xmlns:xlink="http://www.w3.org/1999/xlink"
+                                     width="24px" height="24px" viewBox="0 0 24 24"
+                                     version="1.1">
+                                    <g stroke="none" stroke-width="1" fill="none"
+                                       fill-rule="evenodd">
+                                        <polygon
+                                                points="0 0 24 0 24 24 0 24"></polygon>
+                                        <path d="M12,11 C9.790861,11 8,9.209139 8,7 C8,4.790861 9.790861,3 12,3 C14.209139,3 16,4.790861 16,7 C16,9.209139 14.209139,11 12,11 Z"
+                                              fill="#000000" fill-rule="nonzero"
+                                              opacity="0.3"></path>
+                                        <path d="M3.00065168,20.1992055 C3.38825852,15.4265159 7.26191235,13 11.9833413,13 C16.7712164,13 20.7048837,15.2931929 20.9979143,20.2 C21.0095879,20.3954741 20.9979143,21 20.2466999,21 C16.541124,21 11.0347247,21 3.72750223,21 C3.47671215,21 2.97953825,20.45918 3.00065168,20.1992055 Z"
+                                              fill="#000000"
+                                              fill-rule="nonzero"></path>
+                                    </g>
+                                </svg>
+                                <!--end::Svg Icon-->
+                            </span>
+                        </span>
+                    <span class="menu-text">Historial de Pagos</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="/student/payments/create"
+                   class="menu-link">
+                        <span class="navi-icon mr-2">
+                            <span class="svg-icon">
+                                <!--begin::Svg Icon | path:/keen/theme/demo2/dist/assets/media/svg/icons/General/User.svg-->
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     xmlns:xlink="http://www.w3.org/1999/xlink"
+                                     width="24px" height="24px" viewBox="0 0 24 24"
+                                     version="1.1">
+                                    <g stroke="none" stroke-width="1" fill="none"
+                                       fill-rule="evenodd">
+                                        <polygon
+                                                points="0 0 24 0 24 24 0 24"></polygon>
+                                        <path d="M12,11 C9.790861,11 8,9.209139 8,7 C8,4.790861 9.790861,3 12,3 C14.209139,3 16,4.790861 16,7 C16,9.209139 14.209139,11 12,11 Z"
+                                              fill="#000000" fill-rule="nonzero"
+                                              opacity="0.3"></path>
+                                        <path d="M3.00065168,20.1992055 C3.38825852,15.4265159 7.26191235,13 11.9833413,13 C16.7712164,13 20.7048837,15.2931929 20.9979143,20.2 C21.0095879,20.3954741 20.9979143,21 20.2466999,21 C16.541124,21 11.0347247,21 3.72750223,21 C3.47671215,21 2.97953825,20.45918 3.00065168,20.1992055 Z"
+                                              fill="#000000"
+                                              fill-rule="nonzero"></path>
+                                    </g>
+                                </svg>
+                                <!--end::Svg Icon-->
+                            </span>
+                        </span>
+                    <span class="menu-text">Realizar nuevo Pago</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="/student/payments/pending"
+                   class="menu-link">
+                        <span class="navi-icon mr-2">
+                            <span class="svg-icon">
+                                <!--begin::Svg Icon | path:/keen/theme/demo2/dist/assets/media/svg/icons/General/User.svg-->
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     xmlns:xlink="http://www.w3.org/1999/xlink"
+                                     width="24px" height="24px" viewBox="0 0 24 24"
+                                     version="1.1">
+                                    <g stroke="none" stroke-width="1" fill="none"
+                                       fill-rule="evenodd">
+                                        <polygon
+                                                points="0 0 24 0 24 24 0 24"></polygon>
+                                        <path d="M12,11 C9.790861,11 8,9.209139 8,7 C8,4.790861 9.790861,3 12,3 C14.209139,3 16,4.790861 16,7 C16,9.209139 14.209139,11 12,11 Z"
+                                              fill="#000000" fill-rule="nonzero"
+                                              opacity="0.3"></path>
+                                        <path d="M3.00065168,20.1992055 C3.38825852,15.4265159 7.26191235,13 11.9833413,13 C16.7712164,13 20.7048837,15.2931929 20.9979143,20.2 C21.0095879,20.3954741 20.9979143,21 20.2466999,21 C16.541124,21 11.0347247,21 3.72750223,21 C3.47671215,21 2.97953825,20.45918 3.00065168,20.1992055 Z"
+                                              fill="#000000"
+                                              fill-rule="nonzero"></path>
+                                    </g>
+                                </svg>
+                                <!--end::Svg Icon-->
+                            </span>
+                        </span>
+                    <span class="menu-text">Pagos pendientes</span>
+                </a>
+            </li>
+            {% endif %}
+            {% if request.user.is_staff or user.groups.all.0.name == 'Profesores' %}
+                {% include 'staff/aside-menu.html' %}
+            {% else %}
+            <li class="menu-section">
+                <h4 class="menu-text">Perfil</h4>
+                <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
+            </li>
+            <li class="menu-item">
+                <a href="/student/profile/personal-information"
+                   class="menu-link">
+								<span class="navi-icon mr-2">
+                                                            <span class="svg-icon">
+                                                                <!--begin::Svg Icon | path:/keen/theme/demo2/dist/assets/media/svg/icons/General/User.svg-->
+                                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                                     xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                                     width="24px" height="24px" viewBox="0 0 24 24"
+                                                                     version="1.1">
+                                                                    <g stroke="none" stroke-width="1" fill="none"
+                                                                       fill-rule="evenodd">
+                                                                        <polygon
+                                                                                points="0 0 24 0 24 24 0 24"></polygon>
+                                                                        <path d="M12,11 C9.790861,11 8,9.209139 8,7 C8,4.790861 9.790861,3 12,3 C14.209139,3 16,4.790861 16,7 C16,9.209139 14.209139,11 12,11 Z"
+                                                                              fill="#000000" fill-rule="nonzero"
+                                                                              opacity="0.3"></path>
+                                                                        <path d="M3.00065168,20.1992055 C3.38825852,15.4265159 7.26191235,13 11.9833413,13 C16.7712164,13 20.7048837,15.2931929 20.9979143,20.2 C21.0095879,20.3954741 20.9979143,21 20.2466999,21 C16.541124,21 11.0347247,21 3.72750223,21 C3.47671215,21 2.97953825,20.45918 3.00065168,20.1992055 Z"
+                                                                              fill="#000000"
+                                                                              fill-rule="nonzero"></path>
+                                                                    </g>
+                                                                </svg>
+                                                                <!--end::Svg Icon-->
+                                                            </span>
+                                                        </span>
+                    <span class="menu-text">Información Personal</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="/student/profile/account-information"
+                   class="menu-link">
+								<span class="navi-icon mr-2">
+																<span class="svg-icon">
+																	<!--begin::Svg Icon | path:/keen/theme/demo2/dist/assets/media/svg/icons/Code/Compiling.svg-->
+																	<svg xmlns="http://www.w3.org/2000/svg"
+                                                                         xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                                         width="24px" height="24px" viewBox="0 0 24 24"
+                                                                         version="1.1">
+																		<g stroke="none" stroke-width="1" fill="none"
+                                                                           fill-rule="evenodd">
+																			<rect x="0" y="0" width="24"
+                                                                                  height="24"></rect>
+																			<path d="M2.56066017,10.6819805 L4.68198052,8.56066017 C5.26776695,7.97487373 6.21751442,7.97487373 6.80330086,8.56066017 L8.9246212,10.6819805 C9.51040764,11.267767 9.51040764,12.2175144 8.9246212,12.8033009 L6.80330086,14.9246212 C6.21751442,15.5104076 5.26776695,15.5104076 4.68198052,14.9246212 L2.56066017,12.8033009 C1.97487373,12.2175144 1.97487373,11.267767 2.56066017,10.6819805 Z M14.5606602,10.6819805 L16.6819805,8.56066017 C17.267767,7.97487373 18.2175144,7.97487373 18.8033009,8.56066017 L20.9246212,10.6819805 C21.5104076,11.267767 21.5104076,12.2175144 20.9246212,12.8033009 L18.8033009,14.9246212 C18.2175144,15.5104076 17.267767,15.5104076 16.6819805,14.9246212 L14.5606602,12.8033009 C13.9748737,12.2175144 13.9748737,11.267767 14.5606602,10.6819805 Z"
+                                                                                  fill="#000000" opacity="0.3"></path>
+																			<path d="M8.56066017,16.6819805 L10.6819805,14.5606602 C11.267767,13.9748737 12.2175144,13.9748737 12.8033009,14.5606602 L14.9246212,16.6819805 C15.5104076,17.267767 15.5104076,18.2175144 14.9246212,18.8033009 L12.8033009,20.9246212 C12.2175144,21.5104076 11.267767,21.5104076 10.6819805,20.9246212 L8.56066017,18.8033009 C7.97487373,18.2175144 7.97487373,17.267767 8.56066017,16.6819805 Z M8.56066017,4.68198052 L10.6819805,2.56066017 C11.267767,1.97487373 12.2175144,1.97487373 12.8033009,2.56066017 L14.9246212,4.68198052 C15.5104076,5.26776695 15.5104076,6.21751442 14.9246212,6.80330086 L12.8033009,8.9246212 C12.2175144,9.51040764 11.267767,9.51040764 10.6819805,8.9246212 L8.56066017,6.80330086 C7.97487373,6.21751442 7.97487373,5.26776695 8.56066017,4.68198052 Z"
+                                                                                  fill="#000000"></path>
+																		</g>
+																	</svg>
+                                                                    <!--end::Svg Icon-->
+                                                                </span>
+                                                        </span>
+                    <span class="menu-text">Información de la Cuenta</span>
+                </a>
+            </li>
+            {% endif %}
+        </ul>
+    </div>
+</div>

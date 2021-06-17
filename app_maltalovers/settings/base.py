@@ -27,9 +27,12 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 INSTALLED_APPS = [
     'home',
     'search',
+    'forms',
+    'menus',
 
     'wagtail.contrib.forms',
     'wagtail.contrib.redirects',
+    'wagtail.contrib.modeladmin',
     'wagtail.embeds',
     'wagtail.sites',
     'wagtail.users',
@@ -39,9 +42,11 @@ INSTALLED_APPS = [
     'wagtail.search',
     'wagtail.admin',
     'wagtail.core',
+    'wagtail.locales',
 
     'modelcluster',
     'taggit',
+    'django_extensions',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -49,7 +54,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'wagtail.contrib.modeladmin',
     'rest_framework',
     'rest_framework.authtoken',
     'corsheaders',
@@ -112,11 +116,8 @@ WSGI_APPLICATION = 'app_maltalovers.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'HOST': os.environ.get('DB_HOST'),
-        'NAME': os.environ.get('DB_NAME'),
-        'USER': os.environ.get('DB_USER'),
-        'PASSWORD': os.environ.get('DB_PASS'),
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 

@@ -1,0 +1,12 @@
+<div class="d-flex align-items-center flex-wrap justify-content-between">
+    <!--begin::Description-->
+    <div class="flex-grow-1 font-weight-bold text-dark-50 py-2 py-lg-2 mr-5">
+        Bandeja de Entrada
+        {% if student.has_new_notifications %}
+        <span><a href="/student/notifications/index"><p class="small">Tienes {{ student.total_new_notifications }} notificaciones nuevas</p></a></span>
+        {% else %}
+        <span><p class="small">No tiene ninguna notificación</p></span>
+        {%endif%}
+    </div>
+    <!--end::Description-->
+</div>

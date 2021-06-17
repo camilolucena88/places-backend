@@ -1,0 +1,79 @@
+{% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li
+                    {% if message.tags %} class="alert alert-{{ message.tags }}" {% endif %}>{{ message }}
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}
+<div class="card card-custom gutter-b">
+    <!--begin::Header-->
+    <div class="card-header flex-wrap border-0 pt-6 pb-0">
+        <div class="d-flex align-items-center my-2">
+            <a href="javascript:history.go(-1)" class="btn btn-clean btn-icon btn-sm mr-6" data-inbox="back">
+                <i class="flaticon2-left-arrow-1"></i>
+            </a>
+            <div class="card-title">
+                <h3 class="card-label">Bandeja de Notificaciones Enviados
+                    <span class="d-block text-muted pt-2 font-size-sm">Notificaciones enviadas</span>
+                </h3>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <!--begin: Datatable-->
+        <div id="kt_datatable_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+            <div class="row">
+                <div class="col-sm-12">
+                    <table class="table table-bordered table-checkable dataTable no-footer dtr-inline"
+                           id="kt_datatable_2"
+                           role="grid" aria-describedby="kt_datatable_info" style="width: 1200px;">
+                        <thead>
+                        <tr role="row">
+                            <th></th>
+                            <th>Enviado a</th>
+                            <th>Contenido</th>
+                            <th>Enviado</th>
+                            <th>Estatus</th>
+                            <th>Acciones</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for notification in notifications %}
+                            <tr class="odd">
+                                <td></td>
+                                <td>
+                                    <span style="width: 250px;">
+                                        <div
+                                                class="d-flex align-items-center">
+                                    <div
+                                            class="symbol symbol-40 symbol-light-success flex-shrink-0">
+                                    <span class="symbol symbol-35 mr-3">
+                                        <span class="symbol-label"
+                                              style="background-image: url('/media/{{ notification.student.user.wagtail_userprofile.avatar }}')">
+                                        </span>
+                                    </span>
+                                </div>								<div
+                                                class="ml-4">									<div
+                                                class="text-dark-75 font-weight-bolder font-size-lg mb-0">{{ notification.student.user.get_full_name }}</div>									<a
+                                                href="#"
+                                                class="text-muted font-weight-bold text-hover-primary">{{ notification.created_by.user.email }}</a>
+                                </div>
+                                </div>
+                                </span>
+                                </td>
+                                <td><a href="/communications/notifications/sent/{{ notification.id }}">{{ notification.title }}</a></td>
+                                <td>{{ notification.created_at | date:"d/m/Y h:m:s" }}</td>
+                                <td>Leido</td>
+                                <td nowrap="nowrap"></td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!--end: Datatable-->
+    </div>
+</div>

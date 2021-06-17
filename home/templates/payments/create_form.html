@@ -1,0 +1,108 @@
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li
+            {% if message.tags %} class="alert alert-{{ message.tags }}" {% endif %}>{{ message }}
+    </li>
+    {% endfor %}
+</ul>
+{% endif %}
+<ul class="nav nav-tabs nav-tabs-line">
+    <li class="nav-item">
+        <a class="nav-link font-size-lg active" data-toggle="tab" href="#kt_tab_pane_1">Crear una solicitud de pago a Grupos</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link font-size-lg" data-toggle="tab" href="#kt_tab_pane_2">Crear una solicitud de pago invidividuales</a>
+    </li>
+</ul>
+<div class="tab-content mt-5" id="myTabContent">
+    <div class="tab-pane fade show active bg-white" id="kt_tab_pane_1" role="tabpanel" aria-labelledby="kt_tab_pane_2">
+        <form class="form" method="POST" action="{% url 'create_payment_request' %}">
+            {% csrf_token %}
+            <div class="card-body">
+                {% if payment_form.description.errors %}
+                    {{ payment_form.description.errors }}
+                {% endif %}
+                <div class="form-group">
+                    <label>Mes:</label>
+                    {{ payment_form.description }}
+                    <span class="form-text text-muted">Agregar la descripción de la solicitud de pago</span>
+                </div>
+                {% if payment_form.amount.errors %}
+                    {{ payment_form.amount.errors }}
+                {% endif %}
+                <div class="form-group">
+                    <label>Monto</label>
+                    <div class="input-group input-group-lg">
+                        <div class="input-group-prepend"><span class="input-group-text">$</span></div>
+                        {{ payment_form.amount }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group input-group-lg">
+                        <div class="input-group-prepend">
+                        <span class="input-group-text">Fecha de vencimiento</span></div>
+                        {{ invoice_form.expired_at }}
+                    </div>
+                    <span class="form-text text-muted">Si el pago no ha sido realizado despues de este dia, se bloquea la cuenta</span>
+                </div>
+                <div class="form-group">
+                    <label for="id_object_id">Grupo de Estudiantes</label>
+                    {{ invoice_form.object_id }}
+                    <span class="form-text text-muted">Todos los estudiantes dentro de este grupo recibiran la solicitud de pago</span>
+                </div>
+                <div class="form-group">
+                    <input name="type" type="text" value="paymentgroups" hidden>
+                </div>
+            </div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-primary mr-2">Guardar</button>
+                <button type="reset" class="btn btn-secondary">Cancelar</button>
+            </div>
+        </form>
+    </div>
+    <div class="tab-pane fade bg-white" id="kt_tab_pane_2" role="tabpanel" aria-labelledby="kt_tab_pane_2">
+        <form class="form" method="POST" action="{% url 'create_payment_request' %}">
+            {% csrf_token %}
+            <div class="card-body">
+                {% if payment_form.description.errors %}
+                    {{ payment_form.description.errors }}
+                {% endif %}
+                <div class="form-group">
+                    <label>Mes:</label>
+                    {{ payment_form.description }}
+                    <span class="form-text text-muted">Agregar la descripción de la solicitud de pago</span>
+                </div>
+                {% if payment_form.amount.errors %}
+                    {{ payment_form.amount.errors }}
+                {% endif %}
+                <div class="form-group">
+                    <label>Monto</label>
+                    <div class="input-group input-group-lg">
+                        <div class="input-group-prepend"><span class="input-group-text">$</span></div>
+                        {{ payment_form.amount }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group input-group-lg">
+                        <div class="input-group-prepend">
+                        <span class="input-group-text">Fecha de vencimiento</span></div>
+                        {{ invoice_individual_form.expired_at }}
+                    </div>
+                    <span class="form-text text-muted">Si el pago no ha sido realizado despues de este dia, se bloquea la cuenta</span>
+                </div>
+                <div class="form-group">
+                    <label for="object_id">Estudiante</label>
+                    {{ invoice_individual_form.object_id }}
+                </div>
+                <div class="form-group">
+                    <input name="type" type="text" value="students" hidden>
+                </div>
+            </div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-primary mr-2">Guardar</button>
+                <button type="reset" class="btn btn-secondary">Cancelar</button>
+            </div>
+        </form>
+    </div>
+</div>

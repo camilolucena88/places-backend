@@ -1,0 +1,54 @@
+//
+// Base
+//
+
+// Body
+body {
+	background-color: $page-bg;
+}
+
+// Page
+.page {
+	@include border-radius($border-radius);
+}
+
+// Desktop Mode
+@include media-breakpoint-up(lg) {
+	// Wrapper
+	.wrapper {
+		margin: get($content-config, spacing, desktop) 0;
+		margin-left: get($content-config, spacing, desktop) + get($aside-config, base, width);
+		margin-right: get($content-config, spacing, desktop);
+		transition: margin-right get($sidebar-config, desktop, transition);
+
+		// Sidebear Enabled Mode
+		.sidebar-enabled[data-sidebar="on"] & {
+			margin-right: get($sidebar-config, desktop, width);
+			transition: margin-right get($sidebar-config, desktop, transition);
+		}
+	}
+
+	// Container
+	.container,
+	.container-fluid {
+		padding: 0 get($content-config, spacing, desktop);
+	}
+}
+
+// Tablet & Mobile Modes
+@include media-breakpoint-down(md) {
+	// Wrapper
+	.wrapper {
+		// Fixed Header
+		.header-mobile-fixed & {
+			padding-top: get($header-config, tablet-and-mobile, fixed, height);
+		}
+	}
+
+	// Container
+	.container,
+	.container-fluid {
+		max-width: none;
+		padding: 0 get($content-config, spacing, tablet-and-mobile);
+	}
+}

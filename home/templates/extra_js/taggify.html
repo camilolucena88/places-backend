@@ -1,0 +1,35 @@
+{% load static %}
+<script type="text/javascript" src="{% static 'js/pages/features/forms/widgets/tagify.js' %}" defer></script>
+<script>
+    async function convertFMJSON(fm) {
+        let obj = {}
+        for (let key of fm.keys()) {
+            obj[key] = fm.get(key)
+        }
+        return JSON.stringify(obj);
+    }
+    async function addQuestion() {
+        var questionsForm = document.getElementById("questionsForm")
+        var fm = new FormData(questionsForm)
+        var fmJSON = await convertFMJSON(fm)
+        var header = new Headers();
+        header.append('Content-type', 'application/json');
+        header.append('X-CSRFToken', KTCookie.getCookie('csrftoken'));
+        let url = '/api/activities/question'
+        let request = new Request(url, {
+            headers: header,
+            body: fmJSON,
+            method: 'POST'
+        });
+
+        fetch(request)
+        .then((res) => console.log(res.json()))
+        .then((data) => {
+            console.log(data)
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+
+    }
+</script>
