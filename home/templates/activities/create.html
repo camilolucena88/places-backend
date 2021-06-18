@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block body_class %}container{% endblock %}
+
+{% block extra_css %}
+
+    {% comment %}
+Delete the line below if you're just getting started and want to remove the welcome screen!
+{% endcomment %}
+    <link rel="stylesheet" href="{% static 'css/welcome_page.css' %}">
+    <link rel="stylesheet" href="{% static '/plugins/custom/fullcalendar/fullcalendar.bundle.css' %}">
+    <link rel="stylesheet" href="{% static '/plugins/global/plugins.bundle.css' %}">
+    <link rel="stylesheet" href="{% static '/plugins/custom/prismjs/prismjs.bundle.css' %}">
+    <link rel="stylesheet" href="{% static '/css/style.bundle.css' %}">
+    <!--end::Global Theme Styles-->
+    <!--begin::Layout Themes(used by all pages)-->
+    <!--end::Layout Themes-->
+
+{% endblock extra_css %}
+
+{% block content %}
+
+    {% comment %}
+Delete the line below if you're just getting started and want to remove the welcome screen!
+{% endcomment %}
+    {% load i18n wagtailcore_tags wagtailimages_tags %}
+
+    <form method="POST" class="form">
+        {% csrf_token %}
+        <div class="card-body bg-white">
+            <div class="form-group">
+                {% if form.title.errors %}
+                    {{ form.title.errors }}
+                {% endif %}
+                <label>Nombre de la Actividad</label>
+                {{ form.title }}
+                <span class="form-text text-muted">Agregar el nombre de la actividad</span>
+            </div>
+            <div class="form-group">
+                {% if form.description.errors %}
+                    {{ form.description.errors }}
+                {% endif %}
+                <label class="col-form-label text-right">Descripcion</label>
+                {{ form.description }}
+                <div class="mt-3 text-muted">Las opciones no son modificables, debes escribirlas de nuevo
+                </div>
+            </div>
+            <div class="form-group">
+                {% if form.type.errors %}
+                    {{ form.type.errors }}
+                {% endif %}
+                <label>Tipo:</label>
+                {{ form.type }}
+                <span class="form-text text-muted">We'll never share your email with anyone else</span>
+            </div>
+            {% if form.created_by.errors %}
+                {{ form.created_by.errors }}
+            {% endif %}
+            {{ form.created_by }}
+        </div>
+        <div class="card-footer">
+            <button type="submit" class="btn btn-secondary">Guardar Actividad</button>
+        </div>
+    </form>
+
+{% endblock content %}
+
+{% block extra_js %}
+{% endblock %}
+

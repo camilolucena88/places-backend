@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block body_class %}container{% endblock %}
+
+{% block extra_css %}
+
+    {% comment %}
+Delete the line below if you're just getting started and want to remove the welcome screen!
+{% endcomment %}
+    <link rel="stylesheet" href="{% static 'css/welcome_page.css' %}">
+    <link rel="stylesheet" href="{% static '/plugins/custom/fullcalendar/fullcalendar.bundle.css' %}">
+    <link rel="stylesheet" href="{% static '/plugins/global/plugins.bundle.css' %}">
+    <link rel="stylesheet" href="{% static '/plugins/custom/prismjs/prismjs.bundle.css' %}">
+    <link rel="stylesheet" href="{% static '/css/style.bundle.css' %}">
+    <!--end::Global Theme Styles-->
+    <!--begin::Layout Themes(used by all pages)-->
+    <!--end::Layout Themes-->
+
+{% endblock extra_css %}
+
+{% block content %}
+
+    {% comment %}
+Delete the line below if you're just getting started and want to remove the welcome screen!
+{% endcomment %}
+    {% load i18n wagtailcore_tags wagtailimages_tags %}
+
+            <div class="card card-custom card-stretch gutter-b example example-compact">
+            <div class="card-header">
+                <div class="card-title">
+                    <span class="card-icon">
+                        <a href="javascript:history.go(-1)" class="btn btn-clean btn-icon btn-sm mr-6" data-inbox="back">
+                            <i class="flaticon2-left-arrow-1"></i>
+                        </a>
+                        <i class="flaticon2-chat-1 text-primary"></i>
+                    </span>
+                    <h3 class="card-label"><span class="font-weight-bold bold">{{ question }}</span> - {{ activity }}</h3>
+                    <small>Agregar respuestas correctas</small></h3>
+                </div>
+                <div class="card-toolbar">
+                    <a href="/activities/{{ question.activity.id }}/questions/{{ question.id }}/options" class="btn btn-sm btn-success font-weight-bold">
+                    <i class="flaticon2-cube"></i>Ver todas las opciones</a>
+                </div>
+            </div>
+            <div class="card-body">
+                <form id="questionsForm" class="form" method="POST">
+        {% csrf_token %}
+        <div class="card-body bg-white">
+            {% if options_form.option.errors %}
+                {% for error in options_form.option.errors %}
+                    {{ error }}
+                {% endfor %}
+            {% endif %}
+            <div class="form-group">
+                <label>Opcion:</label>
+                {{ options_form.option }}
+                <span class="form-text text-muted">Presionar enter para agregar opciones</span>
+            </div>
+        </div>
+        {{ form.question }}
+        {{ form.created_by }}
+        <div class="card-footer">
+{#            <button type="button" onclick="addQuestion()" class="btn btn-primary mr-2">Agregar otra Pregunta</button>#}
+            <button type="submit" class="btn btn-secondary">Guardar Opciones</button>
+        </div>
+    </form>
+            </div>
+        </div>
+
+{% endblock content %}
+
+{% block extra_js %}
+    {% include 'extra_js/taggify.html' %}
+{% endblock %}
+

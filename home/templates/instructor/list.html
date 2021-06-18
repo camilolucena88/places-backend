@@ -1,0 +1,68 @@
+<div class="card card-custom gutter-b">
+    <div class="card-header flex-wrap py-3">
+        <div class="d-flex align-items-center my-2">
+            <a href="javascript:history.go(-1)" class="btn btn-clean btn-icon btn-sm mr-6" data-inbox="back">
+                <i class="flaticon2-left-arrow-1"></i>
+            </a>
+            <div class="card-title">
+            <h3 class="card-label">Lista de Profesores
+            </h3>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <!--begin: Datatable-->
+        <div id="kt_datatable_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+            <div class="row">
+                <div class="col-sm-12">
+                    <table class="table table-bordered table-checkable dataTable no-footer dtr-inline" id="kt_datatable"
+                           role="grid" aria-describedby="kt_datatable_info" style="width: 1200px;">
+                        <thead>
+                        <tr role="row">
+                            <th>Record ID</th>
+                            <th>Profesor</th>
+                            <th>Email</th>
+                            <th>Cursos</th>
+                            <th>Classroom</th>
+                            <th>Materias</th>
+                            <th>Classroom</th>
+                            <th>Acciones</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for instructor in object_list %}
+                        <tr class="odd">
+                            <td></td>
+                            <td class="sorting_1"><a href="/instructor/{{instructor.user.id}}">{{ instructor }}</a></td>
+                            <td><a href="{{instructor.main_course.classroom.url}}">{{ instructor.email }}</a>
+                            </td>
+                            {% if instructor.main_course %}
+                                <td><a href="/courses/id/{{instructor.main_course.id}}">{{ instructor.main_course }}</a></td>
+                                <td><a href="{{ instructor.main_course.classroom.url }}">{{ instructor.main_course.classroom }}</a></td>
+                            {% else %}
+                                    <td>-</td>
+                                    <td>-</td>
+                            {% endif %}
+                                {% if instructor.get_subjects|length > 1 %}
+                                        <td><a href="/courses/subjects/{{ subject.id }}">{{ instructor.get_subjects|length }}</a></td>
+                                        <td><a href="{{ instructor.main_course.classroom.url }}">{{ instructor.main_course.classroom }}</a></td>
+                                {% elif instructor.get_subjects|length == 1 %}
+                                    {% for subject in instructor.get_subjects %}
+                                        <td><a href="/courses/subjects/{{ subject.id }}">{{ subject }}</a></td>
+                                        <td><a href="{{ instructor.main_course.classroom.url }}">{{ instructor.main_course.classroom }}</a></td>
+                                    {% endfor %}
+                                {% else %}
+                                    <td>-</td>
+                                    <td>-</td>
+                                {% endif %}
+                            <td nowrap="nowrap"></td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!--end: Datatable-->
+    </div>
+</div>

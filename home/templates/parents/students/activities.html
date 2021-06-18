@@ -1,0 +1,67 @@
+<div class="card card-custom gutter-b">
+    <div class="card-header">
+        <div class="d-flex align-items-center my-2">
+            <a href="javascript:history.go(-1)" class="btn btn-clean btn-icon btn-sm mr-6" data-inbox="back">
+                <i class="flaticon2-left-arrow-1"></i>
+            </a>
+        </div>
+        <div class="card-title">
+            <h3 class="card-label">últimas actividades y tareas</h3>
+        </div>
+    </div>
+    <div class="card-body">
+        <!--begin::Example-->
+        <div class="example example-basic">
+            <div class="example-preview">
+                <!--begin::Timeline-->
+                <div class="timeline timeline-6 mt-3">
+                    <!--begin::Item-->
+                    {% if student.activities %}
+                        {% for activity in student.activities %}
+                        <a href="/student/id/{{ student.student.user.id }}/parent_view_activity/{{ activity.id }}">
+                            <div class="timeline-item align-items-start mt-9">
+                                <!--begin::Label-->
+                                <div class="timeline-label font-weight-bolder text-dark-75 font-size-lg">
+                                    {{ activity.created_at |date:"N d P" }}
+                                </div>
+                                <!--end::Label-->
+                                <!--begin::Badge-->
+                                <div class="timeline-badge">
+                                    <i class="fa fa-genderless text-warning icon-xl"></i>
+                                </div>
+                                <!--end::Badge-->
+                                <!--begin::Text-->
+                                <div class="font-weight-mormal font-size-lg timeline-content text-muted pl-3">{{ activity.title }}
+                                    <small class="text-muted font-weight-bold">{{ activity.type }}</small>
+                                </div>
+                                <small>Ver más</small>
+                                <!--end::Text-->
+                            </div>
+                        </a>
+                        {% endfor %}
+                    {% else %}
+                    <div class="timeline-item align-items-start mt-9">
+                        <!--begin::Label-->
+                        <div class="timeline-label font-weight-bolder text-dark-75 font-size-lg">
+
+                        </div>
+                        <!--end::Label-->
+                        <!--begin::Badge-->
+                        <div class="timeline-badge">
+                            <i class="fa fa-genderless text-warning icon-xl"></i>
+                        </div>
+                        <!--end::Badge-->
+                        <!--begin::Text-->
+                        <div class="font-weight-mormal font-size-lg timeline-content text-muted pl-3"><small
+                                class="text-muted font-weight-bold">No hay actividades</small>
+                        </div>
+                        <!--end::Text-->
+                    </div>
+                    {% endif %}
+                    <!--end::Item-->
+                </div>
+                <!--end::Timeline-->
+            </div>
+        </div>
+    </div>
+</div>

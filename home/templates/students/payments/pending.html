@@ -1,0 +1,53 @@
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li
+            {% if message.tags %} class="alert alert-{{ message.tags }}" {% endif %}>{{ message }}
+    </li>
+    {% endfor %}
+</ul>
+{% endif %}
+<div class="card card-custom gutter-b">
+    <!--begin::Header-->
+    {% include 'students/payments/top_menu.html' %}
+    <!--end::Header-->
+    <div class="card-body">
+        <!--begin: Datatable-->
+        <div id="kt_datatable_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+            <div class="row">
+                <div class="col-sm-12">
+                    <table class="table table-bordered table-checkable dataTable no-footer dtr-inline" id="kt_datatable_pending_payment"
+                           role="grid" aria-describedby="kt_datatable_info" style="width: 1200px;">
+                        <thead>
+                        <tr>
+                                <th></th>
+                                <th>Usuario</th>
+                                <th>Descripcion</th>
+                                <th>Creado el</th>
+                                <th>Vencio el</th>
+                                <th>Monto</th>
+                                <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            {% if page == 'pending' %}
+                                {% for payment in payments %}
+                                    <tr class="odd">
+                                    {% include 'students/payments/pending_list.html' %}
+                                    </tr>
+                                {% endfor %}
+                            {% else %}
+                                {% for payment in payments %}
+                                    <tr class="odd">
+                                    {% include 'students/payments/payment_list.html' %}
+                                    </tr>
+                                {% endfor %}
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!--end: Datatable-->
+    </div>
+</div>

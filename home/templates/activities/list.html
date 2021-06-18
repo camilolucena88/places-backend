@@ -1,0 +1,64 @@
+<div class="card card-custom">
+    <div class="card-header">
+        <div class="card-title">
+            <span class="card-icon">
+                <a href="javascript:history.go(-1)" class="btn btn-clean btn-icon btn-sm mr-6" data-inbox="back">
+                    <i class="flaticon2-left-arrow-1"></i>
+                </a>
+                <i class="flaticon2-chat-1 text-primary"></i>
+            </span>
+            <h3 class="card-label">Lista de Actividades
+            <small>todas las actividades creadas</small></h3>
+        </div>
+        <div class="card-toolbar">
+            <a href="/activities/create" class="btn btn-sm btn-success font-weight-bold">
+            <i class="flaticon2-cube"></i>Crear Actividades</a>
+        </div>
+    </div>
+    <div class="card-body">
+        <!--begin: Datatable-->
+        <div id="kt_datatable_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+            <div class="row">
+                <div class="col-sm-12">
+                    <table class="table table-bordered table-checkable dataTable no-footer dtr-inline" id="kt_datatable"
+                           role="grid" aria-describedby="kt_datatable_info" style="width: 1200px;">
+                        <thead>
+                        <tr role="row">
+                            <th></th>
+                            <th>Titulo</th>
+                            <th>Descripcion</th>
+                            <th>Tipo</th>
+                            <th>Etiquetas</th>
+                            <th>Total Preguntas</th>
+                            <th>Acciones</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for activity in activities %}
+                        <tr class="odd">
+                            <td class="dt-left dtr-control" tabindex="0">
+                                <label class="checkbox checkbox-single">
+                                    <input type="checkbox" value="" class="checkable">
+                                    <span></span>
+                                </label></td>
+                            <td class="sorting_1"><a href="/activities/{{ activity.id }}/questions">{{ activity.title }}</a></td>
+                            <td>{{ activity.description }}</td>
+                            <td>{{ activity.type }}</td>
+                            <td></td>
+                            <td>{{ activity.questions_set.all.count }}</td>
+                            <td nowrap="nowrap"></td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!--end: Datatable-->
+    </div>
+    {% if request.user.is_staff %}
+    <div class="card-footer d-flex justify-content-between">
+        <a href="/admin/students/activities/" class="btn btn-light-primary font-weight-bold">Manejar actividades</a>
+    </div>
+    {% endif %}
+</div>

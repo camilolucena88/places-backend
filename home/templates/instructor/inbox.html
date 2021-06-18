@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block body_class %}container{% endblock %}
+
+{% block extra_css %}
+
+{% comment %}
+Delete the line below if you're just getting started and want to remove the welcome screen!
+{% endcomment %}
+<link rel="stylesheet" href="{% static 'css/welcome_page.css' %}">
+<link rel="stylesheet" href="{% static '/plugins/custom/fullcalendar/fullcalendar.bundle.css' %}">
+<link rel="stylesheet" href="{% static '/plugins/global/plugins.bundle.css' %}">
+<link rel="stylesheet" href="{% static '/plugins/custom/prismjs/prismjs.bundle.css' %}">
+<link rel="stylesheet" href="{% static '/css/style.bundle.css' %}">
+{% endblock extra_css %}
+
+{% block content %}
+
+{% comment %}
+Delete the line below if you're just getting started and want to remove the welcome screen!
+{% endcomment %}
+{% load i18n wagtailcore_tags wagtailimages_tags %}
+{% include 'instructor/inbox_sidebar.html' %}
+{% include 'instructor/inbox_main.html' %}
+{% endblock content %}
+
+{% block extra_js %}
+    {% include 'extra_js/inbox_js.html' %}
+{% endblock %}

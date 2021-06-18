@@ -1,0 +1,57 @@
+<div class="card card-custom gutter-b">
+    <div class="card-header">
+        {% if page != 'home' %}
+        <div class="d-flex align-items-center my-2">
+            <a href="javascript:history.go(-1)" class="btn btn-clean btn-icon btn-sm mr-6" data-inbox="back">
+                <i class="flaticon2-left-arrow-1"></i>
+            </a>
+        </div>
+        {% endif %}
+        <div class="card-title">
+            <h3 class="card-label">últimas actividades y tareas</h3><small><a href="/student/activities/index">Ver todas</a></small>
+        </div>
+    </div>
+    {% if student.activities %}
+    <div class="card-body">
+        <!--begin::Example-->
+        <div class="example example-basic">
+            <div class="example-preview">
+                <!--begin::Timeline-->
+                <div class="timeline timeline-6 mt-3">
+                    <!--begin::Item-->
+                    {% for activity in activities %}
+                    <a href="/student/id/{{ request.user.id }}/activity/{{ activity.id }}">
+                            <div class="timeline-item align-items-start mt-9">
+                                <!--begin::Label-->
+                                <div class="timeline-label font-weight-bolder text-dark-75 font-size-lg">
+                                    {{ activity.created_at |date:"N d P" }}
+                                </div>
+                                <!--end::Label-->
+                                <!--begin::Badge-->
+                                <div class="timeline-badge">
+                                    <i class="fa fa-genderless text-warning icon-xl"></i>
+                                </div>
+                                <!--end::Badge-->
+                                <!--begin::Text-->
+                                <div class="font-weight-mormal font-size-lg timeline-content text-muted pl-3">{{ activity.title }}
+                                    <small class="text-muted font-weight-bold">{{ activity.type }}</small>
+                                </div>
+                                <small>Ver más</small>
+                                <!--end::Text-->
+                            </div>
+                        </a>
+                    {% endfor %}
+                    <!--end::Item-->
+                </div>
+                <!--end::Timeline-->
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="card-body">
+        <div class="example-preview">
+            No hay actividades nuevas
+        </div>
+    </div>
+    {% endif %}
+</div>

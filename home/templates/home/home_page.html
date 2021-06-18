@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block body_class %}template-homepage{% endblock %}
+{% block body_class %}container{% endblock %}
 
 {% block extra_css %}
 
@@ -9,13 +9,38 @@
 Delete the line below if you're just getting started and want to remove the welcome screen!
 {% endcomment %}
 <link rel="stylesheet" href="{% static 'css/welcome_page.css' %}">
+<link rel="stylesheet" href="{% static '/plugins/custom/fullcalendar/fullcalendar.bundle.css' %}">
+<link rel="stylesheet" href="{% static '/plugins/global/plugins.bundle.css' %}">
+<link rel="stylesheet" href="{% static '/plugins/custom/prismjs/prismjs.bundle.css' %}">
+<link rel="stylesheet" href="{% static '/css/style.bundle.css' %}">
 {% endblock extra_css %}
 
 {% block content %}
 
-{% comment %}
-Delete the line below if you're just getting started and want to remove the welcome screen!
-{% endcomment %}
-{% include 'home/welcome_page.html' %}
-
+{% if request.user.is_authenticated %}
+    <div class="card card-custom gutter-b">
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li {% if message.tags %} class="alert alert-{{ message.tags }}" {% endif %}>{{ message }}
+                </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        <div class="card-body my-9">
+            {% include 'user/user_card.html' %}
+                    <div class="separator separator-solid my-7"></div>
+            {% include 'home/welcome_page.html' %}
+        </div>
+    </div>
+{% else %}
+    <div class="card card-custom gutter-b">
+        <div class="card-body my-9">
+            <h1>Bienvenido a Escuela Uno Online</h1>
+            <div class="my-9">
+                <a href="/_util/login/" class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3">Inicia Sesión aquí</a>
+            </div>
+        </div>
+    </div>
+{% endif %}
 {% endblock content %}

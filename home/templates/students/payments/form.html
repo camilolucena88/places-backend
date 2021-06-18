@@ -1,0 +1,113 @@
+<div class="card card-custom">
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li
+        {% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <div class="card-header">
+        <h3 class="card-title">
+            Pagos Pendientes
+        </h3>
+    </div>
+    <!--begin::Form-->
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="card-body">
+            {{ form }}
+            <div class="mt-5">
+                <button type="submit" class="btn btn-primary mr-2">Enviar</button>
+            </div>
+        </div>
+    </form>
+{#    <form class="form" method="POST" enctype="multipart/form-data">#}
+{#        {% csrf_token %}#}
+{#        <div class="card-body">#}
+{#            <div class="form-group form-group-last">#}
+{#                <div class="alert alert-custom alert-default" role="alert">#}
+{#                    <div class="alert-icon"><i class="flaticon-warning text-primary"></i></div>#}
+{#                    <div class="alert-text">#}
+{#                        Debes agregar el archivo en PDF o la foto (.png, .svg, .jpg) donde se muestre claramente la#}
+{#                        prueba de pago#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#            {% if form.description.errors %}#}
+{#                <ol>#}
+{#                {% for error in form.description.errors %}#}
+{#                    <li><strong>{{ error|escape }}</strong></li>#}
+{#                {% endfor %}#}
+{#                </ol>#}
+{#            {% endif %}#}
+{#            {% if form.description.errors %}#}
+{#            <div class="alert alert-custom alert-light-danger fade show">#}
+{#                {{ form.description.errors }}#}
+{#            </div>#}
+{#            {% endif %}#}
+{#            <div class="form-group">#}
+{#                <label for="{{ form.description.id_for_label }}">Descripción</label>#}
+{#                {{ form.description }}#}
+{#            </div>#}
+{#            {% if form.amount.errors %}#}
+{#                <ol>#}
+{#                {% for error in form.amount.errors %}#}
+{#                    <li><strong>{{ error|escape }}</strong></li>#}
+{#                {% endfor %}#}
+{#                </ol>#}
+{#            {% endif %}#}
+{#            {% if form.amount.errors %}#}
+{#            <div class="alert alert-custom alert-light-danger fade show">#}
+{#                {{ form.amount.errors }}#}
+{#            </div>#}
+{#            {% endif %}#}
+{#            <div class="form-group">#}
+{#                <label for="{{ form.amount.id_for_label }}">Monto</label>#}
+{#                <div></div>#}
+{#                {{ form.amount }}#}
+{#                <div class="form-group">#}
+{#                    <label>Descripción</label>#}
+{#                    <div></div>#}
+{#                    {{ form.product }}#}
+{#                </div>#}
+{#            </div>#}
+{#            {% if form.related_student.errors %}#}
+{#                <ol>#}
+{#                {% for error in form.related_student.errors %}#}
+{#                    <li><strong>{{ error|escape }}</strong></li>#}
+{#                {% endfor %}#}
+{#                </ol>#}
+{#            {% endif %}#}
+{#            <div class="form-group">#}
+{#                <label for="{{ form.related_student.id_for_label }}">Monto</label>#}
+{#                {{ form.related_student }}#}
+{#            </div>#}
+{#            {% if form.file.errors %}#}
+{#                                ERROOOOOOOOOOOR FILE#}
+{#                <ol>#}
+{#                {% for error in form.file.errors %}#}
+{#                    <li><strong>{{ error|escape }}</strong></li>#}
+{#                {% endfor %}#}
+{#                </ol>#}
+{#            {% endif %}#}
+{#            {% if form.file.errors %}#}
+{#            <div class="alert alert-custom alert-light-danger fade show">#}
+{#                {{ form.file.errors }}#}
+{#            </div>#}
+{#            {% endif %}#}
+{#            <div class="form-group">#}
+{#                <label>Comprobante de Pago</label>#}
+{#                <div></div>#}
+{#                <div class="custom-file">#}
+{#                    <label class="custom-file-label" for="{{ form.file.id_for_label }}">Adjunta el archivo</label>#}
+{#                    {{ form.file }}#}
+{#                </div>#}
+{#            </div>#}
+{#            <div class="card-footer">#}
+{#                <button type="submit" class="btn btn-primary mr-2">Submit</button>#}
+{#            </div>#}
+{#        </div>#}
+{#    </form>#}
+    <!--end::Form-->
+</div>

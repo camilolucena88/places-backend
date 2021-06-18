@@ -1,0 +1,30 @@
+<div class="card card-custom gutter-b">
+    <div class="card-header flex-wrap py-3">
+        <div class="d-flex align-items-center my-2">
+            {% if not course.id %}
+            <a href="javascript:history.go(-1)" class="btn btn-clean btn-icon btn-sm mr-6" data-inbox="back">
+                <i class="flaticon2-left-arrow-1"></i>
+            </a>
+            {% endif %}
+            <div class="card-title">
+            <h3 class="card-label">Lista de Estudiantes {% if course.id %}- <small><a href="/courses/students?course_id={{ course.id }}">Ver todas</a>{% endif %}</small>
+            </h3>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div id="kt_datatable_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+            <div class="row">
+                <div class="col-sm-12">
+                    {% if course %}
+                        {% include 'courses/students/students_per_course.html' %}
+                    {% elif subject %}
+                        {% include 'courses/students/students_per_subject.html' %}
+                    {% else %}
+                        {% include 'courses/students/students_per_school.html' %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

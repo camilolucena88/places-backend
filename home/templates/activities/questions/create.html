@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block body_class %}container{% endblock %}
+
+{% block extra_css %}
+
+    {% comment %}
+Delete the line below if you're just getting started and want to remove the welcome screen!
+{% endcomment %}
+    <link rel="stylesheet" href="{% static 'css/welcome_page.css' %}">
+    <link rel="stylesheet" href="{% static '/plugins/custom/fullcalendar/fullcalendar.bundle.css' %}">
+    <link rel="stylesheet" href="{% static '/plugins/global/plugins.bundle.css' %}">
+    <link rel="stylesheet" href="{% static '/plugins/custom/prismjs/prismjs.bundle.css' %}">
+    <link rel="stylesheet" href="{% static '/css/style.bundle.css' %}">
+    <!--end::Global Theme Styles-->
+    <!--begin::Layout Themes(used by all pages)-->
+    <!--end::Layout Themes-->
+
+{% endblock extra_css %}
+
+{% block content %}
+
+    {% comment %}
+Delete the line below if you're just getting started and want to remove the welcome screen!
+{% endcomment %}
+    {% load i18n wagtailcore_tags wagtailimages_tags %}
+
+    <form id="questionsForm" class="form" method="POST">
+        {% csrf_token %}
+        <div class="card-body bg-white">
+            {% if form.question.errors %}
+                {% for error in form.question.errors %}
+                    {{ error }}
+                {% endfor %}
+            {% endif %}
+            <div class="form-group">
+                <label>Pregunta</label>
+                <input name="{{ form.question.name }}" id="question_input" class="form-control" placeholder="Agrega la pregunta"/>
+                <span class="form-text text-muted">Agregar detalles de la pregunta</span>
+            </div>
+            {% if options_form.option.errors %}
+                {% for error in options_form.option.errors %}
+                    {{ error }}
+                {% endfor %}
+            {% endif %}
+            {% if form.type.errors %}
+                {% for error in form.type.errors %}
+                    {{ error }}
+                {% endfor %}
+            {% endif %}
+            <div class="form-group">
+                <label>Tipo:</label>
+                {{ form.type }}
+                <span class="form-text text-muted">We'll never share your email with anyone else</span>
+            </div>
+            {% if form.max_duration.errors %}
+                {% for error in form.max_duration.errors %}
+                    {{ error }}
+                {% endfor %}
+            {% endif %}
+            <div class="form-group">
+                <label>Duración</label>
+                <div class="input-group input-group-lg">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><small>Tiempo en Segundos</small></span>
+                    </div>
+                    {{ form.max_duration }}
+                </div>
+                <span class="form-text text-muted">Agregar la descripción de la solicitud de pago</span>
+            </div>
+        </div>
+        {{ form.activity }}
+        {{ form.created_by }}
+        <div class="card-footer">
+{#            <button type="button" onclick="addQuestion()" class="btn btn-primary mr-2">Agregar otra Pregunta</button>#}
+            <button type="submit" class="btn btn-secondary">Guardar Pregunta</button>
+        </div>
+    </form>
+
+{% endblock content %}
+
+{% block extra_js %}
+    {% include 'extra_js/taggify.html' %}
+{% endblock %}
+

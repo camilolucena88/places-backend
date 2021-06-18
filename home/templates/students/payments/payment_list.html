@@ -1,0 +1,20 @@
+<td class="datatable-cell-sorted datatable-cell-left datatable-cell" data-field="RecordID"
+    aria-label="1"><span style="width: 40px;"><span class="font-weight-bolder">1</span></span></td>
+<td data-field="OrderID" aria-label="64616-103" class="datatable-cell"><span style="width: 250px;"><div
+        class="d-flex align-items-center">								<div
+        class="symbol symbol-40 symbol-light-success flex-shrink-0">									<span
+        class="symbol-label font-size-h4 font-weight-bold">B</span>								</div>								<div
+        class="ml-4">									<div
+        class="text-dark-75 font-weight-bolder font-size-lg mb-0">{{ payment.user.full_name }}</div>									<a
+        href="#" class="text-muted font-weight-bold text-hover-primary">{{ payment.user.email }}</a>								</div>							</div></span>
+</td>
+<td data-field="Country" aria-label="Brazil" class="datatable-cell"><span style="width: 154px;"><div
+        class="font-weight-bolder font-size-lg mb-0">{{ payment.description }}</div><div
+        class="font-weight-bold text-muted"><small>Estudiante: {{ payment.related_student }}</small></div></span></td>
+<td data-field="ShipDate" aria-label="10/15/2017" class="datatable-cell"><span
+        style="width: 154px;"><div
+        class="font-weight-bolder text-primary mb-0">{{ payment.created_at | date:"d/m/Y" }}</div></span></td>
+<td data-field="CompanyName" aria-label="Casper-Kerluke" class="datatable-cell">{{ payment.amount }}
+</td>
+<td><span class="label label-lg font-weight-bold  label-light-{{ payment.verify_status }} label-inline">{{ payment.status }}</span></td>
+<td nowrap="nowrap"></td>

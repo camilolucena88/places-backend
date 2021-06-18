@@ -1,0 +1,155 @@
+<div class="card-spacer mb-3" id="kt_inbox_reply">
+    <div class="card-header flex-wrap py-3">
+        <div class="d-flex align-items-center my-2">
+            <a href="javascript:history.go(-1)" class="btn btn-clean btn-icon btn-sm mr-6" data-inbox="back">
+                <i class="flaticon2-left-arrow-1"></i>
+            </a>
+            <div class="card-title">
+            <h3 class="card-label">Crear Notificaciones
+                <span class="d-block text-muted pt-2 font-size-sm">Crear notificaciones para los alumnos unicamente</span>
+            </h3>
+            </div>
+        </div>
+        <div class="card-body p-0">
+            <!--begin::Form-->
+            <form id="kt_inbox_reply_form" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <!--begin::Body-->
+                <div class="d-block">
+                    <!--begin::To-->
+                    <div class="d-flex align-items-center border-bottom inbox-to px-8 min-h-50px">
+                        <div class="text-dark-50 w-75px">Para:</div>
+                        <div class="d-flex align-items-center flex-grow-1">
+                            <input type="text" class="form-control border-0" name="student"
+                                   value="">
+                        </div>
+                        <div class="ml-2">
+                            <span class="text-muted font-weight-bold cursor-pointer text-hover-primary mr-2"
+                                  data-inbox="cc-show">Cc</span>
+                            <span class="text-muted font-weight-bold cursor-pointer text-hover-primary"
+                                  data-inbox="bcc-show">Bcc</span>
+                        </div>
+                    </div>
+                    <!--end::To-->
+                    <!--begin::CC-->
+                    <div class="d-none align-items-center border-bottom inbox-to-cc pl-8 pr-5 min-h-50px">
+                        <div class="text-dark-50 w-75px">Cc:</div>
+                        <div class="flex-grow-1">
+                            <tags class="tagify form-control border-0 tagify--noTags tagify--empty" tabindex="-1">
+                                <span contenteditable="" data-placeholder="​" aria-placeholder="" class="tagify__input"
+                                      role="textbox" aria-autocomplete="both" aria-multiline="false"></span>
+                            </tags>
+                            <input type="text" class="form-control border-0" name="compose_cc" value="">
+                        </div>
+                        <span class="btn btn-clean btn-xs btn-icon" data-inbox="cc-hide">
+																			<i class="la la-close"></i>
+																		</span>
+                    </div>
+                    <!--end::CC-->
+                    <!--begin::BCC-->
+                    <div class="d-none align-items-center border-bottom inbox-to-bcc pl-8 pr-5 min-h-50px">
+                        <div class="text-dark-50 w-75px">Bcc:</div>
+                        <div class="flex-grow-1">
+                            <tags class="tagify form-control border-0 tagify--noTags tagify--empty" tabindex="-1">
+                                <span contenteditable="" data-placeholder="​" aria-placeholder="" class="tagify__input"
+                                      role="textbox" aria-autocomplete="both" aria-multiline="false"></span>
+                            </tags>
+                            <input type="text" class="form-control border-0" name="compose_bcc" value="">
+                        </div>
+                        <span class="btn btn-clean btn-xs btn-icon" data-inbox="bcc-hide">
+																			<i class="la la-close"></i>
+																		</span>
+                    </div>
+                    <!--end::BCC-->
+                    <!--begin::Subject-->
+                    <div class="border-bottom">
+                        <input class="form-control border-0 px-8 min-h-45px" name="title"
+                               placeholder="Titulo" id="notification_title">
+                    </div>
+                    <!--end::Subject-->
+                    <!--begin::Message-->
+                    <div id="kt_inbox_reply_editor" class="border-0 ql-container ql-snow" style="height: 250px">
+                        <div id="content_selector" class="ql-editor ql-blank px-8" data-gramm="false" contenteditable="true"
+                             data-placeholder="Escribe el mensaje..."><p><br></p></div>
+                        <div class="ql-clipboard" contenteditable="true" tabindex="-1"></div>
+                    </div>
+                    <div id="kt_inbox_compose_editor"></div>
+                    {{ form.description }}
+                    <!--end::Message-->
+                    <!--begin::Attachments-->
+                    <div class="dropzone dropzone-multi px-8 py-4" id="kt_inbox_reply_attachments">
+                        <div id="dropzone-area" class="dropzone-items">
+
+                        </div>
+                        <div class="dz-default dz-message">
+                            <button class="dz-button" type="button">Drop files here to upload</button>
+                        </div>
+                    </div>
+                    <!--end::Attachments-->
+                </div>
+                <!--end::Body-->
+                <!--begin::Footer-->
+                <div class="d-flex align-items-center justify-content-between py-5 pl-8 pr-5 border-top">
+                    <!--begin::Actions-->
+                    <div class="d-flex align-items-center mr-3">
+                        <!--begin::Send-->
+                        <div class="btn-group mr-4">
+                            <button id="submit-notification" class="btn btn-primary font-weight-bold" type="submit">Enviar</button>
+                            <span class="btn btn-primary font-weight-bold dropdown-toggle dropdown-toggle-split"
+                                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" role="button"></span>
+                            <div class="dropdown-menu dropdown-menu-sm dropup p-0 m-0 dropdown-menu-right">
+                                <ul class="navi py-3">
+                                    <li class="navi-item">
+                                        <a href="#" class="navi-link">
+																							<span class="navi-icon">
+																								<i class="flaticon2-writing"></i>
+																							</span>
+                                            <span class="navi-text">Enviar luego</span>
+                                        </a>
+                                    </li>
+                                    <li class="navi-item">
+                                        <a href="#" class="navi-link">
+																							<span class="navi-icon">
+																								<i class="flaticon2-medical-records"></i>
+																							</span>
+                                            <span class="navi-text">Guardarlo &amp; archivarlo</span>
+                                        </a>
+                                    </li>
+                                    <li class="navi-item">
+                                        <a href="#" class="navi-link">
+																							<span class="navi-icon">
+																								<i class="flaticon2-hourglass-1"></i>
+																							</span>
+                                            <span class="navi-text">Cancelar</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!--end::Send-->
+                        <!--begin::Other-->
+                        <span class="btn btn-icon btn-sm btn-clean mr-2 dz-clickable"
+                              id="kt_inbox_reply_attachments_select">
+                            <i class="flaticon2-clip-symbol"></i>
+                        </span>
+                        <select name={{ form.attachment.name }} class="form-control" id="id_attachment" multiple hidden>
+                        </select>
+                        <!--end::Other-->
+                    </div>
+                    <!--end::Actions-->
+                    <!--begin::Toolbar-->
+                    <div class="d-flex align-items-center">
+                        <span class="btn btn-icon btn-sm btn-clean" data-inbox="dismiss" data-toggle="tooltip" title=""
+                              data-original-title="Dismiss reply">
+                            <i class="flaticon2-rubbish-bin-delete-button" id="deleteBtn"></i>
+                        </span>
+                    </div>
+                    <!--end::Toolbar-->
+                </div>
+                <!--end::Footer-->
+            </form>
+            <div id="alert-message" class="alert" role="alert" style="display:none"></div>
+            <!--end::Form-->
+        </div>
+    </div>
+</div>

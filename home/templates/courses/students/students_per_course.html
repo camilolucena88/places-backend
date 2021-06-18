@@ -1,0 +1,44 @@
+{% if course.all_students %}
+<table class="table table-bordered table-checkable dataTable no-footer dtr-inline" id="kt_datatable"
+       role="grid" aria-describedby="kt_datatable_info" style="width: 1200px;">
+    <thead>
+    <tr role="row">
+        <th class="dt-left sorting_disabled" rowspan="1" colspan="1" style="width: 30px;"
+            aria-label="Record ID">
+            <label class="checkbox checkbox-single">
+                <input type="checkbox" value="" class="group-checkable">
+                <span></span>
+            </label></th>
+        <th class="sorting_desc" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1"
+            style="width: 80px;" aria-sort="descending"
+            aria-label="Order ID: activate to sort column ascending">Nombre
+        </th>
+        <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1"
+            style="width: 102px;" aria-label="Country: activate to sort column ascending">Apellido
+        </th>
+        <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1"
+            style="width: 102px;" aria-label="Country: activate to sort column ascending">Email
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+        {% for student in course.all_students %}
+            <tr class="odd">
+            <td class="dt-left dtr-control" tabindex="0">
+                <label class="checkbox checkbox-single">
+                    <input type="checkbox" value="" class="checkable">
+                    <span></span>
+                </label></td>
+            <td class="sorting_1">{{ student.first_name }}</td>
+            <td>{{ student.last_name }}</td>
+            <td><a href="/instructor/profile/{{subject.instructor.user.id}}">{{ student.email }}</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<div class="py-10">
+    No hay estudiantes registrados
+</div>
+{%endif%}

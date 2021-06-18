@@ -1,0 +1,65 @@
+<div class="card card-custom gutter-b">
+    <div class="d-flex align-items-center p-3">
+        <a href="javascript:history.go(-1)" class="btn btn-clean btn-icon btn-sm mr-6" data-inbox="back">
+            <i class="flaticon2-left-arrow-1"></i>
+        </a>
+        <div class="card-title">
+            <h3 class="card-label">Lista de Materias
+                <span class="d-block text-muted pt-2 font-size-sm"><a href="/courses/id/{{ student.get_current_course.id }}">{{ student.get_current_course.name }}</a></span>
+            </h3>
+        </div>
+    </div>
+    <div class="card-body">
+        <!--begin: Datatable-->
+        <div id="kt_datatable_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+            <div class="row">
+                <div class="col-sm-12">
+                    <table class="table table-separate table-head-custom table-checkable" id="kt_datatable_2"
+                           role="grid" aria-describedby="kt_datatable_info" style="width: 1200px;">
+                        <thead>
+                        <tr role="row">
+                            <th>ID</th>
+                            <th>Nombre de Materia</th>
+                            <th>Profesora</th>
+                            <th>Horario</th>
+                            <th>Actividades</th>
+                            <th>Nuevos Mensajes</th>
+                            <th>Enlace a Classroom</th>
+                            <th>Ultima actividad</th>
+                            <th>Status</th>
+                            <th>Acciones</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for subject in page_obj %}
+                            <tr>
+                                <td>1</td>
+                                <td><a href="/courses/subjects/{{ subject.id }}">{{ subject.name }}</a></td>
+                                <td><a href="/instructor/{{subject.instructor_id.user.id}}">{{ subject.instructor_id }}</a></td>
+                                <td><a href="/calendar/courses/schedule/{{ subject.id }}">Horario</a></td>
+                                {% if student.has_new_notifications %}
+                                    <td><a href="/student/notifications/index">{{ student.total_new_notifications }}</a></td>
+                                {% else %}
+                                    <td>{{ student.total_new_notifications }}</td>
+                                {% endif %}
+                                {% if student.has_new_activities %}
+                                    <td><a href="/student/activities/index">{{ student.total_new_activities }}</a></td>
+                                {% else %}
+                                    <td>{{ student.total_new_activities }}</td>
+                                {% endif %}
+                                <td><span
+                                        class="label label-lg font-weight-bold label-light-primary label-inline"><a
+                                        href="{{ student.get_current_course.classroom.url }}">Classroom</a></span>
+                                </td>
+                                <td>10/15/2017</td>
+                                <td>4</td>
+                                <td nowrap="nowrap"></td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

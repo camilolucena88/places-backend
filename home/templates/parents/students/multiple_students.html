@@ -1,0 +1,38 @@
+<div class="card card-custom card-shadowless">
+    <!--begin::Header-->
+    <div class="card-header card-header-tabs-line">
+        <ul class="nav nav-dark nav-bold nav-tabs nav-tabs-line" data-remember-tab="tab_id" role="tablist">
+            {% for student in students %}
+            <li class="nav-item">
+                <a class="nav-link {% if forloop.first == 1 %}active {% endif %}" data-toggle="tab" href="#kt_builder_{{student.user.id}}" role="tab" aria-controls="student_{{student.user.id}}" {% if forloop.first == 1 %} aria-selected="true" {% else %} aria-selected="false" {% endif %}>{{ student.first_name }}</a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <!--end::Header-->
+    <!--begin::Body-->
+    <div class="card-body">
+        <div class="tab-content pt-3">
+            {% for student in students %}
+            <div class="tab-pane {% if forloop.first == 1 %} active {% endif %}" id="kt_builder_{{student.user.id}}" role="tabpanel" aria-labelledby="student_{{student.user.id}}">
+                    <div class="card-body my-9">
+                        {% include 'parents/students/user_card.html' %}
+                                <div class="separator separator-solid my-7"></div>
+                        {% include 'parents/students/student_details.html' %}
+                    </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        {% include 'parents/students/multiple_students_notifications.html' %}
+                    </div>
+                    <div class="col-sm-6">
+                        {% include 'parents/students/activities.html' %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <!--end::Body-->
+    <!--begin::Footer-->
+    <!--end::Footer-->
+</div>

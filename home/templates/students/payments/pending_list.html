@@ -1,0 +1,7 @@
+<td>{{ payment.payment.id }}</td>
+<td>{{ payment.payment.created_by }}</td>
+<td>{{ payment.payment.description }}</td>
+<td>{{ payment.payment.created_at.date }}</td>
+<td>{{ payment.payment.invoice.expired_at.date|default:"nothing" }}</td>
+<td>{{ payment.payment.amount }}</td>
+<td nowrap="nowrap">{% include 'students/payments/pending_tset.html' %}</td>

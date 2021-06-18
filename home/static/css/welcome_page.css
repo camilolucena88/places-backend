@@ -9,10 +9,6 @@ html {
 }
 
 body {
-    max-width: 960px;
-    min-height: 100vh;
-    margin: 0 auto;
-    padding: 0 15px;
     color: #231f20;
     font-family: 'Helvetica Neue', 'Segoe UI', Arial, sans-serif;
     line-height: 1.25;
@@ -49,7 +45,6 @@ svg:not(:root) {
 }
 
 .header {
-    display: flex;
     justify-content: space-between;
     align-items: center;
     padding-top: 20px;

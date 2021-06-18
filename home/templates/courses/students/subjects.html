@@ -1,0 +1,47 @@
+<div class="card card-custom gutter-b">
+    <div class="card-header flex-wrap py-3">
+        <div class="card-title">
+            <h3 class="card-label">Lista de Materias - {{student.current_course}}
+            </h3>
+        </div>
+    </div>
+    {% if student.current_course.get_subjects %}
+    <div class="card-body">
+        <!--begin: Datatable-->
+        <div id="kt_datatable_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+            <div class="row">
+                <div class="col-sm-12">
+                    <table class="table table-bordered table-checkable dataTable no-footer dtr-inline" id="kt_datatable"
+                           role="grid" aria-describedby="kt_datatable_info" style="width: 1200px;">
+                        <thead>
+                        <tr role="row">
+                            <th class="sorting_desc" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1"
+                                style="width: 80px;" aria-sort="descending"
+                                aria-label="Order ID: activate to sort column ascending">Nombre
+                            </th>
+                            <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1"
+                                style="width: 102px;" aria-label="Country: activate to sort column ascending">Profesor
+                            </th>
+                            <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1"
+                                style="width: 50px;" aria-label="Ship City: activate to sort column ascending">Email
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for subject in student.current_course.get_subjects %}
+                        <tr class="odd">
+                            <td class="sorting_1"><a href="/courses/subjects/{{subject.id}}">{{ subject }}</a></td>
+                            <td>{{ subject.instructor_id }}</td>
+                            <td><a href="/instructor/profile/{{subject.instructor.user.id}}">{{ subject.instructor_id.email }}</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    {% endif %}
+</div>

@@ -1,0 +1,66 @@
+<div class="card card-custom gutter-b">
+    <div class="card-header">
+        <div class="card-title">
+            <h3 class="card-label">Nuevas notificaciones</h3>
+        </div>
+    </div>
+    <div class="card-body">
+        <!--begin::Example-->
+        <div class="example example-basic">
+            <div class="example-preview">
+                <!--begin::Timeline-->
+                <div class="timeline timeline-1 mt-3">
+                    <!--begin::Item-->
+                {% for student in students %}
+                    <div>{{ student.user.first_name }}</div>
+                    {% if student.new_notifications %}
+                        {% for notification in student.new_notifications|slice:":3" %}
+                            <a href="/student/admin/notification/{{ notification.id }}">
+                                <div class="timeline-item align-items-start mt-9">
+                                <!--begin::Label-->
+                                <div class="timeline-label font-weight-bolder text-dark-75 font-size-lg">
+                                    {{ notification.created_at |date:"N d P" }}
+                                </div>
+                                <!--end::Label-->
+                                <!--begin::Badge-->
+                                <div class="timeline-badge">
+                                    <i class="fa fa-genderless text-warning icon-xl"></i>
+                                </div>
+                                <!--end::Badge-->
+                                <!--begin::Text-->
+                                <div class="font-weight-mormal font-size-lg timeline-content text-muted pl-3">
+                                    {{ notification.title }}
+                                </div>
+                                    <small>Ver más</small>
+                                <!--end::Text-->
+                            </div>
+                            </a>
+                        {% endfor %}
+                    {% else %}
+                                        <div class="timeline-item align-items-start mt-9">
+                        <!--begin::Label-->
+                        <div class="timeline-label font-weight-bolder text-dark-75 font-size-lg">
+
+                        </div>
+                        <!--end::Label-->
+                        <!--begin::Badge-->
+                        <div class="timeline-badge">
+                            <i class="fa fa-genderless text-warning icon-xl"></i>
+                        </div>
+                        <!--end::Badge-->
+                        <!--begin::Text-->
+                        <div class="font-weight-mormal font-size-lg timeline-content text-muted pl-3"><small
+                                class="text-muted font-weight-bold">No tiene notificaciones</small>
+                        </div>
+                        <!--end::Text-->
+                    </div>
+
+                    {% endif %}
+                {% endfor %}
+                    <!--end::Item-->
+                </div>
+                <!--end::Timeline-->
+            </div>
+        </div>
+    </div>
+</div>

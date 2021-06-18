@@ -1,0 +1,243 @@
+{% extends "wagtailadmin/base.html" %}
+{% load i18n wagtailadmin_tags modeladmin_tags %}
+
+{% block titletag %}{{ view.get_meta_title }}{% endblock %}
+
+{% block extra_css %}
+{{ block.super }}
+
+{% include "wagtailadmin/pages/_editor_css.html" %}
+{{ edit_handler.form.media.css }}
+
+{{ view.media.css }}
+{% endblock %}
+
+{% block extra_js %}
+{{ block.super }}
+
+{% include "wagtailadmin/pages/_editor_js.html" %}
+{{ edit_handler.form.media.js }}
+{{ edit_handler.html_declarations }}
+
+{{ view.media.js }}
+{% prepopulated_slugs %}
+{% endblock %}
+
+{% block content %}
+
+{% block header %}
+{% include "wagtailadmin/shared/header.html" with title=view.get_page_title subtitle=view.get_page_subtitle icon=view.header_icon tabbed=1 merged=1 %}
+{% endblock %}
+
+<form action="/courses/subjects/create" {% if is_multipart %} enctype="multipart/form-data" {% endif %} method="POST"
+      novalidate>
+    {% csrf_token %}
+
+    {% block form %}
+    {{ form.non_field_errors }}
+    <ul class="objects">
+        <li class="object required integer_field">
+            <div class="title-wrapper">
+                <label for="id_{{ form.type.name }}">
+                    Tipo
+                </label>
+            </div>
+            {{ form.type.errors }}
+            <div class="object-layout">
+                <div class="object-layout_big-part">
+                    <fieldset class="">
+                        <legend>Tipo</legend>
+                        <ul class="fields">
+                            <li class="">
+                                <div class="field integer_field number_input">
+                                    <div class="field-content">
+                                        <div class="input  ">
+                                            <select name="type" id="id_{{ form.type.name }}">
+                                                <option value="0">Preescolar</option>
+                                                <option value="1">Primaria</option>
+                                                <option value="2">Secundaria</option>
+                                                <option value="3">Extra curricular</option>
+                                                <option value="4">Idiomas</option>
+                                                <option value="5">Dirigidas</option>
+                                            </select>
+                                            <span></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </fieldset>
+                </div>
+            </div>
+        </li>
+        <li class="object required char_field">
+            <div class="title-wrapper">
+                <label for="id_{{ form.name.name }}">
+                    Nombre
+                </label>
+            </div>
+            <div class="object-layout">
+                {{ form.name.errors }}
+                <div class="object-layout_big-part">
+                    <fieldset>
+                        <legend>Nombre</legend>
+                        <ul class="fields">
+                            <li>
+                                <div class="field char_field text_input">
+                                    <div class="field-content">
+                                        <div class="input  ">
+                                            {{ form.name }}
+                                            <span></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </fieldset>
+                </div>
+            </div>
+        </li>
+        <li class="object required char_field">
+            <div class="title-wrapper">
+                <label for="id_{{ form.description.name }}">
+                    Descripción
+                </label>
+            </div>
+            <div class="object-layout">
+                <div class="object-layout_big-part">
+                    {{ form.description.errors }}
+                    <fieldset class="">
+                        <legend>Descripción</legend>
+                        <ul class="fields">
+                            <li class="">
+                                <div class="field char_field admin_auto_height_text_input">
+                                    <div class="field-content">
+                                        <div class="input  ">
+                                            {{ form.description }}
+                                            <span></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </fieldset>
+                </div>
+            </div>
+        </li>
+        <li class="object required model_choice_field">
+            <div class="title-wrapper">
+                <label for="{{ form.course_id.id_for_label }}">
+                    Curso
+                </label>
+            </div>
+            <div class="object-layout">
+                <div class="object-layout_small-part">
+                    <div class="object-help help">
+                        <svg class="icon icon-help default" aria-hidden="true" focusable="false">
+                            <use href="#icon-help"></use>
+                        </svg>
+                        Curso
+                    </div>
+                </div>
+                <div class="object-layout_big-part">
+                    {{ form.course_id.errors }}
+                    <fieldset class="">
+                        <legend>Course id</legend>
+                        <ul class="fields">
+                            <li class="">
+                                <div class="field model_choice_field select">
+                                    <div class="field-content">
+                                        <div class="input  ">
+                                            {{ form.course_id }}
+                                            <span></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </fieldset>
+                </div>
+            </div>
+        </li>
+        <li class="object required model_choice_field">
+            <div class="title-wrapper">
+                <label for="{{ form.course_id.id_for_label }}">
+                    Horario
+                </label>
+            </div>
+            <div class="object-layout">
+                <div class="object-layout_small-part">
+                    <div class="object-help help">
+                        <svg class="icon icon-help default" aria-hidden="true" focusable="false">
+                            <use href="#icon-help"></use>
+                        </svg>
+                        Schedule
+                    </div>
+                </div>
+                <div class="object-layout_big-part">
+                    {{ form.schedule.errors }}
+                    <fieldset class="">
+                        <legend>Horario de clases</legend>
+                        <ul class="fields">
+                            <li class="">
+                                <div class="field model_choice_field select">
+                                    <div class="field-content">
+                                        <div class="input  ">
+                                            {{ form.schedule }}
+                                            <span></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </fieldset>
+                </div>
+            </div>
+        </li>
+        <li class="object required model_choice_field">
+            <div class="title-wrapper">
+                <label for="{{ form.instructor_id.id_for_label }}">
+                    Profesor
+                </label>
+            </div>
+            <div class="object-layout">
+                <div class="object-layout_big-part">
+                    <fieldset>
+                        <legend>Instructor id</legend>
+                        <ul class="fields">
+                            <li>
+                                <div class="field model_choice_field select ">
+                                    <div class="field-content">
+                                        <div class="input  ">
+                                            {{form.instructor_id}}
+                                            <span></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </fieldset>
+                </div>
+            </div>
+        </li>
+    </ul>
+    {% endblock %}
+
+    {% block footer %}
+    <footer>
+        <ul>
+            <li class="actions">
+                {% block form_actions %}
+                <div class="dropdown dropup dropdown-button match-width">
+                    <button type="submit" class="button action-save button-longrunning"
+                            data-clicked-text="{% trans 'Saving…' %}">
+                        {% icon name="spinner" %}<em>{% trans 'Save' %}</em>
+                    </button>
+                </div>
+                {% endblock %}
+            </li>
+        </ul>
+    </footer>
+    {% endblock %}
+</form>
+{% endblock %}

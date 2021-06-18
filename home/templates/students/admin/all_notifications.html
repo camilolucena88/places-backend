@@ -1,0 +1,49 @@
+<div class="card card-custom gutter-b">
+    <div class="card-header">
+        <div class="card-title">
+            <h3 class="card-label">últimas notificaciones</h3><small><a href="/student/notifications/index">Ver
+            todas</a></small>
+        </div>
+    </div>
+    <div class="card-body">
+        <!--begin::Example-->
+        <div class="card card-custom card-shadowless">
+            <!--begin::Header-->
+            <div class="card-header card-header-tabs-line">
+                <ul class="nav nav-dark nav-bold nav-tabs nav-tabs-line" data-remember-tab="tab_id" role="tablist">
+                    {% for student in students %}
+                        <li class="nav-item">
+                            <a class="nav-link {% if forloop.first == 1 %}active {% endif %}" data-toggle="tab"
+                               href="#kt_builder_{{ student.user.id }}" role="tab"
+                               aria-controls="student_{{ student.user.id }}" {% if forloop.first == 1 %}
+                               aria-selected="true" {% else %}
+                               aria-selected="false" {% endif %}>{{ student.first_name }} - {{ student.total_new_notifications }} notificaciones no leidas</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <!--end::Header-->
+            <!--begin::Body-->
+            <div class="card-body">
+                <div class="tab-content pt-3">
+                    {% for student in students %}
+                        <div class="tab-pane {% if forloop.first == 1 %} active {% endif %}"
+                             id="kt_builder_{{ student.user.id }}" role="tabpanel"
+                             aria-labelledby="student_{{ student.user.id }}">
+                        {% if student.new_notifications or student.viewed_notifications %}
+                            {% for notification in student.new_notifications %}
+                                {% include 'students/notifications/timeline.html' %}
+                            {% endfor %}
+                            {% for notification in student.viewed_notifications %}
+                                {% include 'students/notifications/timeline.html' with type="viewed" %}
+                            {% endfor %}
+                        {% else %}
+                            No hay notificaciones para {{ student.user.get_full_name }}
+                        {% endif %}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

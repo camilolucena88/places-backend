@@ -1,0 +1,35 @@
+<table class="table table-bordered table-checkable dataTable no-footer dtr-inline" id="kt_datatable"
+       role="grid" aria-describedby="kt_datatable_info" style="width: 1200px;">
+    <thead>
+    <tr role="row">
+        <th>Record ID</th>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Cedula Estudiantil</th>
+        <th>Fecha de Nacimiento</th>
+        <th>Email</th>
+        <th>Grado</th>
+        <th>Instructor</th>
+        <th>Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+        {% for student in students %}
+            <tr class="odd">
+            <td class="dt-left dtr-control" tabindex="0">
+                <label class="checkbox checkbox-single">
+                    <input type="checkbox" value="" class="checkable">
+                    <span></span>
+                </label></td>
+            <td class="sorting_1"><a href="/courses/students/{{ student.user.id }}">{{ student.first_name }}</a></td>
+            <td class="sorting_1"><a href="/courses/students/{{ student.user.id }}">{{ student.last_name }}</a></td>
+            <td class="sorting_1">{{ student.student_identification|default:'No asignada' }}</td>
+            <td class="sorting_1">{{ student.dob|default:'No especificado' }}</td>
+            <td>{{ student.email }}</td>
+            <td><a href="/courses/id/{{ student.current_course.id }}">{{ student.current_course }}</a></td>
+            <td>{{ student.current_course.instructor }}</td>
+            <td nowrap="nowrap"></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>

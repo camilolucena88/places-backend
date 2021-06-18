@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block body_class %}container{% endblock %}
+
+{% block extra_css %}
+
+{% comment %}
+Delete the line below if you're just getting started and want to remove the welcome screen!
+{% endcomment %}
+<link rel="stylesheet" href="{% static 'css/welcome_page.css' %}">
+<link rel="stylesheet" href="{% static '/plugins/custom/fullcalendar/fullcalendar.bundle.css' %}">
+<link rel="stylesheet" href="{% static '/plugins/global/plugins.bundle.css' %}">
+<link rel="stylesheet" href="{% static '/plugins/custom/prismjs/prismjs.bundle.css' %}">
+<link rel="stylesheet" href="{% static '/css/style.bundle.css' %}">
+{% endblock extra_css %}
+
+{% block content %}
+
+{% comment %}
+Delete the line below if you're just getting started and want to remove the welcome screen!
+{% endcomment %}
+{% load i18n wagtailcore_tags wagtailimages_tags %}
+    <div class="card card-custom gutter-b">
+        <div class="card-body my-9">
+                {% include 'instructor/instructor_card.html' %}
+                    <div class="separator separator-solid my-7"></div>
+                {% include 'instructor/instructor_details.html' %}
+        </div>
+    </div>
+<div class="row">
+    <div class="col-sm-6">
+    </div>
+    <div class="col-sm-6">
+    </div>
+</div>
+{% endblock content %}

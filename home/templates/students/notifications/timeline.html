@@ -1,0 +1,21 @@
+<a href="/student/admin/notification/{{ notification.id }}">
+    <div class="timeline-item align-items-start mt-9 p-5 {% if type != 'viewed' %} bg-success-o-50 {% else %} shadow-sm {% endif %} rounded-lg">
+        <!--begin::Label-->
+        <div class="timeline-label font-weight-bolder text-dark-75 font-size-lg">
+            {{ notification.created_at |date:"N d P" }}
+        </div>
+        <!--end::Label-->
+        <!--begin::Badge-->
+        <div class="timeline-badge">
+            <i class="fa fa-genderless text-warning icon-xl"></i>
+        </div>
+        <!--end::Badge-->
+        <!--begin::Text-->
+        <div class="font-weight-mormal font-size-lg timeline-content pl-3">
+            {{ notification.title }} - {{ student.first_name }} {{ student.last_name }}
+            {% if type != 'viewed' %}- No ha sido leida {% endif %}
+        </div>
+        <small>Ver más</small>
+        <!--end::Text-->
+    </div>
+</a>

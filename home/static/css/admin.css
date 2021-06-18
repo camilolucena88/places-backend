@@ -1,0 +1,129 @@
+:root {
+    --color-primary-hue: 157;
+    --color-primary-saturation: 46.7%;
+    --color-primary-lightness: 44.9%;
+    --color-primary-darker-hue: 179.4;
+    --color-primary-darker-saturation: 70.9%;
+    --color-primary-darker-lightness: 29.6%;
+    --color-primary-dark-hue: 171.3;
+    --color-primary-dark-saturation: 73.8%;
+    --color-primary-dark-lightness: 32.9%;
+}
+
+a {
+    background-color: transparent;
+    color: #308282;
+}
+
+.nav-wrapper, .nav-wrapper .inner {
+    background: #f2f2f2;
+    overflow: auto;
+}
+
+.content {
+    background: #ffffff;
+}
+
+@media screen and (min-width: 50em) {
+    .nav-wrapper .inner, .nav-wrapper, .nav-main .footer {
+        width: 225px;
+    }
+
+    .wrapper, body.nav-open .wrapper {
+    padding-left: 225px;
+    }
+
+    form .objects {
+    padding: 150px;
+    }
+
+    .logo {
+    margin: 1em auto;
+    }
+    .nav-main .account {
+    background: #308282;
+    color: #ccc;
+    }
+    .nav-main .account:hover {
+    background: #44bfbf;
+    }
+}
+.nav-main a {
+    color: rgb(111 111 111);
+}
+
+.nav-main .menu-active,.nav-search input, .footer-submenu {
+    background: #308282;
+    color: #ffffff;
+    border: none
+}
+
+.nav-search input::placeholder {
+    color: #ffffff;
+}
+
+.nav-search input:active, .nav-search input:focus, .nav-main .menu-active:hover, .nav-search input:hover, .footer-submenu li:hover {
+    background-color: #44bfbf;
+    color: #000;
+}
+.nav-main a:hover {
+    color: #308282;
+    text-shadow:none;
+}
+
+.listing .no:hover {
+    border-color: #b4191f;
+    border-color: #b4191f;
+    background-color: #b4191f;
+    background-color: #b4191f;
+}
+
+.footer-submenu a {
+    color: #ffffff;
+}
+
+.c-explorer {
+    background: #ffffff;
+}
+
+.c-explorer__item__title {
+    color: #308282;
+}
+
+.c-status {
+    background: #308282;
+    color: #fff;
+}
+
+.c-explorer__header {
+    background: #3da87f;
+}
+
+.c-explorer__header__title__inner .icon--explorer-header {
+    color: #ffffff;
+}
+
+body, html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-size: 13px!important;
+    font-weight: 400;
+    font-family: Poppins,Helvetica,sans-serif;
+    -ms-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+@media screen and (max-width: 50em) {
+    header .right {
+        margin-top: 10px;
+    }
+    header .col {
+    float: right;
+     margin-right: 0;
+    }
+    .result-list{
+        overflow-x: auto;
+    }
+}
