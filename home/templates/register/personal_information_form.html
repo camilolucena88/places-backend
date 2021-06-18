@@ -1,12 +1,12 @@
 <div class="pb-5" data-wizard-type="step-content" data-wizard-state="current">
-                                    <h3 class="mb-10 font-weight-bold text-dark">Informacion personal del usuario</h3>
+                                    <h3 class="mb-10 font-weight-bold text-dark">Personal Information</h3>
                                     <!--begin::Input-->
                                     <div class="form-group fv-plugins-icon-container">
-                                        <label>Usuario</label>
+                                        <label>Username</label>
                                         {{ register_form.username }}
                                         <span class="form-text text-muted"></span>
                                         <div class="fv-plugins-message-container"></div>
-                                        <span class="form-text text-muted">Elige un nombre de usuario, el nombre de usuario es unico y no debe llevar espacios.</span>
+                                        <span class="form-text text-muted">Choose a username, the username is unique and should not contain spaces.</span>
                                         {% if register_form.username.errors %}
                                             <div class="alert alert-custom alert-light-danger fade show">
                                                 {{ register_form.username.errors }}
@@ -18,7 +18,7 @@
                                     <div class="row">
                                         <div class="col-xl-6">
                                             <div class="form-group fv-plugins-icon-container">
-                                                <label>Primer nombre</label>
+                                                <label>First Name</label>
                                                     {{ register_form.first_name }}
                                                 <span class="form-text text-muted"></span>
                                                 {% if register_form.first_name.errors %}
@@ -30,7 +30,7 @@
                                         </div>
                                         <div class="col-xl-6">
                                             <div class="form-group fv-plugins-icon-container">
-                                                <label>Apellido</label>
+                                                <label>Last Name</label>
                                                 {{ register_form.last_name }}
                                                 <span class="form-text text-muted"></span>
                                                 <div class="fv-plugins-message-container"></div>
@@ -40,7 +40,7 @@
                                     <div class="form-group fv-plugins-icon-container">
                                     <label>Email</label>
                                     {{ register_form.email }}
-                                    <span class="form-text text-muted">Email es obligatorio y diferente al email del representante.</span>
+                                    <span class="form-text text-muted">Email is mandatory and different from the business email.</span>
                                     {% if register_form.email.errors %}
                                         <div class="alert alert-custom alert-light-danger fade show">
                                             {{ register_form.email.errors }}
@@ -53,9 +53,9 @@
                                         <div class="col-xl-6">
                                             <!--begin::Input-->
                                             <div class="form-group fv-plugins-icon-container">
-                                                <label>Contraseña</label>
+                                                <label>Password</label>
                                                 {{ register_form.password1 }}
-                                                <span class="form-text text-muted">Contraseña</span>
+                                                <span class="form-text text-muted">Password</span>
                                                 <div class="fv-plugins-message-container"></div>
                                                 {% if register_form.password1.errors %}
                                                 <div class="alert alert-custom alert-light-danger fade show">
@@ -68,9 +68,9 @@
                                         <div class="col-xl-6">
                                             <!--begin::Input-->
                                             <div class="form-group fv-plugins-icon-container">
-                                                <label>Verifica Contraseña</label>
+                                                <label>Confirm Password</label>
                                                 {{ register_form.password2 }}
-                                                <span class="form-text text-muted">Verifica tu contraseña.</span>
+                                                <span class="form-text text-muted">Confirm Password.</span>
                                                 <div class="fv-plugins-message-container"></div>
                                             {% if register_form.password2.errors %}
                                                 <div class="alert alert-custom alert-light-danger fade show">

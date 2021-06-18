@@ -1,0 +1,38 @@
+<div class="pb-5" data-wizard-type="step-content">
+    <h4 class="mb-10 font-weight-bold text-dark">Business Details</h4>
+    <!--begin::Select-->
+    <div class="form-group fv-plugins-icon-container">
+        {% if business_form.business_type.errors %}
+            {% for error in business_form.business_type.errors %}
+                {{ error }}
+            {% endfor %}
+        {% endif %}
+        <div class="form-group">
+        <label>Business Type:</label>
+            {{ business_form.business_type }}
+            <span class="form-text text-muted">We'll never share your email with anyone else</span>
+        </div>
+        {% if business_form.sector.errors %}
+            {% for error in business_form.sector.errors %}
+                {{ error }}
+            {% endfor %}
+        {% endif %}
+        <div class="form-group">
+        <label>Business Sector:</label>
+            {{ business_form.sector }}
+            <span class="form-text text-muted">We'll never share your email with anyone else</span>
+        </div>
+        {% if business_form.account_type.errors %}
+            {% for error in business_form.account_type.errors %}
+                {{ error }}
+            {% endfor %}
+        {% endif %}
+        <div class="form-group">
+        <label>Business Account Type:</label>
+            {{ business_form.account_type }}
+            <span class="form-text text-muted">We'll never share your email with anyone else</span>
+        </div>
+        <div class="fv-plugins-message-container"></div>
+    </div>
+    <!--end::Select-->
+</div>

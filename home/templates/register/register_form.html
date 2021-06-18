@@ -59,7 +59,7 @@
                                 <!--end::Wizard Step 2-->
                                 <!--begin::Wizard Step 3-->
                             {% if not request.user.is_authenticated %}
-                                {% include 'register/student_information_form.html' %}
+                                {% include 'register/business_information_form.html' %}
                             {% else %}
                                 {% include 'register/student_parent_information_form.html' %}
                             {% endif %}
@@ -96,12 +96,12 @@
 																		</g>
 																	</svg>
                                                                     <!--end::Svg Icon-->
-																</span>Regresar
+																</span>Back
                                         </button>
                                     </div>
                                     <div>
                                         <button type="button" class="btn btn-success font-weight-bolder px-10 py-3"
-                                                data-wizard-type="action-submit">Enviar
+                                                data-wizard-type="action-submit">Send
                                             <span class="svg-icon svg-icon-md ml-3">
 																	<!--begin::Svg Icon | path:/keen/theme/demo2/dist/assets/media/svg/icons/Navigation/Check.svg-->
 																	<svg xmlns="http://www.w3.org/2000/svg"
@@ -121,7 +121,7 @@
 																</span></button>
                                         <button type="button" id="next-step"
                                                 class="btn btn-primary font-weight-bolder px-10 py-3"
-                                                data-wizard-type="action-next">Siguiente
+                                                data-wizard-type="action-next">Next
                                             <span class="svg-icon svg-icon-md ml-3">
 																	<!--begin::Svg Icon | path:/keen/theme/demo2/dist/assets/media/svg/icons/Navigation/Arrow-right.svg-->
 																	<svg xmlns="http://www.w3.org/2000/svg"

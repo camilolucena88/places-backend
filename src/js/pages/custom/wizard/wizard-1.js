@@ -33,7 +33,7 @@ var KTWizard1 = function () {
 						KTUtil.scrollTop();
 					} else {
 						Swal.fire({
-							text: "Lo siento, parece que se han detectado algunos errores, inténtelo de nuevo.",
+							text: "Sorry, looks like there are some errors detected, please try again.",
 							icon: "error",
 							buttonsStyling: false,
 							confirmButtonText: "Ok!",
@@ -58,23 +58,24 @@ var KTWizard1 = function () {
 				KTUtil.getById('form_input_first_name').innerText = _formEl.elements.namedItem('first_name').value;
 				KTUtil.getById('form_input_last_name').innerText = _formEl.elements.namedItem('last_name').value;
 				KTUtil.getById('form_input_email').innerText = _formEl.elements.namedItem('email').value;
+				KTUtil.getById('form_input_name').innerText = _formEl.elements.namedItem('name').value;
 				KTUtil.getById('form_input_address').innerText = _formEl.elements.namedItem('address').value;
 				KTUtil.getById('form_input_telephone').innerText = _formEl.elements.namedItem('telephone').value;
 				KTUtil.getById('form_input_city').innerText = _formEl.elements.namedItem('city').value;
 				KTUtil.getById('form_input_country').innerText = _formEl.elements.namedItem('country').value;
-				KTUtil.getById('form_input_course').innerText = _formEl.elements.namedItem('current_course').value;
+				KTUtil.getById('form_input_business_email').innerText = _formEl.elements.namedItem('business_email').value;
 			}
 		});
 
 		// Submit event
 		_wizardObj.on('submit', function (wizard) {
 			Swal.fire({
-				text: "¡Todo esta correcto! Confirme el envío del formulario.",
+				text: "All is good! Please confirm the form submission.",
 				icon: "success",
 				showCancelButton: true,
 				buttonsStyling: false,
-				confirmButtonText: "Si, enviar!",
-				cancelButtonText: "No, cancelar",
+				confirmButtonText: "Yes, submit!",
+				cancelButtonText: "No, cancel",
 				customClass: {
 					confirmButton: "btn font-weight-bold btn-primary",
 					cancelButton: "btn font-weight-bold btn-default"
@@ -109,35 +110,35 @@ var KTWizard1 = function () {
 					username: {
 						validators: {
 							notEmpty: {
-								message: 'Usuario es un campo requerido'
+								message: 'Username is required'
 							},
 							remote: {
 								data: {
 									'csrfmiddlewaretoken': csrftoken
 								},
-								message: 'Este usuario ya esta tomado, prueba con otro.',
+								message: 'This user is already taken, try another.',
 								method: 'POST',
-								url: '/api/verify/username',
+								url: '/api/v1/verify/username',
 							},
 							stringLength: {
 								min: 6,
 								max: 30,
-								message: 'El nombre de usuario debe tener más de 6 y menos de 30 caracteres.',
+								message: 'Username must be more than 6 and less than 30 characters.',
 							},
 							regexp: {
 								regexp: /^[a-zA-Z0-9_]+$/,
 								message: '' +
-									'El nombre de usuario solo puede constar de alfabético, número y guión bajo',
+									'Username can only consist of alphabetic, number, and underscore',
 							},
 						}
 					},
 					email: {
 						validators: {
 							notEmpty: {
-								message: 'Email es un campo requerido'
+								message: 'Email is a required field'
 							},
 							emailAddress: {
-								message: 'Ingresa un email valido'
+								message: 'Enter a valid email'
 							},
 							remote: {
 								header: {
@@ -147,30 +148,30 @@ var KTWizard1 = function () {
 								data: {
 									'csrfmiddlewaretoken': csrftoken
 								},
-								message: 'Ya existe un usuario con este email',
+								message: 'A user with this email already exists',
 								method: 'POST',
-								url: '/api/verify/email',
+								url: '/api/v1/verify/email',
 							},
 						},
 					},
 					first_name: {
 						validators: {
 							notEmpty: {
-								message: 'Primer nombre es un campo requerido'
+								message: 'First name is a required field'
 							}
 						}
 					},
 					last_name: {
 						validators: {
 							notEmpty: {
-								message: 'Apellido es un campo requerido'
+								message: 'Last name is a required field'
 							}
 						}
 					},
 					password1: {
 						validators: {
 							notEmpty: {
-								message: 'Contrasena es un campo requerido'
+								message: 'Password is a required field'
 							}
 						}
 					},
@@ -180,7 +181,7 @@ var KTWizard1 = function () {
 								compare: function() {
 									return _formEl.elements.namedItem('password1').value;
 								},
-								message: 'La contraseñas no son iguales, verifica que sean iguales'
+								message: 'The passwords are not the same, verify that they are the same'
                         	}
 						}
 					},
@@ -203,32 +204,32 @@ var KTWizard1 = function () {
 					telephone: {
 						validators: {
 							notEmpty: {
-								message: 'Numero de telefono es requerido'
+								message: 'Phone number is required'
 							},
 							phone: {
 								country: 'VE',
-								message: 'Numero de telefono es requerido'
+								message: 'Phone number is requiredo'
 							}
 						}
 					},
 					country: {
 						validators: {
 							notEmpty: {
-								message: 'Numero de telefono es requerido'
+								message: 'Phone number is required'
 							}
 						}
 					},
 					student_address: {
 						validators: {
 							notEmpty: {
-								message: 'Direccion es un campo requerido'
+								message: 'Address is a required field'
 							}
 						}
 					},
 					city: {
 						validators: {
 							notEmpty: {
-								message: 'La ciudad es un campo requerido'
+								message: 'The city is a required field'
 							}
 						}
 					}
@@ -248,10 +249,24 @@ var KTWizard1 = function () {
 			_formEl,
 			{
 				fields: {
-					course: {
+					business_type: {
 						validators: {
 							notEmpty: {
-								message: 'Selecciona el curso'
+								message: 'Business Type should be selected'
+							}
+						}
+					},
+					sector: {
+						validators: {
+							notEmpty: {
+								message: 'The Sector should be selected'
+							}
+						}
+					},
+					account_type: {
+						validators: {
+							notEmpty: {
+								message: 'Account Type should be selected'
 							}
 						}
 					},

@@ -14,10 +14,12 @@ urlpatterns = [
     url(r'^config/', admin.site.urls),
     url(r'^admin/', include(wagtailadmin_urls)),
     url(r'^documents/', include(wagtaildocs_urls)),
+    url(r"^api/v1/", include('api.urls')),
     path(r"api/places/", include('places_api.urls')),
     path(r"api/auth/", include('authentication.urls')),
     path(r"api/users/", include('users_api.urls')),
     path(r"api-auth/", include('rest_framework.urls', namespace='rest_framework')),
+    # path(r"payments/", include('payments.urls')),
 ]
 
 urlpatterns += i18n_patterns(

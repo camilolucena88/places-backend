@@ -368,7 +368,7 @@ var KTAppInbox = function () {
 
 // Class Initialization
 jQuery(document).ready(async function () {
-    var users = await fetch('/api/students')
+    var users = await fetch('/api/v1/students')
         .then(response => response.json())
         .then(data => {
             return data;

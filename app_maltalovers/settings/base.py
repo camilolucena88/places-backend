@@ -63,7 +63,10 @@ INSTALLED_APPS = [
     'authentication.apps.AuthenticationConfig',
     'places.apps.PlacesConfig',
     'places_api.apps.PlacesApiConfig',
-    'users_api.apps.UsersApiConfig'
+    'users_api.apps.UsersApiConfig',
+    'payments.apps.PaymentsConfig',
+    'listing.apps.ListingConfig',
+    'api.apps.ApiConfig'
 ]
 
 MIDDLEWARE = [

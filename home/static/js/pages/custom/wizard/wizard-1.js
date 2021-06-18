@@ -214,7 +214,7 @@ var KTWizard1 = function () {
 								},
 								message: 'Este usuario ya esta tomado, prueba con otro.',
 								method: 'POST',
-								url: '/api/verify/username',
+								url: '/api/v1/verify/username',
 							},
 							stringLength: {
 								min: 6,
