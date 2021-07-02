@@ -27,7 +27,7 @@
             </li>
             {% endfor %}
             <li class="menu-section">
-                <h4 class="menu-text">Menu</h4>
+                <h4 class="menu-text">Listings</h4>
                 <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
             </li>
                 {% if 'students.view_students' in user.get_all_permissions %}
@@ -47,7 +47,7 @@
 									</svg>
                                     <!--end::Svg Icon-->
 								</span>
-                            <span class="menu-text">Clases</span>
+                            <span class="menu-text">Add listing</span>
                         </a>
                     </li>
                         <li class="menu-item menu-item-submenu {%if 'class' in request.path %}menu-item-open menu-item-here{%endif%}" aria-haspopup="true"
@@ -85,7 +85,7 @@
 									</svg>
                                     <!--end::Svg Icon-->
 								</span>
-                            <span class="menu-text">Padres</span>
+                            <span class="menu-text">View Listings</span>
                         </a>
                     </li>
                         <li class="menu-item menu-item-submenu {%if 'class' in request.path %}menu-item-open menu-item-here{%endif%}" aria-haspopup="true"
@@ -143,7 +143,7 @@
                                         </svg>
                                         <!--end::Svg Icon-->
                                     </span>
-                            <span class="menu-text">Clases</span>
+                            <span class="menu-text">Add Listings</span>
                         </a>
                     </li>
                     <li class="menu-item menu-item-submenu {%if 'class' in request.path %}menu-item-open menu-item-here{%endif%}" aria-haspopup="true"
@@ -188,7 +188,7 @@
                 {% else %}
                     <li class="menu-item menu-item-submenu {%if 'class' in request.path %}menu-item-open menu-item-here{%endif%}" aria-haspopup="true"
                         data-menu-toggle="hover">
-                        <a href="/student/courses" class="menu-link menu-toggle">
+                        <a href="/listings/create" class="menu-link menu-toggle">
                                     <span class="svg-icon menu-icon">
                                         <!--begin::Svg Icon | path:/keen/theme/demo1/dist/assets/media/svg/icons/Layout/Layout-4-blocks.svg-->
                                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -202,7 +202,7 @@
                                         </svg>
                                         <!--end::Svg Icon-->
                                     </span>
-                            <span class="menu-text">Clases</span>
+                            <span class="menu-text">Add Listings</span>
                         </a>
                     </li>
                     {% if request.user.is_authenticated %}
@@ -222,7 +222,7 @@
                                         </svg>
                                         <!--end::Svg Icon-->
                                     </span>
-                            <span class="menu-text">Crear cuenta de Representante</span>
+                            <span class="menu-text">View your listings</span>
                         </a>
                     </li>
                     {% endif %}

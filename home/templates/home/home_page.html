@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load i18n static wagtailuserbar i18n wagtailcore_tags wagtailimages_tags%}
 
 {% block body_class %}container{% endblock %}
 
@@ -8,7 +9,7 @@
 {% comment %}
 Delete the line below if you're just getting started and want to remove the welcome screen!
 {% endcomment %}
-<link rel="stylesheet" href="{% static 'css/welcome_page.css' %}">
+<link rel="stylesheet" href="{% static 'css/welcome_page.css' %}" xmlns="http://www.w3.org/1999/html">
 <link rel="stylesheet" href="{% static '/plugins/custom/fullcalendar/fullcalendar.bundle.css' %}">
 <link rel="stylesheet" href="{% static '/plugins/global/plugins.bundle.css' %}">
 <link rel="stylesheet" href="{% static '/plugins/custom/prismjs/prismjs.bundle.css' %}">
@@ -18,29 +19,74 @@ Delete the line below if you're just getting started and want to remove the welc
 {% block content %}
 
 {% if request.user.is_authenticated %}
-    <div class="card card-custom gutter-b">
-        {% if messages %}
-            <ul class="messages">
-                {% for message in messages %}
-                <li {% if message.tags %} class="alert alert-{{ message.tags }}" {% endif %}>{{ message }}
-                </li>
-                {% endfor %}
-            </ul>
-        {% endif %}
-        <div class="card-body my-9">
-            {% include 'user/user_card.html' %}
-                    <div class="separator separator-solid my-7"></div>
-            {% include 'home/welcome_page.html' %}
-        </div>
+<div class="card card-custom gutter-b">
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li {% if message.tags %} class="alert alert-{{ message.tags }}" {% endif %}>{{ message }}
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <div class="card-body my-9">
+        {% include 'user/user_card.html' %}
+        <div class="separator separator-solid my-7"></div>
+        {% include 'home/welcome_page.html' %}
     </div>
+</div>
 {% else %}
-    <div class="card card-custom gutter-b">
-        <div class="card-body my-9">
-            <h1>Bienvenido a Escuela Uno Online</h1>
-            <div class="my-9">
-                <a href="/_util/login/" class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3">Inicia Sesión aquí</a>
+<div class="card card-custom gutter-b">
+    <div class="login-body d-flex flex-column-fluid align-items-stretch justify-content-center">
+        <div class="container row">
+            <div class="col-lg-6 d-flex align-items-center">
+                <!--begin::Signin-->
+                <div class="login-form login-signin">
+                    <!--begin::Form-->
+                    <form class="form w-xxl-550px rounded-lg p-20 fv-plugins-bootstrap fv-plugins-framework"
+                          method="POST" action="{% url 'wagtailcore_login' %}">
+                        {% csrf_token %}
+                        <div class="pb-13 pt-lg-0 pt-5">
+                          <h3 class="font-weight-bolder text-dark font-size-h4 font-size-h1-lg">Welcome to Keen</h3>
+                        </div>
+                        <div class="form-group fv-plugins-icon-container">
+                            <label>Nombre del usuario</label>
+                            <input type="text" name="{{ form.username.name }}" autofocus autocomplete="username"
+                                   class="form-control form-control-solid form-control-lg">
+                            <span class="form-text text-muted">Email o nombre del usuario.</span>
+                            <div class="fv-plugins-message-container"></div>
+                            {% if register_form.password2.errors %}
+                            <div class="alert alert-custom alert-light-danger fade show">
+                                {{ register_form.password2.errors }}
+                            </div>
+                            {% endif %}
+                        </div>
+                        <div class="form-group fv-plugins-icon-container">
+                            <div class="d-flex justify-content-between mt-n5">
+                                <label class="font-size-h6">Contraseña</label>
+                                <a href="/password/reset" class="text-primary font-size-sm text-hover-primary pt-5">¿Olvidaste
+                                    la contraseña?</a>
+                            </div>
+                            <input type="password" name="{{ form.password.name }}" autocomplete="current-password"
+                                   class="form-control form-control-solid form-control-lg">
+                            <span class="form-text text-muted">Contraseña.</span>
+                            <div class="fv-plugins-message-container"></div>
+                            {% if register_form.password.errors %}
+                            <div class="alert alert-custom alert-light-danger fade show">
+                                {{ register_form.password.errors }}
+                            </div>
+                            {% endif %}
+                        </div>
+                        <button type="submit" class="btn btn-primary font-weight-bolder px-10 py-3">Log in</button>
+                        <a href="/register" class="btn btn-outline-primary font-weight-bolder px-10 py-3">Registrate</a>
+                        <input type="hidden" name="next" value="{{ next }}"/>
+                    </form>
+                    <!--end::Form-->
+                </div>
             </div>
+            <div class="col-lg-6 bgi-size-contain bgi-no-repeat bgi-position-y-center bgi-position-x-center min-h-150px mt-10 m-md-0"
+                 style="background-image: url(https://preview.keenthemes.com/keen/theme/demo2/dist/assets/media/svg/illustrations/accomplishment.svg)"></div>
         </div>
     </div>
+</div>
 {% endif %}
 {% endblock content %}

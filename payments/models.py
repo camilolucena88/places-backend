@@ -7,7 +7,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from django.db.models import Q
 
-from listing.models import Listing
+from places.models import Places
 
 
 class Products(models.Model):
@@ -75,8 +75,7 @@ class Payments(models.Model):
                                help_text="Tipo de Pago: 0:Pendiente, 1:APROBADO, 2:Cancelado, 3:Rechazado")
     parent_transaction = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True,
                                            help_text="Pago relacionado")
-    related_student = models.ForeignKey(Listing, on_delete=models.CASCADE, null=True, blank=True,
-                                        help_text="Estudiante")
+    related_place = models.ForeignKey(Places, on_delete=models.CASCADE, null=True, blank=True)
     file = models.FileField("Archivo", upload_to="files/payments", blank=True, null=True)
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, help_text="Creado por")
     approved_by = models.ForeignKey(User, blank=True, null=True, on_delete=models.CASCADE, related_name="administrator")

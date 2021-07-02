@@ -80,14 +80,7 @@
                             <span class="navi-text">Otras opciones</span>
                         </a>
                     </li>
-                    <li class="navi-item">
-                        <a href="/student/logout" class="navi-link">
-                                                    <span class="navi-icon">
-                                                        <i class="flaticon2-graph-1"></i>
-                                                    </span>
-                            <span class="navi-text">Cerrar sesión</span>
-                        </a>
-                    </li>
+                    {% include 'components/links/logout.html' %}
                 </ul>
                 <!--end::Navigation-->
             </div>
@@ -141,14 +134,7 @@
                             <span class="navi-text">Cambio de contraseña</span>
                         </a>
                     </li>
-                    <li class="navi-item">
-                        <a href="/student/logout" class="navi-link">
-                                                    <span class="navi-icon">
-                                                        <i class="flaticon2-graph-1"></i>
-                                                    </span>
-                            <span class="navi-text">Cerrar sesión</span>
-                        </a>
-                    </li>
+                    {% include 'components/links/logout.html' %}
                 </ul>
                 <!--end::Navigation-->
             </div>
@@ -156,8 +142,8 @@
     </div>
     <!--end::Dropdown-->
     {% else %}
-        <span class="text-muted font-weight-bold">¿Primera vez aquí?
-            <a href="/register" id="kt_login_signup" class="text-primary font-weight-bolder">Registrate, crea una cuenta</a>
+        <span class="text-muted font-weight-bold">¿First time here?
+            <a href="/register" id="kt_login_signup" class="text-primary font-weight-bolder">Register your business with us</a>
         </span>
     {% endif %}
 </div>

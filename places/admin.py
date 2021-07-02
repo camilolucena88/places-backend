@@ -29,7 +29,7 @@ class ImagesAdmin(admin.ModelAdmin):
 
 
 class PlacesAdmin(admin.ModelAdmin):
-    list_display = ["name", "description", "slug", "address", "img", "created_by"]
+    list_display = ["name", "description", "slug", "img_render", "created_by"]
     list_filter = ["name"]
     search_fields = ["name"]
 
@@ -84,7 +84,7 @@ class PlacesAdmin(ModelAdmin):
     menu_label = "Places"
     menu_icon = "user"
     menu_order = 290
-    list_display = ("name", "description", "slug", "address", "genres", "img", "created_by")
+    list_display = ("name", "description", "slug", "genres", "img", "created_by")
     list_filter = ["name"]
     search_fields = ["name"]
 

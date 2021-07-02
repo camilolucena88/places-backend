@@ -70,13 +70,14 @@ class Images(models.Model):
         else:
             return self.img_render.get_rendition('fill-300x150|jpegquality-60').url
 
+
 class Places(models.Model):
     name = models.CharField('Name', max_length=50)
     description = models.TextField('Description', max_length=150)
     slug = models.SlugField('Slug')
-    address = models.OneToOneField(Address, on_delete=models.CASCADE, blank=True, null=True)
     genres = models.ManyToManyField(Genres, blank=True, related_name='places_genres')
-    img = models.ForeignKey(Images, on_delete=models.CASCADE, blank=True, null=True)
+    img = models.ForeignKey(Images, on_delete=models.CASCADE, null=True)
+    img_render = models.ForeignKey(Image, on_delete=models.CASCADE, null=True)
     created_by = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -101,11 +102,18 @@ class Places(models.Model):
         return self.img.url
 
     @property
-    def thumbnail(self):
-        if self.img.img_render:
-            return self.img.custom_thumbnail.url
+    def custom_thumbnail(self):
+        if self.img_render.renditions.filter(width=275, height=185).count() > 0:
+            return self.img_render.renditions.filter(width=275, height=185)[0]
         else:
-            return self.img.img.url
+            return self.img_render.get_rendition('fill-275x185|jpegquality-80').url
+
+    @property
+    def thumbnail(self):
+        if self.img_render.renditions.filter(width=165).count() > 0:
+            return self.img_render.renditions.get(width=165)
+        else:
+            return self.img_render.get_rendition('fill-300x150|jpegquality-60').url
 
 
 class RateList(models.IntegerChoices):

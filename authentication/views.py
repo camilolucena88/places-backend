@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.contrib.auth import logout
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from rest_framework import viewsets, generics, status
@@ -59,3 +60,8 @@ def register(request):
                     messages.success(request, 'Recibiras un email una vez sea aprobada.')
                     return redirect('/_util/login')
     return render(request, "register/register.html", {'register_form': UserForm(), 'business_form': BusinessForm()})
+
+
+def logout_view(request):
+    logout(request)
+    return redirect('/')

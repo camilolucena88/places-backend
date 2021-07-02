@@ -3,6 +3,8 @@ from django.contrib.auth.models import User
 
 from django.utils.translation import gettext_lazy as _
 
+from places.models import Places
+
 
 class UserHelper(User):
     PARENT = 0
@@ -76,41 +78,22 @@ class Business(models.Model):
 
 
 class Listing(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE,
-                                primary_key=True,
-                                related_name='student_profile',
-                                help_text="Usuario")
-    dob = models.DateField("Fecha de Nacimiento", blank=True, null=True)
-    telephone = models.CharField("Teléfono", blank=True, null=True, max_length=20)
-    address = models.TextField('Dirección', blank=True, null=True)
-    city = models.TextField('Ciudad', blank=True, null=True)
-    country = models.TextField('País', blank=True, null=True)
-    account_status = models.SmallIntegerField('Estatus', null=True, blank=True, default=0)
-    created_at = models.DateTimeField("Dia de creacion", auto_now_add=True)
+    places = models.ForeignKey(Places, on_delete=models.CASCADE, related_name='place_listing')
+    telephone = models.CharField("Telephone", blank=True, null=True, max_length=20)
+    address = models.TextField('Direction', blank=True, null=True)
+    city = models.TextField('City', blank=True, null=True)
+    country = models.TextField('Country', blank=True, null=True)
+    account_status = models.SmallIntegerField('Status', null=True, blank=True, default=0)
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='owner_listing', help_text="Owner")
+    created_at = models.DateTimeField("Created At", auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return str(self.user)
-
-    def get_absolute_url(self):
-        return f"/student/{self.user.id}/admin/view"
-
-    def get_user(self):
-        return self.user.value_from_object()
-
-    def email(self):
-        return User.objects.get(username=self.user).email
-
-    def first_name(self):
-        return User.objects.get(username=self.user).first_name
-
-    def last_name(self):
-        return User.objects.get(username=self.user).last_name
+        return str(self.places)
 
     class Meta:
-        db_table = "courses_students"
-        verbose_name_plural = "Estudiantes"
-        verbose_name = "Estudiante"
+        verbose_name_plural = "Listings"
+        verbose_name = "Listing"
 
 
 class ListingAdmin(models.Model):

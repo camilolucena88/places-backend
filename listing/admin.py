@@ -1,7 +1,7 @@
 from django.contrib import admin
 from wagtail.contrib.modeladmin.options import ModelAdmin, modeladmin_register
 
-from listing.models import Business, Sector
+from listing.models import Business, Sector, Listing
 
 
 class BusinessAdmin(ModelAdmin):
@@ -24,5 +24,16 @@ class SectorAdmin(ModelAdmin):
     search_fields = ["name", "created_at"]
 
 
+class ListingAdmin(ModelAdmin):
+    model = Listing
+    menu_label = "Listing"
+    menu_icon = "user"
+    menu_order = 290
+    list_display = ("places", "telephone", "city", "country", "created_at")
+    list_filter = ["places", "created_at"]
+    search_fields = ["places", "created_at"]
+
+
 modeladmin_register(BusinessAdmin)
 modeladmin_register(SectorAdmin)
+modeladmin_register(ListingAdmin)

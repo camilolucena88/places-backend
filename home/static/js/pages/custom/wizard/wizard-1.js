@@ -198,7 +198,6 @@ var KTWizard1 = function () {
 		// Step 1
 		const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value
 		const csrfcookie = KTCookie.getCookie('csrftoken')
-		console.log(csrftoken, csrfcookie)
 		_validations.push(FormValidation.formValidation(
 			_formEl,
 			{

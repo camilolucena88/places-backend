@@ -7,7 +7,7 @@ from wagtail.admin import urls as wagtailadmin_urls
 from wagtail.core import urls as wagtail_urls
 from wagtail.documents import urls as wagtaildocs_urls
 from django.contrib.auth import views as auth_views
-from authentication.views import register
+from authentication.views import register, logout_view
 from search import views as search_views
 
 urlpatterns = [
@@ -19,6 +19,8 @@ urlpatterns = [
     path(r"api/auth/", include('authentication.urls')),
     path(r"api/users/", include('users_api.urls')),
     path(r"api-auth/", include('rest_framework.urls', namespace='rest_framework')),
+    path(r"logout/", logout_view),
+    path(r"listings/", include('listing.urls'))
     # path(r"payments/", include('payments.urls')),
 ]
 
