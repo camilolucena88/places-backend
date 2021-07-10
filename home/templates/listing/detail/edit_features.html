@@ -1,0 +1,7 @@
+{% if listing.genres.first.name == "Beaches" %}
+    Beach
+{% else %}
+    {% for genre in listing.genres.all %}
+        {{listing.genres.first.name}}
+    {% endfor %}
+{% endif %}

@@ -1,0 +1,66 @@
+{% load wagtailimages_tags %}
+<div class="card card-custom gutter-b">
+    <div class="card-body">
+        <div class="card-body">
+            <!--begin::Container-->
+            <div class="pt-1">
+                <form class="form fv-plugins-bootstrap fv-plugins-framework" id="place" method="POST">
+                    {% csrf_token %}
+                    <!--begin::Image-->
+                    <div class="card card-custom overlay">
+                        <div class="card-body p-0">
+                            <div class="overlay-wrapper">
+                                <img src="/media/{{listing.img.file.name}}" alt="" class="w-100 rounded">
+                            </div>
+                            <div class="overlay-layer">
+                                <a href="/admin/images/{{listing.img.id}}/" class="btn font-weight-bold btn-primary btn-shadow font-weight-bold font-size-h3 px-12 py-5">Edit Picture</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!--end::Image-->
+                    <!--begin::Title-->
+                    <h3 class="font-size-h4 text-dark-75 text-hover-primary font-weight-bold pt-8">
+                        <label for="id_name">Title</label>
+                        {{ places_form.name }}
+                    </h3>
+                    <!--end::Title-->
+                    <!--begin::Text-->
+                    <p class="text-dark-75 font-size-lg font-weight-normal pt-3 mb-4">
+                        <label for="id_description">Description</label>
+                        {{ places_form.description }}
+                    </p>
+                    <!--end::Text-->
+                    <!--begin::Text-->
+                    <p class="text-dark-75 font-size-lg font-weight-normal pt-3 mb-4">
+                        <label for="id_genres">Category</label>
+                        {{ places_form.genres }}
+                    </p>
+                    <!--end::Text-->
+                    <!--begin::Text-->
+                    <p class="text-dark-75 font-size-lg font-weight-normal pt-3 mb-4">
+                        <label for="id_slug">Slug</label>
+                        {{ places_form.slug }}
+                    </p>
+                    <p class="text-dark-75 font-size-lg font-weight-normal pt-3 mb-4">
+                        <label for="id_telephone">Telephone</label>
+                        {{ listing_form.telephone }}
+                    </p>
+                    <p class="text-dark-75 font-size-lg font-weight-normal pt-3 mb-4">
+                        <label for="id_address">Address</label>
+                        {{ listing_form.address }}
+                    </p>
+                    <p class="text-dark-75 font-size-lg font-weight-normal pt-3 mb-4">
+                        <label for="id_city">City</label>
+                        {{ listing_form.city }}
+                    </p>
+                    <p class="text-dark-75 font-size-lg font-weight-normal pt-3 mb-4">
+                        <label for="id_country">Country</label>
+                        {{ listing_form.country }}
+                    </p>
+                    <!--end::Text-->
+                    <button type="submit" class="btn btn-sm btn-primary font-weight-bolder py-2">Submit</button>
+            </div>
+            <!--end::Container-->
+        </div>
+    </div>
+</div>

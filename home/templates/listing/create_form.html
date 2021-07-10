@@ -30,16 +30,11 @@
                             {% include 'listing/steps/step2.html' %}
                             <!--end::Wizard Step 2 Nav-->
                             <!--begin::Wizard Step 3 Nav-->
-                            {% if not request.user.is_authenticated %}
-                                {% include 'listing/steps/step3.html' %}
-                            {% else %}
-                                {% include 'listing/steps/step3-parent.html' %}
-                            {% endif %}
+                            {% include 'listing/steps/step3.html' %}
                             <!--end::Wizard Step 3 Nav-->
                             <!--begin::Wizard Step 4 Nav-->
-{#                            {% include 'listing/steps/step4.html' %}#}
+                            {% include 'listing/steps/step4.html' %}
                             <!--end::Wizard Step 4 Nav-->
-                            <!--begin::Wizard Step 5 Nav-->
                             {% include 'listing/steps/step5.html' %}
                             <!--end::Wizard Step 5 Nav-->
                         </div>
@@ -60,8 +55,12 @@
                                 <!--begin::Wizard Step 3-->
                                 {% include 'listing/forms/listing_img.html' %}
                                 <!--end::Wizard Step 3-->
-                                <!--end::Wizard Step 5-->
+                                <!--begin::Wizard Step 4-->
+                                {% include 'listing/forms/listing_opening.html' %}
+                                <!--end::Wizard Step 4-->
+                                <!--begin::Wizard Step 5-->
                                 {% include 'listing/submit_form.html' %}
+                                <!--end::Wizard Step 5-->
                                 <!--begin::Wizard Actions-->
                                 <div class="d-flex justify-content-between border-top mt-5 pt-10">
                                     <div class="mr-2">

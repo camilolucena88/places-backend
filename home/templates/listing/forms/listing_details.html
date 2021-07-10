@@ -5,7 +5,7 @@
         <label>Telephone</label>
         <div class="input-group date mb-2">
             {{ listing_form.telephone }}
-            {% if listing_form.telephone.errors %}
+                {% if listing_form.telephone.errors %}
             <div class="alert alert-custom alert-light-danger fade show">
                 {{ listing_form.telephone.errors }}
             </div>
@@ -41,7 +41,7 @@
         <div class="col-xl-6">
                 <div class="form-group fv-plugins-icon-container">
                     <label>Country</label>
-                    <select name="{{ listing_form.country.name }}"
+                    <select name="{{ listing_form.country.name }}" id="id_country"
                             class="form-control form-control-solid form-control-lg">
                         <option value="">Select</option>
                         <option value="AF">Afghanistan</option>

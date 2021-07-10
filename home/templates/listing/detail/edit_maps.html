@@ -1,0 +1,30 @@
+<div class="card card-custom gutter-b">
+        <div class="card-title">
+            <h4 class="card-label pb-4">Add your Location</h4>
+            <div class="form-group row pb-5">
+                <div class="col-lg-4">
+                    {{coordinates_form.lat}}
+                </div>
+                <div class="col-lg-4">
+                    {{coordinates_form.lon}}
+                </div>
+                <div class="col-lg-4">
+                    <button class="btn btn-primary" type="submit">Save</button>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div id="card card-custom gutter-b" style="height: 500px">
+        <div id="card-header">
+            <div class="card-body">
+                <input
+                        id="pac-input"
+                        class="controls"
+                        type="text"
+                        placeholder="Search Box"
+                />
+            </div>
+            <div id="map"></div>
+        </div>
+    </div>
+</div>

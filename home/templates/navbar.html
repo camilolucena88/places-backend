@@ -2,9 +2,6 @@
     {% include 'navbar/panel-administrativo.html' %}
     <!--begin::Daterange-->
     <!--begin::Dropdown-->
-    {% if request.user.is_staff %}
-        {% include 'navbar/pagos.html' %}
-    {% endif %}
     <!--end::Dropdown-->
     {% if request.user.is_authenticated %}
     <a href="/calendar/school"
@@ -20,7 +17,7 @@
          data-placement="top">
         <div
            class="btn btn-fixed-height btn-bg-white btn-text-dark-50 btn-hover-text-primary btn-icon-primary font-weight-bolder font-size-sm px-5 mr-3"
-           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Perfil</div>
+           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Profile</div>
         {% if 'students.view_students' in request.user.get_all_permissions  or user.groups.all.0.name == 'Profesores' %}
 
             <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right p-0 m-0">
@@ -30,7 +27,7 @@
                         <span class="text-primary text-uppercase font-weight-bolder font-size-sm">Editar perfil:</span>
                     </li>
                     <li class="navi-item">
-                        <a href="/admin/account/change_avatar/" class="navi-link">
+                        <a href="/admin/account" class="navi-link">
                                                         <span class="navi-icon mr-2">
                                                             <span class="svg-icon">
                                                                 <!--begin::Svg Icon | path:/keen/theme/demo2/dist/assets/media/svg/icons/General/User.svg-->
@@ -53,23 +50,15 @@
                                                                 <!--end::Svg Icon-->
                                                             </span>
                                                         </span>
-                            <span class="navi-text">Cambiar foto de Perfil</span>
+                            <span class="navi-text">Change Profile Picture</span>
                         </a>
                     </li>
                     <li class="navi-item">
-                        <a href="/admin/account/change_email/" class="navi-link">
-                                                    <span class="navi-icon">
-                                                        <i class="flaticon2-calendar-8"></i>
-                                                    </span>
-                            <span class="navi-text">Cambiar correo electronico</span>
-                        </a>
-                    </li>
-                    <li class="navi-item">
-                        <a href="/admin/account/change_password/" class="navi-link">
+                        <a href="/admin/account" class="navi-link">
                                                     <span class="navi-icon">
                                                         <i class="flaticon2-graph-1"></i>
                                                     </span>
-                            <span class="navi-text">Cambio de contraseña</span>
+                            <span class="navi-text">New password</span>
                         </a>
                     </li>
                     <li class="navi-item">
@@ -89,10 +78,10 @@
                 <!--begin::Navigation-->
                 <ul class="navi navi-hover">
                     <li class="navi-header pb-1">
-                        <span class="text-primary text-uppercase font-weight-bolder font-size-sm">Editar perfil:</span>
+                        <span class="text-primary text-uppercase font-weight-bolder font-size-sm">Edit Profile:</span>
                     </li>
                     <li class="navi-item">
-                        <a href="/student/profile/personal-information" class="navi-link">
+                        <a href="/admin/account/" class="navi-link">
                                                         <span class="navi-icon mr-2">
                                                             <span class="svg-icon">
                                                                 <!--begin::Svg Icon | path:/keen/theme/demo2/dist/assets/media/svg/icons/General/User.svg-->
@@ -115,23 +104,15 @@
                                                                 <!--end::Svg Icon-->
                                                             </span>
                                                         </span>
-                            <span class="navi-text">Información Personal</span>
+                            <span class="navi-text">Change Profile Picture</span>
                         </a>
                     </li>
                     <li class="navi-item">
-                        <a href="/student/profile/account-information" class="navi-link">
-                                                    <span class="navi-icon">
-                                                        <i class="flaticon2-calendar-8"></i>
-                                                    </span>
-                            <span class="navi-text">Información de la cuenta</span>
-                        </a>
-                    </li>
-                    <li class="navi-item">
-                        <a href="/student/profile/change-password" class="navi-link">
+                        <a href="/admin/account/" class="navi-link">
                                                     <span class="navi-icon">
                                                         <i class="flaticon2-graph-1"></i>
                                                     </span>
-                            <span class="navi-text">Cambio de contraseña</span>
+                            <span class="navi-text">New password</span>
                         </a>
                     </li>
                     {% include 'components/links/logout.html' %}

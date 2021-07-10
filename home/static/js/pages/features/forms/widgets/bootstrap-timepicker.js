@@ -100,15 +100,88 @@ var KTBootstrapTimepicker = function () {
     // Private functions
     var demos = function () {
         // minimum setup
-        $('#kt_timepicker_1, #kt_timepicker_1_modal').timepicker();
+        $('#kt_monday_opening').timepicker({
+            defaultTime: '08:00:00 AM',
+            showMeridian: false
+
+        });
 
         // minimum setup
-        $('#kt_timepicker_2, #kt_timepicker_2_modal').timepicker({
-            minuteStep: 1,
-            defaultTime: '',
-            showSeconds: true,
-            showMeridian: false,
-            snapToStep: true
+        $('#kt_monday_closing').timepicker({
+            defaultTime: '09:00:00 PM',
+            showMeridian: false
+
+        });
+        $('#kt_tuesday_opening').timepicker({
+            defaultTime: '08:00:00 AM',
+            showMeridian: false
+
+        });
+
+        // minimum setup
+        $('#kt_tuesday_closing').timepicker({
+            defaultTime: '09:00:00 PM',
+            showMeridian: false
+
+        });
+        $('#kt_wednesday_opening').timepicker({
+            defaultTime: '08:00:00 AM',
+            showMeridian: false
+
+        });
+
+        // minimum setup
+        $('#kt_wednesday_closing').timepicker({
+            defaultTime: '09:00:00 PM',
+            showMeridian: false
+
+        });
+        $('#kt_thursday_opening').timepicker({
+            defaultTime: '08:00:00 AM',
+            showMeridian: false
+
+        });
+
+        // minimum setup
+        $('#kt_thursday_closing').timepicker({
+            defaultTime: '09:00:00 PM',
+            showMeridian: false
+
+        });
+        $('#kt_friday_opening').timepicker({
+            defaultTime: '08:00:00 AM',
+            showMeridian: false
+
+        });
+
+        // minimum setup
+        $('#kt_friday_closing').timepicker({
+            defaultTime: '09:00:00 PM',
+            showMeridian: false
+
+        });
+        $('#kt_saturday_opening').timepicker({
+            defaultTime: '08:00:00 AM',
+            showMeridian: false
+
+        });
+
+        // minimum setup
+        $('#kt_saturday_closing').timepicker({
+            defaultTime: '09:00:00 PM',
+            showMeridian: false
+
+        });
+        $('#kt_sunday_opening').timepicker({
+            defaultTime: '08:00:00 AM',
+            showMeridian: false
+
+        });
+
+        // minimum setup
+        $('#kt_sunday_closing').timepicker({
+            defaultTime: '09:00:00 PM',
+            showMeridian: false
         });
 
         // default time

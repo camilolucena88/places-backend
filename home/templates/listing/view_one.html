@@ -1,0 +1,128 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block body_class %}container{% endblock %}
+
+{% block extra_css %}
+
+{% comment %}
+Delete the line below if you're just getting started and want to remove the welcome screen!
+{% endcomment %}
+<link rel="stylesheet" href="{% static 'css/welcome_page.css' %}">
+<link rel="stylesheet" href="{% static '/plugins/global/plugins.bundle.css' %}">
+<link rel="stylesheet" href="{% static '/plugins/custom/prismjs/prismjs.bundle.css' %}">
+<link rel="stylesheet" href="{% static '/css/style.bundle.css' %}">
+<link rel="stylesheet" href="{% static '/plugins/custom/datatables/datatables.bundle.css' %}">
+<!--end::Global Theme Styles-->
+<!--begin::Layout Themes(used by all pages)-->
+<!--end::Layout Themes-->
+<style>
+    /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+    #map {
+        position: absolute !important;
+        height: 500px !important;
+        width: 100% !important;
+        top:100px;
+        object-fit: cover;
+    }
+
+    /* Optional: Makes the sample page fill the window. */
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+</style>
+{% endblock extra_css %}
+
+{% block content %}
+
+{% comment %}
+Delete the line below if you're just getting started and want to remove the welcome screen!
+{% endcomment %}
+{% load i18n wagtailcore_tags wagtailimages_tags %}
+
+<div class="card card-custom gutter-b">
+    <div class="card-body my-9">
+            {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                {% if message.tags == 'success' %}
+                <div class="alert alert-custom alert-light-success fade show mb-5" role="alert">
+                    <div class="alert-icon"><i class="flaticon2-check-mark"></i></div>
+                    <div class="alert-text">{{ message }}</div>
+                    <div class="alert-close">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true"><i class="ki ki-close"></i></span>
+                        </button>
+                    </div>
+                </div>
+                {% else %}
+                <div class="alert alert-danger" role="alert">{{ message }}</div>
+                {% endif %}
+                {% endfor %}
+            </div>
+            {% endif %}
+        {% include 'listing/detail/card.html' %}
+        <div class="separator separator-solid my-7"></div>
+        <div class="mb-10">
+            <div class="example-preview">
+                <ul class="nav nav-pills" id="myTab1" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="home-tab-1" data-toggle="tab" href="#home-1">
+                            <span class="nav-icon">
+                                <i class="flaticon2-chat-1"></i>
+                            </span>
+                            <span class="nav-text">Listing</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="profile-tab-1" data-toggle="tab" href="#profile-1" aria-controls="profile">
+                            <span class="nav-icon">
+                                <i class="flaticon-time-1   "></i>
+                            </span>
+                            <span class="nav-text">Opening Hours</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="contact-tab-1" data-toggle="tab" href="#contact-1" aria-controls="contact">
+                            <span class="nav-icon">
+                                <i class="flaticon-placeholder-2"></i>
+                            </span>
+                            <span class="nav-text">Location</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="features-tab-1" data-toggle="tab" href="#feature-1" aria-controls="feature">
+                            <span class="nav-icon">
+                                <i class="flaticon2-writing"></i>
+                            </span>
+                            <span class="nav-text">Features</span>
+                        </a>
+                    </li>
+                </ul>
+                <div class="tab-content mt-5" id="myTabContent1">
+                    <div class="tab-pane fade active show" id="home-1" role="tabpanel" aria-labelledby="home-tab-1">
+                        {% include 'listing/detail/edit_details.html' %}
+                    </div>
+                    <div class="tab-pane fade" id="profile-1" role="tabpanel" aria-labelledby="profile-tab-1">
+                        {% include 'listing/detail/edit_opening_hours.html' %}
+                    </div>
+                    <div class="tab-pane fade" id="contact-1" role="tabpanel" aria-labelledby="contact-tab-1">
+                        {% include 'listing/detail/edit_maps.html' %}
+                    </div>
+                    <div class="tab-pane fade" id="feature-1" role="tabpanel" aria-labelledby="contact-tab-1">
+                        {% include 'listing/detail/edit_features.html' %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+{% block extra_js %}
+    {% include 'extra_js/timepicker.html' %}
+    {% include 'extra_js/maps_marker.html' %}
+{% endblock %}

@@ -53,6 +53,10 @@ class Images(models.Model):
     def filename(self):
         return os.path.basename(self.img.name)
 
+    @property
+    def cover_img(self):
+        return self.img_render
+
     def __str__(self):
         return self.filename
 
@@ -73,7 +77,8 @@ class Images(models.Model):
 
 class Places(models.Model):
     name = models.CharField('Name', max_length=50)
-    description = models.TextField('Description', max_length=150)
+    description = models.TextField('Description', max_length=300)
+    coordinates = models.ForeignKey(Coordinates, on_delete=models.CASCADE, null=True)
     slug = models.SlugField('Slug')
     genres = models.ManyToManyField(Genres, blank=True, related_name='places_genres')
     img = models.ForeignKey(Images, on_delete=models.CASCADE, null=True)
@@ -111,7 +116,7 @@ class Places(models.Model):
     @property
     def thumbnail(self):
         if self.img_render.renditions.filter(width=165).count() > 0:
-            return self.img_render.renditions.get(width=165)
+            return self.img_render.renditions.get(width=165).url
         else:
             return self.img_render.get_rendition('fill-300x150|jpegquality-60').url
 

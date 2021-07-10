@@ -19,13 +19,15 @@ class CommentsSerializer(serializers.ModelSerializer):
 
 
 class ImageSerializer(serializers.ModelSerializer):
+    img = serializers.CharField(source='cover_img')
+
     class Meta:
         model = Images
         fields = ['img', 'created_by']
 
 
 class PlacesSerializer(serializers.ModelSerializer):
-    img = serializers.CharField(read_only=True)
+    img = serializers.CharField(source='img_render')
     thumbnail = serializers.CharField(read_only=True, allow_null=True)
     comments = CommentsSerializer(read_only=True, many=True)
     key = serializers.CharField(source='slug')
@@ -33,8 +35,7 @@ class PlacesSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Places
-        fields = ['id', 'name', 'description', 'key', 'address', 'genres', 'likes', 'comments', 'img', 'thumbnail',
-                  'rate']
+        fields = ['id', 'name', 'description', 'key', 'genres', 'likes', 'comments', 'img'  , 'thumbnail', 'rate']
 
 
 class BookmarkSerializer(serializers.ModelSerializer):

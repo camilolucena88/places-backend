@@ -56,16 +56,98 @@ var KTWizard1 = function () {
 		_wizardObj.on('changed', function (wizard) {
 			KTUtil.scrollTop();
 			if (_wizardObj.isLastStep()) {
-				KTUtil.getById('form_input_username').innerText = _formEl.elements.namedItem('username').value;
-				KTUtil.getById('form_input_first_name').innerText = _formEl.elements.namedItem('first_name').value;
-				KTUtil.getById('form_input_last_name').innerText = _formEl.elements.namedItem('last_name').value;
-				KTUtil.getById('form_input_email').innerText = _formEl.elements.namedItem('email').value;
-				KTUtil.getById('form_input_name').innerText = _formEl.elements.namedItem('name').value;
-				KTUtil.getById('form_input_address').innerText = _formEl.elements.namedItem('address').value;
-				KTUtil.getById('form_input_telephone').innerText = _formEl.elements.namedItem('telephone').value;
-				KTUtil.getById('form_input_city').innerText = _formEl.elements.namedItem('city').value;
-				KTUtil.getById('form_input_country').innerText = _formEl.elements.namedItem('country').value;
-				KTUtil.getById('form_input_business_email').innerText = _formEl.elements.namedItem('business_email').value;
+				KTUtil.getById('form_input_listing_name').innerText = _formEl.elements.namedItem('name').value;
+				KTUtil.getById('form_input_listing_description').innerText = _formEl.elements.namedItem('description').value;
+				KTUtil.getById('form_input_listing_slug').innerText = _formEl.elements.namedItem('slug').value;
+				KTUtil.getById('form_input_listing_genres').innerText = _formEl.elements.namedItem('genres').value;
+				KTUtil.getById('form_input_listing_telephone').innerText = _formEl.elements.namedItem('telephone').value;
+				KTUtil.getById('form_input_listing_longitude').innerText = _formEl.elements.namedItem('longitude').value;
+				KTUtil.getById('form_input_listing_latitude').innerText = _formEl.elements.namedItem('latitude').value;
+				KTUtil.getById('form_input_listing_address').innerText = _formEl.elements.namedItem('address').value;
+				KTUtil.getById('form_input_listing_city').innerText = _formEl.elements.namedItem('city').value;
+				KTUtil.getById('form_input_listing_country').innerText = _formEl.elements.namedItem('country').value;
+
+				if(_formEl.elements.namedItem('monday').value === '1') {
+					KTUtil.getById('form_listing_monday_opening').innerText = _formEl.elements.namedItem('monday_opening').value;
+					KTUtil.getById('form_listing_monday_closing').innerText = _formEl.elements.namedItem('monday_closing').value;
+				} else if (_formEl.elements.namedItem('monday').value === '2') {
+					KTUtil.getById('form_listing_monday_opening').innerText = 'Open all day (24 hrs)';
+					KTUtil.getById('form_listing_monday_closing').innerText = '';
+				} else {
+					KTUtil.getById('form_listing_monday_opening').innerText = 'Closed';
+					KTUtil.getById('form_listing_monday_closing').innerText = '';
+				}
+
+				if(_formEl.elements.namedItem('tuesday').value === '1') {
+					KTUtil.getById('form_listing_tuesday_opening').innerText = _formEl.elements.namedItem('tuesday_opening').value;
+					KTUtil.getById('form_listing_tuesday_closing').innerText = _formEl.elements.namedItem('tuesday_closing').value;
+				} else if (_formEl.elements.namedItem('tuesday').value === '2') {
+					KTUtil.getById('form_listing_tuesday_opening').innerText = 'Open all day (24 hrs)';
+					KTUtil.getById('form_listing_tuesday_closing').innerText = '';
+				} else {
+					KTUtil.getById('form_listing_tuesday_opening').innerText = 'Closed';
+					KTUtil.getById('form_listing_tuesday_closing').innerText = '';
+				}
+
+				if(_formEl.elements.namedItem('wednesday').value === '1') {
+					KTUtil.getById('form_listing_wednesday_opening').innerText = _formEl.elements.namedItem('wednesday_opening').value;
+					KTUtil.getById('form_listing_wednesday_closing').innerText = _formEl.elements.namedItem('wednesday_closing').value;
+				} else if (_formEl.elements.namedItem('wednesday').value === '2') {
+					KTUtil.getById('form_listing_wednesday_opening').innerText = 'Open all day (24 hrs)';
+					KTUtil.getById('form_listing_wednesday_closing').innerText = '';
+				} else {
+					KTUtil.getById('form_listing_wednesday_opening').innerText = 'Closed';
+					KTUtil.getById('form_listing_wednesday_closing').innerText = '';
+				}
+
+				if(_formEl.elements.namedItem('thursday').value === '1') {
+					KTUtil.getById('form_listing_thursday_opening').innerText = _formEl.elements.namedItem('thursday_opening').value;
+					KTUtil.getById('form_listing_thursday_closing').innerText = _formEl.elements.namedItem('thursday_closing').value;
+				} else if (_formEl.elements.namedItem('thursday').value === '2') {
+					KTUtil.getById('form_listing_thursday_opening').innerText = 'Open all day (24 hrs)';
+					KTUtil.getById('form_listing_thursday_closing').innerText = '';
+				} else {
+					KTUtil.getById('form_listing_thursday_opening').innerText = 'Closed';
+					KTUtil.getById('form_listing_thursday_closing').innerText = '';
+				}
+
+				if(_formEl.elements.namedItem('friday').value === '1') {
+					KTUtil.getById('form_listing_friday_opening').innerText = _formEl.elements.namedItem('friday_opening').value;
+					KTUtil.getById('form_listing_friday_closing').innerText = _formEl.elements.namedItem('friday_closing').value;
+				} else if (_formEl.elements.namedItem('friday').value === '2') {
+					KTUtil.getById('form_listing_friday_opening').innerText = 'Open all day (24 hrs)';
+					KTUtil.getById('form_listing_friday_closing').innerText = '';
+				} else {
+					KTUtil.getById('form_listing_friday_opening').innerText = 'Closed';
+					KTUtil.getById('form_listing_friday_closing').innerText = '';
+				}
+
+				if(_formEl.elements.namedItem('saturday').value === '1') {
+					KTUtil.getById('form_listing_saturday_opening').innerText = _formEl.elements.namedItem('saturday_opening').value;
+					KTUtil.getById('form_listing_saturday_closing').innerText = _formEl.elements.namedItem('saturday_closing').value;
+				} else if (_formEl.elements.namedItem('saturday').value === '2') {
+					KTUtil.getById('form_listing_saturday_opening').innerText = 'Open all day (24 hrs)';
+					KTUtil.getById('form_listing_saturday_closing').innerText = '';
+				} else {
+					KTUtil.getById('form_listing_saturday_opening').innerText = 'Closed';
+					KTUtil.getById('form_listing_saturday_closing').innerText = '';
+				}
+
+				if(_formEl.elements.namedItem('sunday').value === '1') {
+					KTUtil.getById('form_listing_sunday_opening').innerText = _formEl.elements.namedItem('sunday_opening').value;
+					KTUtil.getById('form_listing_sunday_closing').innerText = _formEl.elements.namedItem('sunday_closing').value;
+				} else if (_formEl.elements.namedItem('sunday').value === '2') {
+					KTUtil.getById('form_listing_sunday_opening').innerText = 'Open all day (24 hrs)';
+					KTUtil.getById('form_listing_sunday_closing').innerText = '';
+				} else {
+					KTUtil.getById('form_listing_sunday_opening').innerText = 'Closed';
+					KTUtil.getById('form_listing_sunday_closing').innerText = '';
+				}
+
+				const imgId = _formEl.elements.namedItem('img').value;
+				KTUtil.getById('form_listing_img').innerText = imgId;
+				KTUtil.getById('form_listing_img_name').innerText = _formEl.elements.namedItem('image-'+ imgId +'-title').value;
+				KTUtil.getById('form_listing_img_tag').innerText = _formEl.elements.namedItem('image-'+ imgId +'-tags').value;
 			}
 		});
 
@@ -114,8 +196,8 @@ var KTWizard1 = function () {
 							},
 							stringLength: {
 								min: 4,
-								max: 30,
-								message: 'Name must be more than 6 and less than 30 characters.',
+								max: 65,
+								message: 'Name must be more than 6 and less than 65 characters.',
 							},
 						}
 					},
@@ -138,8 +220,8 @@ var KTWizard1 = function () {
 							},
 							stringLength: {
 								min: 4,
-								max: 16,
-								message: 'Slug must be more than 4 and less than 12 characters.',
+								max: 30,
+								message: 'Slug must be more than 4 and less than 30 characters.',
 							},
                             regexp: {
 								regexp: /^[a-zA-Z0-9-]+$/,
@@ -212,24 +294,39 @@ var KTWizard1 = function () {
 			_formEl,
 			{
 				fields: {
-					business_type: {
+					img: {
+						validators: {
+							notEmpty: {
+								message: 'Image cannot be empty'
+							}
+						}
+					},
+				},
+				plugins: {
+					trigger: new FormValidation.plugins.Trigger(),
+					bootstrap: new FormValidation.plugins.Bootstrap({
+						eleValidClass: '',
+					})
+				}
+			}
+		));
+
+        // Step 4
+		_validations.push(FormValidation.formValidation(
+			_formEl,
+			{
+				fields: {
+					monday: {
 						validators: {
 							notEmpty: {
 								message: 'Business Type should be selected'
 							}
 						}
 					},
-					sector: {
+					tuesday: {
 						validators: {
 							notEmpty: {
-								message: 'The Sector should be selected'
-							}
-						}
-					},
-					account_type: {
-						validators: {
-							notEmpty: {
-								message: 'Account Type should be selected'
+								message: 'Business Type should be selected'
 							}
 						}
 					},

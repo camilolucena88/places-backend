@@ -2,63 +2,35 @@
          data-placement="top">
         {% if request.user.is_staff %}
             <a href="/admin" class="btn btn-fixed-height btn-danger font-weight-bolder font-size-sm px-5 mr-3"
-               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Panel Administrativo</a>
+               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Options</a>
         {% endif %}
         <div class="dropdown-menu dropdown-menu-md dropdown-menu-right p-0 m-0">
             <!--begin::Navigation-->
             <ul class="navi navi-hover">
                 <li class="navi-header font-weight-bold py-4">
-                    <span class="font-size-lg">Link rápidos:</span>
+                    <span class="font-size-lg">Short links:</span>
                     <i class="flaticon2-information icon-md text-muted" data-toggle="tooltip"
                        data-placement="right" title="" data-original-title="Click to learn more..."></i>
                 </li>
                 <li class="navi-separator mb-3 opacity-70"></li>
                 <li class="navi-item">
-                    <a href="/admin/users/" class="navi-link">
-														<span class="navi-text">
-															<span class="label label-xl label-inline label-light-primary">Lista de usuario</span>
-														</span>
+                    <a href="/listings/create/" class="navi-link">
+                        <span class="navi-text">
+                            <span class="label label-xl label-inline label-light-primary">Add Listing</span>
+                        </span>
                     </a>
                 </li>
                 <li class="navi-item">
-                    <a href="/admin/users/add/" class="navi-link">
-														<span class="navi-text">
-															<span class="label label-xl label-inline label-light-primary">Crear de usuario</span>
-														</span>
-                    </a>
-                </li>
-                <li class="navi-item">
-                    <a href="/admin/students/students/" class="navi-link">
-														<span class="navi-text">
-															<span class="label label-xl label-inline label-light-danger">Estudiante</span>
-														</span>
-                    </a>
-                </li>
-                <li class="navi-item">
-                    <a href="/admin/students/courses/" class="navi-link">
-														<span class="navi-text">
-															<span class="label label-xl label-inline label-light-warning">Cursos</span>
-														</span>
-                    </a>
-                </li>
-                <li class="navi-item">
-                    <a href="/admin/students/subjects/" class="navi-link">
-														<span class="navi-text">
-															<span class="label label-xl label-inline label-light-success">Materias</span>
-														</span>
-                    </a>
-                </li>
-                <li class="navi-item">
-                    <a href="/admin/students/notifications/" class="navi-link">
-														<span class="navi-text">
-															<span class="label label-xl label-inline label-light-dark">Notificaciones</span>
-														</span>
+                    <a href="/listings/all/" class="navi-link">
+                        <span class="navi-text">
+                            <span class="label label-xl label-inline label-light-danger">View all Listing</span>
+                        </span>
                     </a>
                 </li>
                 <li class="navi-separator mt-3 opacity-70"></li>
                 <li class="navi-footer py-4">
                     <a class="btn btn-primary font-weight-bold btn-sm px-5" href="/admin">
-                        <i class="ki ki-plus icon-sm"></i>Otras opciones</a>
+                        <i class="ki ki-plus icon-sm"></i>Other options</a>
                 </li>
             </ul>
             <!--end::Navigation-->

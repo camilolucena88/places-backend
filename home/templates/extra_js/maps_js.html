@@ -1,0 +1,290 @@
+{% load static %}
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBaP6Fhc35A1StbEuaH7xija46CCciDU-U&callback=initAutocomplete&libraries=places&v=weekly" async
+></script>
+<script>
+    function slugifyTitle(e) {
+        const slug = document.querySelector('#id_slug')
+        slug.value = string_to_slug(e.target.value);
+    }
+
+    function string_to_slug (str) {
+        str = str.replace(/^\s+|\s+$/g, ''); // trim
+        str = str.toLowerCase();
+
+        // remove accents, swap ñ for n, etc
+        const from = "àáãäâèéëêìíïîòóöôùúüûñç·/_,:;";
+        const to   = "aaaaaeeeeiiiioooouuuunc------";
+
+        for (let i=0, l=from.length ; i<l ; i++) {
+            str = str.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i));
+        }
+
+        str = str.replace(/[^a-z0-9 -]/g, '') // remove invalid chars
+            .replace(/\s+/g, '-') // collapse whitespace and replace by -
+            .replace(/-+/g, '-'); // collapse dashes
+
+        return str;
+    }
+    // This example adds a search box to a map, using the Google Place Autocomplete
+    // feature. People can enter geographical searches. The search box will return a
+    // pick list containing a mix of places and predicted search terms.
+    // This example requires the Places library. Include the libraries=places
+    // parameter when you first load the API. For example:
+    // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+    function initAutocomplete() {
+        const map = new google.maps.Map(document.getElementById("map"), {
+            center: { lat: -33.8688, lng: 151.2195 },
+            zoom: 13,
+            mapTypeId: "roadmap",
+        });
+        // Create the search box and link it to the UI element.
+        const input = document.getElementById("pac-input");
+
+        const searchBox = new google.maps.places.SearchBox(input);
+
+        const getTimeFromGoogleWeekdayText = (weekday_text) => {
+            if (weekday_text.search('Closed') !== -1) {
+                return ['Closed','']
+            } else if (weekday_text.search('Open 24 hours') !== -1) {
+                return ['Open 24 hours']
+            } else if (weekday_text.search('Monday') !== -1) {
+                const time = weekday_text.replace('Monday: ', '')
+                const timeArray = time.split(" ")
+                return [timeArray[0] + ' ' + timeArray[1], timeArray[3] + ' ' + timeArray[4]]
+            } else if(weekday_text.search('Tuesday') !== -1) {
+                const time = weekday_text.replace('Tuesday: ', '')
+                const timeArray = time.split(" ")
+                return [timeArray[0] + ' ' + timeArray[1], timeArray[3] + ' ' + timeArray[4]]
+            } else if(weekday_text.search('Wednesday') !== -1) {
+                const time = weekday_text.replace('Wednesday: ', '')
+                const timeArray = time.split(" ")
+                return [timeArray[0] + ' ' + timeArray[1], timeArray[3] + ' ' + timeArray[4]]
+            } else if(weekday_text.search('Thursday') !== -1) {
+                const time = weekday_text.replace('Thursday: ', '')
+                const timeArray = time.split(" ")
+                return [timeArray[0] + ' ' + timeArray[1], timeArray[3] + ' ' + timeArray[4]]
+            } else if(weekday_text.search('Friday') !== -1) {
+                const time = weekday_text.replace('Friday: ', '')
+                const timeArray = time.split(" ")
+                return [timeArray[0] + ' ' + timeArray[1], timeArray[3] + ' ' + timeArray[4]]
+            } else if(weekday_text.search('Saturday') !== -1) {
+                const time = weekday_text.replace('Saturday: ', '')
+                const timeArray = time.split(" ")
+                return [timeArray[0] + ' ' + timeArray[1], timeArray[3] + ' ' + timeArray[4]]
+            } else if(weekday_text.search('Sunday') !== -1) {
+                const time = weekday_text.replace('Sunday: ', '')
+                const timeArray = time.split(" ")
+                return [timeArray[0] + ' ' + timeArray[1], timeArray[3] + ' ' + timeArray[4]]
+            } else {
+                throw new Error('Error');
+            }
+        }
+
+        const getTypeOfWeekdayText = (weekday_text) => {
+            if (weekday_text.search('Closed') !== -1) {
+                return '3'
+            } else if (weekday_text.search('Open 24 hours') !== -1) {
+                return '2'
+            } else {
+                return '1'
+            }
+        }
+
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+        // Bias the SearchBox results towards current map's viewport.
+        map.addListener("bounds_changed", () => {
+            searchBox.setBounds(map.getBounds());
+        });
+
+        let markers = [];
+        // Listen for the event fired when the user selects a prediction and retrieve
+        // more details for that place.
+        searchBox.addListener("places_changed", () => {
+            const places = searchBox.getPlaces();
+
+            if (places.length == 0) {
+                return;
+            }
+            // Clear out the old markers.
+            markers.forEach((marker) => {
+                marker.setMap(null);
+            });
+            markers = [];
+            // For each place, get the icon, name and location.
+            const bounds = new google.maps.LatLngBounds();
+            const _formEl = document.getElementById('kt_form')
+            const latInput = document.querySelector('#latitude')
+            const lngInput = document.querySelector('#longitude')
+            const listingNameInput = document.querySelector('#id_name')
+            const listingSlugInput = document.querySelector('#id_slug')
+            const listingAddressInput = document.querySelector('#id_address')
+            const listingTelephoneInput = document.querySelector('#id_telephone')
+            const listingCityInput = document.querySelector('#id_city')
+            const listingCountryInput = document.querySelector('#id_country')
+            const listingMondayOpeningInput = document.querySelector('#kt_monday_opening')
+            const listingMondayClosingInput = document.querySelector('#kt_monday_closing')
+            const listingMondayInput = _formEl.elements.namedItem('monday')
+            const listingTuesdayOpeningInput = document.querySelector('#kt_tuesday_opening')
+            const listingTuesdayClosingInput = document.querySelector('#kt_tuesday_closing')
+            const listingTuesdayInput = _formEl.elements.namedItem('tuesday')
+            const listingWednesdayOpeningInput = document.querySelector('#kt_wednesday_opening')
+            const listingWednesdayClosingInput = document.querySelector('#kt_wednesday_closing')
+            const listingWednesdayInput = _formEl.elements.namedItem('wednesday')
+            const listingThursdayOpeningInput = document.querySelector('#kt_thursday_opening')
+            const listingThursdayClosingInput = document.querySelector('#kt_thursday_closing')
+            const listingThursdayInput = _formEl.elements.namedItem('thursday')
+            const listingFridayOpeningInput = document.querySelector('#kt_friday_opening')
+            const listingFridayClosingInput = document.querySelector('#kt_friday_closing')
+            const listingFridayInput = _formEl.elements.namedItem('friday')
+            const listingSaturdayOpeningInput = document.querySelector('#kt_saturday_opening')
+            const listingSaturdayClosingInput = document.querySelector('#kt_saturday_closing')
+            const listingSaturdayInput = _formEl.elements.namedItem('saturday')
+            const listingSundayOpeningInput = document.querySelector('#kt_sunday_opening')
+            const listingSundayClosingInput = document.querySelector('#kt_sunday_closing')
+            const listingSundayInput = _formEl.elements.namedItem('sunday')
+
+            places.forEach((place) => {
+                console.log(place)
+                try {
+                    lngInput.value = place.geometry.location.lng()
+                    latInput.value = place.geometry.location.lat()
+                    listingNameInput.value = place.name
+                    listingSlugInput.value = string_to_slug(place.name)
+                    listingAddressInput.value = place.formatted_address;
+                    listingTelephoneInput.value = place.international_phone_number;
+                    if (place.address_components.length === 3) {
+                        listingCityInput.value = place.address_components[1].long_name;
+                        listingCountryInput.value = place.address_components[2].short_name;
+                    }
+                    if ('opening_hours' in place) {
+
+                        if(getTypeOfWeekdayText(place.opening_hours.weekday_text[0]) === '1') {
+                            listingMondayOpeningInput.value = getTimeFromGoogleWeekdayText(place.opening_hours.weekday_text[0])[0]
+                            listingMondayClosingInput.value = getTimeFromGoogleWeekdayText(place.opening_hours.weekday_text[0])[1]
+                            listingMondayInput.value = getTypeOfWeekdayText(place.opening_hours.weekday_text[0])
+                        } else if (getTypeOfWeekdayText(place.opening_hours.weekday_text[0]) === '2') {
+                            listingMondayOpeningInput.value = ''
+                            listingMondayClosingInput.value = ''
+                            listingMondayInput.value = getTypeOfWeekdayText(place.opening_hours.weekday_text[0])
+                        } else {
+                            listingMondayOpeningInput.value = ''
+                            listingMondayClosingInput.value = ''
+                            listingMondayInput.value = getTypeOfWeekdayText(place.opening_hours.weekday_text[0])
+                        }
+
+                        if(getTypeOfWeekdayText(place.opening_hours.weekday_text[0]) === '1') {
+
+                            listingTuesdayOpeningInput.value = getTimeFromGoogleWeekdayText(place.opening_hours.weekday_text[1])[0]
+                            listingTuesdayClosingInput.value = getTimeFromGoogleWeekdayText(place.opening_hours.weekday_text[1])[1]
+                            listingTuesdayInput.value = getTypeOfWeekdayText(place.opening_hours.weekday_text[0])
+                        } else if (getTypeOfWeekdayText(place.opening_hours.weekday_text[0]) === '2') {
+                            listingTuesdayOpeningInput.value = ''
+                            listingTuesdayOpeningInput.value = ''
+                            listingTuesdayInput.value = getTypeOfWeekdayText(place.opening_hours.weekday_text[0])
+                        } else {
+                            listingTuesdayOpeningInput.value = ''
+                            listingTuesdayOpeningInput.value = ''
+                            listingTuesdayInput.value = getTypeOfWeekdayText(place.opening_hours.weekday_text[0])
+                        }
+
+                        if(getTypeOfWeekdayText(place.opening_hours.weekday_text[0]) === '1') {
+
+                            listingWednesdayOpeningInput.value = getTimeFromGoogleWeekdayText(place.opening_hours.weekday_text[2])[0]
+                            listingWednesdayClosingInput.value = getTimeFromGoogleWeekdayText(place.opening_hours.weekday_text[2])[1]
+                            listingWednesdayInput.value = getTypeOfWeekdayText(place.opening_hours.weekday_text[0])
+                        } else if (getTypeOfWeekdayText(place.opening_hours.weekday_text[0]) === '2') {
+                            listingWednesdayOpeningInput.value = ''
+                            listingWednesdayClosingInput.value = ''
+                            listingWednesdayInput.value = getTypeOfWeekdayText(place.opening_hours.weekday_text[0])
+                        } else {
+                            listingWednesdayOpeningInput.value = ''
+                            listingWednesdayClosingInput.value = ''
+                            listingWednesdayInput.value = getTypeOfWeekdayText(place.opening_hours.weekday_text[0])
+                        }
+
+                        if(getTypeOfWeekdayText(place.opening_hours.weekday_text[0]) === '1') {
+                            listingThursdayOpeningInput.value = getTimeFromGoogleWeekdayText(place.opening_hours.weekday_text[3])[0]
+                            listingThursdayClosingInput.value = getTimeFromGoogleWeekdayText(place.opening_hours.weekday_text[3])[1]
+                            listingThursdayInput.value = getTypeOfWeekdayText(place.opening_hours.weekday_text[0])
+                        } else if (getTypeOfWeekdayText(place.opening_hours.weekday_text[0]) === '2') {
+                            listingThursdayOpeningInput.value = ''
+                            listingThursdayClosingInput.value = ''
+                            listingThursdayInput.value = getTypeOfWeekdayText(place.opening_hours.weekday_text[0])
+                        } else {
+                            listingThursdayOpeningInput.value = ''
+                            listingThursdayClosingInput.value = ''
+                            listingThursdayInput.value = getTypeOfWeekdayText(place.opening_hours.weekday_text[0])
+                        }
+
+                        if(getTypeOfWeekdayText(place.opening_hours.weekday_text[0]) === '1') {
+                            listingFridayOpeningInput.value = getTimeFromGoogleWeekdayText(place.opening_hours.weekday_text[4])[0]
+                            listingFridayClosingInput.value = getTimeFromGoogleWeekdayText(place.opening_hours.weekday_text[4])[1]
+                            listingFridayInput.value = getTypeOfWeekdayText(place.opening_hours.weekday_text[0])
+                        } else if (getTypeOfWeekdayText(place.opening_hours.weekday_text[0]) === '2') {
+                            listingFridayOpeningInput.value = ''
+                            listingFridayClosingInput.value = ''
+                            listingFridayInput.value = getTypeOfWeekdayText(place.opening_hours.weekday_text[0])
+                        } else {
+                            listingFridayOpeningInput.value = ''
+                            listingFridayClosingInput.value = ''
+                            listingFridayInput.value = getTypeOfWeekdayText(place.opening_hours.weekday_text[0])
+                        }
+
+                        if(getTypeOfWeekdayText(place.opening_hours.weekday_text[0]) === '1') {
+                            listingSaturdayOpeningInput.value = getTimeFromGoogleWeekdayText(place.opening_hours.weekday_text[5])[0]
+                            listingSaturdayClosingInput.value = getTimeFromGoogleWeekdayText(place.opening_hours.weekday_text[5])[1]
+                            listingSaturdayInput.value = getTypeOfWeekdayText(place.opening_hours.weekday_text[0])
+                        } else if (getTypeOfWeekdayText(place.opening_hours.weekday_text[0]) === '2') {
+                            listingSaturdayOpeningInput.value = ''
+                            listingSaturdayClosingInput.value = ''
+                            listingSaturdayInput.value = getTypeOfWeekdayText(place.opening_hours.weekday_text[0])
+                        } else {
+                            listingSaturdayOpeningInput.value = ''
+                            listingSaturdayClosingInput.value = ''
+                            listingSaturdayInput.value = getTypeOfWeekdayText(place.opening_hours.weekday_text[0])
+                        }
+
+                        if(getTypeOfWeekdayText(place.opening_hours.weekday_text[0]) === '1') {
+                            listingSundayOpeningInput.value = getTimeFromGoogleWeekdayText(place.opening_hours.weekday_text[6])[0]
+                            listingSundayClosingInput.value = getTimeFromGoogleWeekdayText(place.opening_hours.weekday_text[6])[1]
+                            listingSundayInput.value = getTypeOfWeekdayText(place.opening_hours.weekday_text[0])
+                        } else if (getTypeOfWeekdayText(place.opening_hours.weekday_text[0]) === '2') {
+                            listingSundayOpeningInput.value = ''
+                            listingSundayClosingInput.value = ''
+                            listingSundayInput.value = getTypeOfWeekdayText(place.opening_hours.weekday_text[0])
+                        } else {
+                            listingSundayOpeningInput.value = ''
+                            listingSundayClosingInput.value = ''
+                            listingSundayInput.value = getTypeOfWeekdayText(place.opening_hours.weekday_text[0])
+                        }
+                    }
+                } catch (error) {
+                    throw new Error(error)
+                }
+
+                if (!place.geometry || !place.geometry.location) {
+                    console.log("Returned place contains no geometry");
+                    return;
+                }
+
+                // Create a marker for each place.
+                markers.push(
+                    new google.maps.Marker({
+                        map,
+                        title: place.name,
+                        position: place.geometry.location,
+                    })
+                );
+
+                if (place.geometry.viewport) {
+                    // Only geocodes have viewport.
+                    bounds.union(place.geometry.viewport);
+                } else {
+                    bounds.extend(place.geometry.location);
+                }
+            });
+            map.fitBounds(bounds);
+        });
+    }
+
+</script>

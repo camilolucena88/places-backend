@@ -112,8 +112,8 @@ var KTWizard1 = function () {
 							},
 							stringLength: {
 								min: 4,
-								max: 30,
-								message: 'Name must be more than 6 and less than 30 characters.',
+								max: 65,
+								message: 'Name must be more than 6 and less than 65 characters.',
 							},
 							regexp: {
 								regexp: /^[a-zA-Z0-9_]+$/,
@@ -137,8 +137,22 @@ var KTWizard1 = function () {
 					slug: {
 						validators: {
 							notEmpty: {
-								message: 'Slug is a required field'
+								message: 'Slug is required'
 							},
+							stringLength: {
+								min: 4,
+								max: 30,
+								message: 'Slug must be more than 4 and less than 30 characters.',
+							},
+							regexp: {
+								regexp: /^[a-zA-Z0-9-]+$/,
+								message: '' +
+									'Slug can only consist of alphabetic, number, and underscore',
+							},
+							stringCase: {
+								message: 'The Slug must be in lowercase',
+								'case': 'lower'
+							}
 						}
 					},
 					genres: {
@@ -212,6 +226,29 @@ var KTWizard1 = function () {
 						validators: {
 							notEmpty: {
 								message: 'Account Type should be selected'
+							}
+						}
+					},
+				},
+				plugins: {
+					trigger: new FormValidation.plugins.Trigger(),
+					bootstrap: new FormValidation.plugins.Bootstrap({
+						//eleInvalidClass: '',
+						eleValidClass: '',
+					})
+				}
+			}
+		));
+
+        // Step 4
+		_validations.push(FormValidation.formValidation(
+			_formEl,
+			{
+				fields: {
+					business_type: {
+						validators: {
+							notEmpty: {
+								message: 'Business Type should be selected'
 							}
 						}
 					},

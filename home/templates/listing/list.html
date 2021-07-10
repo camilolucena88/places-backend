@@ -1,0 +1,46 @@
+<div class="card card-custom gutter-b">
+    <div class="d-flex align-items-center p-3">
+        <a href="javascript:history.go(-1)" class="btn btn-clean btn-icon btn-sm mr-6" data-inbox="back">
+            <i class="flaticon2-left-arrow-1"></i>
+        </a>
+        <div class="card-title">
+            <h3 class="card-label">Listings
+                <span class="d-block text-muted pt-2 font-size-sm">Check all your listings</span>
+            </h3>
+        </div>
+    </div>
+    <div class="card-body">
+        <!--begin: Datatable-->
+        <div id="kt_datatable_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+            <div class="row">
+                <div class="col-sm-12">
+                    <table class="table table-separate table-head-custom table-checkable" id="kt_datatable_2"
+                           role="grid" aria-describedby="kt_datatable_info" style="width: 1400px;">
+                        <thead>
+                        <tr role="row">
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Contact Telephone</th>
+                            <th>City</th>
+                            <th>Country</th>
+                            <th>Acciones</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for listing in listings %}
+                            <tr>
+                                <td>1</td>
+                                <td><a href="/listings/view/{{listing.id}}">{{ listing.name }}</a></td>
+                                <td><a href="#">{{ listing.telephone }}</a></td>
+                                <td>{{ listing.city }}</td>
+                                <td>{{ listing.country }}</td>
+                                <td nowrap="nowrap"></td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
