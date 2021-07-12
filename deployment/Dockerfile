@@ -1,4 +1,4 @@
-FROM python:3.9-alpine3.13
+FROM python:3.9-slim
 
 ENV PYTHONUNBUFFERED 1
 
@@ -8,16 +8,17 @@ COPY ./scripts /scripts
 WORKDIR /usr/src/app
 EXPOSE 8000
 
-RUN python -m venv /py && \
+RUN apt-get update && \
+    python -m venv /py && \
+    apt-get -y install postgresql && \
+    apt-get install -y python-psycopg2 && \
+    apt-get install -y libpq-dev && \
+    apt-get install -y python3-dev && \
+    apt-get install -y gcc && \
     /py/bin/pip install --upgrade pip && \
     /py/bin/pip install --upgrade wheel && \
-    apk add --update --no-cache postgresql-client && \
-    apk add jpeg-dev zlib-dev libjpeg && \
-    apk add --update --no-cache --virtual .tmp-deps \
-        build-base postgresql-dev musl-dev libc-dev gcc linux-headers && \
     /py/bin/pip install Pillow && \
     /py/bin/pip install -r /requirements.txt && \
-    apk del .tmp-deps && \
     adduser --disabled-password --no-create-home app && \
     mkdir -p /static && \
     mkdir -p /media && \
