@@ -111,7 +111,7 @@ def create(request):
                         sunday_form.save()
                         return redirect('/listings/view/' + str(listingSaved.id))
                 raise ValueError(monday_form.is_valid(), monday_form.errors)
-            raise ValueError(places.is_validF(), places.errors)
+            raise ValueError(places.is_valid(), places.errors)
         raise ValueError(coordinates.is_valid(), coordinates.errors)
     return render(request, "listing/create.html",
                   {'places_form': PlacesModelForm(),
