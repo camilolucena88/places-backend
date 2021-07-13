@@ -2,7 +2,7 @@ from wagtail.contrib.modeladmin.options import ModelAdmin
 from wagtail.contrib.modeladmin.options import modeladmin_register
 from django.contrib import admin
 
-from places.models import Places, Images, Genres, Address, Coordinates, Likes, Comments, Rate, Bookmark, CommentLikes
+from places.models import Places, Images, Genres, Coordinates, Likes, Comments, Rate, Bookmark, CommentLikes
 
 
 class CoordinatesAdmin(admin.ModelAdmin):
@@ -37,7 +37,6 @@ class PlacesAdmin(admin.ModelAdmin):
 admin.site.register(Places, PlacesAdmin)
 admin.site.register(Images, ImagesAdmin)
 admin.site.register(Genres, GenresAdmin)
-admin.site.register(Address, AddressAdmin)
 admin.site.register(Coordinates, CoordinatesAdmin)
 
 

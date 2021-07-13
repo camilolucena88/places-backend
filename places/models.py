@@ -15,19 +15,6 @@ class Coordinates(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
 
-class Address(models.Model):
-    address = models.CharField('Address', max_length=50)
-    street = models.CharField('Street', max_length=50)
-    city = models.CharField('City', max_length=50)
-    state = models.CharField('State', max_length=50)
-    country = models.CharField('Country', max_length=50)
-    postcode = models.CharField('Postcode', max_length=50)
-    coordinates = models.OneToOneField(Coordinates, on_delete=models.CASCADE, blank=True, null=True)
-    created_by = models.ForeignKey(User, on_delete=models.CASCADE)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-
 class Genres(models.Model):
     name = models.CharField('Name', max_length=50)
     description = models.TextField('Description', max_length=150)
