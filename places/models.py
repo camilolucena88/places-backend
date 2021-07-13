@@ -84,7 +84,7 @@ class Places(models.Model):
         if self.img_render is not None:
             return self.img_render.file.url
         elif self.img is not None:
-            return self.img.url
+            return self.img.img.url
         else:
             return self.NO_IMG_FILE
 
@@ -118,6 +118,8 @@ class Places(models.Model):
                 return self.img_render.renditions.get(width=165).url
             else:
                 return self.img_render.get_rendition('fill-300x150|jpegquality-60').url
+        elif self.img is not None:
+            return self.img.img.url
         else:
             return self.NO_IMG_FILE
 
