@@ -29,9 +29,9 @@ class ListingAdmin(ModelAdmin):
     menu_label = "Listing"
     menu_icon = "user"
     menu_order = 290
-    list_display = ("places", "telephone", "city", "country", "created_at")
-    list_filter = ["places", "created_at"]
-    search_fields = ["places", "created_at"]
+    list_display = ("telephone", "city", "country", "created_at")
+    list_filter = ["created_at"]
+    search_fields = ["city", "created_at"]
 
 
 class OpeningHoursAdmin(ModelAdmin):
