@@ -10,7 +10,7 @@ server {
        alias /usr/src/app/static;
     }
 
-    location /media/ {
+    location /media {
       alias /usr/src/app/media/;
     }
 
