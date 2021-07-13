@@ -21,7 +21,6 @@ urlpatterns = [
     path(r"api-auth/", include('rest_framework.urls', namespace='rest_framework')),
     path(r"logout/", logout_view),
     path(r"listings/", include('listing.urls'))
-    # path(r"payments/", include('payments.urls')),
 ]
 
 urlpatterns += i18n_patterns(

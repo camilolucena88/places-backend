@@ -46,38 +46,6 @@ def check_email(request):
         return JsonResponse({'valid': is_available})
 
 
-# def get_all_events(request):
-#     if request.method == 'POST':
-#         school = School.objects.get(pk=1)
-#         school.events.all().exclude(type=6)
-#         return JsonResponse({'valid': school})
-#
-#
-# def get_school():
-#     if School.DoesNotExist:
-#         return Events.objects.all()
-#     return School.objects.last().all_events()
-
-
-# class EventsViewSet(viewsets.ModelViewSet):
-#     """
-#     API endpoint that allows classes to be viewed or edited.
-#     """
-#     queryset = get_school()
-#     serializer_class = EventsSerializer
-#     permission_classes = [
-#         permissions.AllowAny
-#     ]
-
-
-# def course_schedule(request, course_id):
-#     courses = Courses.objects.get(pk=course_id)
-#     serializer_class = SubjectSerializer(courses.get_subjects(), many=True)
-#     return JsonResponse(
-#         serializer_class.data, safe=False
-#     )
-
-
 def create_activities(request):
     if request.method == 'POST':
         raise ValueError(request.POST.get('max_duration'))

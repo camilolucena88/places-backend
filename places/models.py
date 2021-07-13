@@ -62,6 +62,7 @@ class Images(models.Model):
             return self.img_render.get_rendition('fill-300x150|jpegquality-60').url
 
 
+
 class Places(models.Model):
     name = models.CharField('Name', max_length=50)
     description = models.TextField('Description', max_length=300)
@@ -74,8 +75,18 @@ class Places(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    NO_IMG_FILE = '/media/original_images/no-image-icon.png'
+
     def __str__(self):
         return self.name
+
+    def feature_img(self):
+        if self.img_render is not None:
+            return self.img_render.file.url
+        elif self.img is not None:
+            return self.img.url
+        else:
+            return self.NO_IMG_FILE
 
     @property
     def likes(self):
@@ -102,10 +113,13 @@ class Places(models.Model):
 
     @property
     def thumbnail(self):
-        if self.img_render.renditions.filter(width=165).count() > 0:
-            return self.img_render.renditions.get(width=165).url
+        if self.img_render:
+            if self.img_render.renditions.filter(width=165).count() > 0:
+                return self.img_render.renditions.get(width=165).url
+            else:
+                return self.img_render.get_rendition('fill-300x150|jpegquality-60').url
         else:
-            return self.img_render.get_rendition('fill-300x150|jpegquality-60').url
+            return self.NO_IMG_FILE
 
 
 class RateList(models.IntegerChoices):
