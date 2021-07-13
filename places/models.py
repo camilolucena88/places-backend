@@ -30,7 +30,7 @@ class Genres(models.Model):
 class Images(models.Model):
     name = models.CharField('Name', max_length=50)
     description = models.TextField('Description', max_length=150)
-    img = models.FileField("Image", upload_to="files/notifications")
+    img = models.FileField("Image", upload_to="files/notifications", on_delete=models.CASCADE, null=True)
     img_render = models.ForeignKey(Image, on_delete=models.CASCADE, null=True)
     created_by = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
