@@ -33,8 +33,11 @@ class ListingViewSet(viewsets.ModelViewSet):
 def check_username(request):
     if request.method == 'POST':
         username = request.data.get("username")
-        is_available = not User.objects.filter(username=username).exists()
-        return JsonResponse({'valid': is_available})
+        if username is not None:
+            is_available = not User.objects.filter(username=username).exists()
+            return JsonResponse({'valid': is_available})
+        else:
+            return JsonResponse({'error': 'Missing parameters username'}, status=422)
 
 
 @api_view(['POST'])
@@ -42,8 +45,11 @@ def check_username(request):
 def check_email(request):
     if request.method == 'POST':
         email = request.data.get("email")
-        is_available = not User.objects.filter(email=email).exists()
-        return JsonResponse({'valid': is_available})
+        if email is not None:
+            is_available = not User.objects.filter(email=email).exists()
+            return JsonResponse({'valid': is_available})
+        else:
+            return JsonResponse({'error': 'Missing parameters email'}, status=422)
 
 
 def create_activities(request):
