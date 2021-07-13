@@ -113,7 +113,7 @@ class Places(models.Model):
 
     @property
     def thumbnail(self):
-        if self.img_render:
+        if self.img_render is not None:
             if self.img_render.renditions.filter(width=165).count() > 0:
                 return self.img_render.renditions.get(width=165).url
             else:
