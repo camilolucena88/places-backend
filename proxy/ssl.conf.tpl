@@ -11,7 +11,7 @@ server {
     }
 
     location /media {
-      alias /usr/src/app/media/;
+      alias /usr/src/app/media;
     }
 
     location / {
